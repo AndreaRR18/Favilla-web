@@ -55,12 +55,16 @@ resolved — so a broken translation never reaches production.
 
 A port of the app's `DesignSystem` package (see the VoiceTale iOS repo):
 
-- Dark-first palette: background `#100B08`, surface `#1C1410`, warm amber accent
-  `#C4923F`, parchment `#F5E9D0`, slate `#708090` for sleep-sound sections,
-  text in warm creams.
+- Dual palette straight from `Color.swift`: dark-first night theme and the warm
+  parchment light theme, with a sun/moon toggle in the top-right nav. The choice
+  is remembered per browser (`localStorage`), defaults to the OS preference,
+  and ships with an inline `<head>` script so there is no flash of wrong theme.
+  The phone mockups always stay dark — they show the app's bedtime UI.
 - Typography: Epilogue (headings), New York / system serif (body — Apple
   devices get the real New York, like the app), Manrope (labels, uppercase
   and tracked, like the app's overlines).
+- A visible language strip (`EN IT FR DE ES`) sits in the top-right corner of
+  every page, with the current language highlighted.
 - Favicons, the touch icon and the social share image are generated at build
   time in `scripts/build.py` (stdlib PNG writer, no image dependencies).
 
@@ -72,7 +76,7 @@ checkout → setup Python → `scripts/build.py` → upload artifact → deploy-
 GitHub Pages is configured with source `workflow` (set once via
 `gh api` — see the repo Settings → Pages).
 
-## Legacy import slots unlinked titles
+## Catalog showcase data
 
 The landing page's catalog showcase (six tales with localized titles, authors
 and countries) is embedded in `scripts/build.py` as `TALES`; the six stories

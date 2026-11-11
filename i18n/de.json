@@ -18,7 +18,8 @@
   "a11y": {
     "skip": "Zum Inhalt springen",
     "nav_aria": "Hauptnavigation",
-    "lang_aria": "Sprache der Website wählen"
+    "lang_aria": "Sprache der Website wählen",
+    "theme": "Zwischen Dunkel- und Hellmodus wechseln"
   },
   "nav": {
     "features": "Funktionen",
@@ -34,7 +35,7 @@
     "lead": "Nimm Märchen mit deiner eigenen Stimme auf und lass dein Kind mit deiner Gutenachtgeschichte einschlafen — ob du reist, spät heimkommst oder weit weg bist. Keine KI. Keine synthetischen Stimmen. Nur du.",
     "badge_label": "iPhone · Erfordert iOS 26",
     "badge_cta": "Bald im App Store",
-    "badge_note": "Kostenlos bis 3 Geschichten · Keine Werbung · Kein Tracking",
+    "badge_note": "Komplett kostenlos · Keine Werbung · Kein Tracking",
     "cta_anchor": "So funktioniert es"
   },
   "mock": {
@@ -196,7 +197,7 @@
     "rights_t": "Deine Rechte (DSGVO)",
     "rights_p": "Da wir deine personenbezogenen Daten weder erhalten noch speichern, greifst du auf sie zu, exportierst, berichtigst und löschst sie direkt in der App und in den iCloud-Einstellungen. Bei Fragen schreibe an die Kontaktadresse oben; wir antworten innerhalb von 30 Tagen. Du kannst dich auch an deine örtliche Datenschutzbehörde wenden.",
     "purch_t": "Käufe",
-    "purch_p": "VoiceTale ist kostenlos bis drei aufgenommene Geschichten. Falls und wann der optionale Einmal-Kauf „Unbegrenzte Geschichten“ aktiviert wird, läuft die Zahlung vollständig über Apple durch den App Store, und wir erhalten keine Zahlungsdaten.",
+    "purch_p": "VoiceTale ist komplett kostenlos — jede Funktion, jede Geschichte, jedes Geräusch. Version 1.0 enthält keine In-App-Käufe. Sollten Käufe jemals eingeführt werden, läuft die Zahlung vollständig über Apple durch den App Store, und wir erhalten keine Zahlungsdaten.",
     "changes_t": "Änderungen",
     "changes_p": "Ändert sich die Art, wie die App mit Daten umgeht, aktualisieren wir diese Seite und das Datum oben und kennzeichnen wichtige Änderungen in der App.",
     "back": "Zurück zur Startseite"

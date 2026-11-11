@@ -5,7 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{head_title}}</title>
   <meta name="description" content="{{head_desc}}">
-  <meta name="theme-color" content="#100B08">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#100B08">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAF7F2">
+  <script>
+  (function () {
+    try {
+      var chosen = localStorage.getItem("vt-theme");
+      var light = chosen === "light" || (!chosen && window.matchMedia("(prefers-color-scheme: light)").matches);
+      document.documentElement.dataset.theme = light ? "light" : "dark";
+    } catch (e) {
+      document.documentElement.dataset.theme = "dark";
+    }
+  })();
+  </script>
   <link rel="canonical" href="{{canonical}}">
   {{hreflang}}
   <meta property="og:type" content="website">
@@ -47,7 +60,8 @@
         {{nav_links}}
       </div>
       <div class="nav-side">
-        {{lang_menu}}
+        {{lang_switcher}}
+        {{theme_toggle}}
       </div>
     </nav>
   </header>

@@ -25,6 +25,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 LANGS = ["en", "it", "fr", "de", "es"]
 LANG_NAMES = {"en": "English", "it": "Italiano", "fr": "Français", "de": "Deutsch", "es": "Español"}
+LANG_CODES = {"en": "EN", "it": "IT", "fr": "FR", "de": "DE", "es": "ES"}
 OG_LOCALES = {"en": "en_US", "it": "it_IT", "fr": "fr_FR", "de": "de_DE", "es": "es_ES"}
 PAGES = {"index": "index.html", "privacy": "privacy.html", "support": "support.html", "404": "404.html"}
 
@@ -133,6 +134,7 @@ GLYPHS = {
     "import": lambda: svg('<path d="M10 3H4v18h16V3h-6v2h4v14H6V5h4Zm1 4v7.6l2.3-2.3 1.4 1.4L11 17.4l-3.7-3.7 1.4-1.4L11 14.6V7Z"/>'),
     "globe": lambda: svg('<path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm6.9 7h-3a15.4 15.4 0 0 0-1.1-4.4A8 8 0 0 1 18.9 9ZM12 4c.8 1.2 1.9 3.6 2.3 7H9.7C10.1 7.6 11.2 5.2 12 4ZM9.2 4.6A15.4 15.4 0 0 0 8.1 9h-3a8 8 0 0 1 4.1-4.4ZM4.3 11h3.5c-.1 1-.1 2 0 3H4.3a8 8 0 0 1 0-3Zm.8 5h3a15.4 15.4 0 0 0 1.1 4.4A8 8 0 0 1 5.1 16Zm6.9 4.4c-.8-1.2-1.9-3.6-2.3-7h4.6c-.4 3.4-1.5 5.8-2.3 7Zm3.8-.4a15.4 15.4 0 0 0 1.1-4h3a8 8 0 0 1-4.1 4.4ZM19.7 14h-3.5c.1-1 .1-2 0-3h3.5a8 8 0 0 1 0 3Z"/>'),
     "brand": lambda: svg('<path d="M13.5 3A8 8 0 1 0 20 13.4 6.4 6.4 0 0 1 13.5 3Z"/><path d="M7 17.5h1.6v-2.4H7Zm2.5 0h1.6v-4H9.5Zm2.5 0h1.6v-1.8H12Z"/>', size=26),
+    "sun": lambda: svg('<circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.6v2.4M12 19v2.4M2.6 12h2.4M19 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>', size=16),
     "search": lambda: svg('<path d="M10.5 3a7.5 7.5 0 1 0 4.55 13.45l4.75 4.75 1.4-1.4-4.75-4.75A7.5 7.5 0 0 0 10.5 3Zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z"/>', size=15),
 }
 
@@ -395,6 +397,30 @@ def mailto(email, label=None):
     return f'<a href="mailto:{esc(email)}">{esc(label or email)}</a>'
 
 
+def lang_switcher_html(i18n, lang, href_for):
+    """A visible language strip: EN IT FR DE ES, current one highlighted."""
+    items = []
+    for other in LANGS:
+        current = ' aria-current="true"' if other == lang else ""
+        items.append(
+            f'<a lang="{other}" hreflang="{other}" href="{href_for(other)}" '
+            f'title="{esc(LANG_NAMES[other])}" aria-label="{esc(LANG_NAMES[other])}"{current}>'
+            f'{LANG_CODES[other]}</a>')
+    return ('<nav class="lang-switcher" aria-label="'
+            + esc(i18n["a11y.lang_aria"]) + '">' + "".join(items) + '</nav>')
+
+
+def theme_toggle_html(i18n):
+    """Sun/moon icon button; the visible icon follows the active theme."""
+    label = esc(i18n["a11y.theme"])
+    return (
+        '<button type="button" class="theme-toggle" aria-pressed="false" '
+        f'aria-label="{label}" title="{label}">'
+        '<span class="theme-icon theme-icon-sun">' + GLYPHS["sun"]() + '</span>'
+        '<span class="theme-icon theme-icon-moon">' + GLYPHS["moon"]() + '</span>'
+        '</button>')
+
+
 PLACEHOLDER = re.compile(r"\{\{([a-zA-Z0-9_.]+)\}\}")
 
 
@@ -505,28 +531,15 @@ def build(config, strings, out_dir):
             ctx["nav_links"] = "".join(nav_links)
             ctx["nav_home"] = "index.html"
 
-            # language switcher
-            items = []
-            for other in LANGS:
-                other_prefix = "" if other == "en" else other + "/"
-                other_page = "" if page == "index" else PAGES[page]
+            # language switcher (visible, top right) and theme toggle
+            def href_for(other, page=page, lang=lang):
+                name = PAGES[page] if page != "index" else "index.html"
                 if lang == "en":
-                    href = (other_page if other == "en"
-                            else other_prefix + (PAGES[page] if page != "index" else "index.html"))
-                else:
-                    base = "../" if other == "en" else f"../{other_prefix}"
-                    href = base + (PAGES[page] if page != "index" else "index.html")
-                current = ' aria-current="true"' if other == lang else ""
-                items.append(
-                    f'<li><a lang="{other}" hreflang="{other}" href="{href}"{current}>{LANG_NAMES[other]}</a></li>')
-            ctx["lang_menu"] = (
-                '<details class="lang-menu"><summary aria-label="'
-                + esc(i18n["a11y.lang_aria"]) + '">'
-                + f'<span class="lang-current">{esc(LANG_NAMES[lang])}</span>'
-                + '<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">'
-                + '<path d="M12 15.5 6.5 10l1-1 4.5 4.5L16.5 9l1 1L12 15.5Z"/></svg>'
-                + '</summary><ul>' + "".join(items) + '</ul></details>'
-            )
+                    return name if other == "en" else other + "/" + name
+                return ("../" if other == "en" else f"../{other}/") + name
+
+            ctx["lang_switcher"] = lang_switcher_html(i18n, lang, href_for)
+            ctx["theme_toggle"] = theme_toggle_html(i18n)
 
             # footer
             ctx["footer_langs"] = "".join(
@@ -555,18 +568,9 @@ def build(config, strings, out_dir):
                     f'<a href="{path_prefix}#{anchor}">{esc(i18n[key])}</a>'
                     for anchor, key in nav_anchors_404)
                 ctx["nav_links"] += f'<a href="{path_prefix}support.html">{esc(i18n["nav.support"])}</a>'
-                lang_items_404 = [
-                    f'<li><a lang="{other}" hreflang="{other}" href="{path_prefix}{other + "/" if other != "en" else ""}"'
-                    + (' aria-current="true"' if other == lang else "")
-                    + f'>{LANG_NAMES[other]}</a></li>'
-                    for other in LANGS]
-                ctx["lang_menu"] = (
-                    '<details class="lang-menu"><summary aria-label="'
-                    + esc(i18n["a11y.lang_aria"]) + '">'
-                    + f'<span class="lang-current">{esc(LANG_NAMES[lang])}</span>'
-                    + '<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">'
-                    + '<path d="M12 15.5 6.5 10l1-1 4.5 4.5L16.5 9l1 1L12 15.5Z"/></svg>'
-                    + '</summary><ul>' + "".join(lang_items_404) + '</ul></details>')
+                ctx["lang_switcher"] = lang_switcher_html(
+                    i18n, lang,
+                    lambda other, pp=path_prefix: pp + ("" if other == "en" else other + "/"))
                 ctx["footer_home"] = path_prefix
                 ctx["footer_privacy"] = path_prefix + "privacy.html"
                 ctx["footer_support"] = path_prefix + "support.html"

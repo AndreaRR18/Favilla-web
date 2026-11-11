@@ -18,7 +18,8 @@
   "a11y": {
     "skip": "Ir al contenido",
     "nav_aria": "Navegación principal",
-    "lang_aria": "Elige el idioma del sitio"
+    "lang_aria": "Elige el idioma del sitio",
+    "theme": "Cambiar entre modo oscuro y claro"
   },
   "nav": {
     "features": "Funciones",
@@ -34,7 +35,7 @@
     "lead": "Graba cuentos con tu propia voz y deja que tu hijo se duerma con tu historia de buenas noches — tanto si viajas, como si llegas tarde o estás lejos. Sin IA. Sin voces sintéticas. Solo tú.",
     "badge_label": "iPhone · Requiere iOS 26",
     "badge_cta": "Próximamente en el App Store",
-    "badge_note": "Gratis hasta 3 historias · Sin anuncios · Sin rastreo",
+    "badge_note": "Completamente gratis · Sin anuncios · Sin rastreo",
     "cta_anchor": "Descubre cómo funciona"
   },
   "mock": {
@@ -196,7 +197,7 @@
     "rights_t": "Tus derechos (RGPD)",
     "rights_p": "Como no recibimos ni conservamos tus datos personales, puedes acceder, exportar, corregir y eliminarlos directamente en la app y en los ajustes de iCloud. Para cualquier pregunta escribe a la dirección de contacto de arriba; respondemos en 30 días. También puedes acudir a la autoridad de protección de datos de tu país.",
     "purch_t": "Compras",
-    "purch_p": "VoiceTale es gratis hasta tres historias grabadas. Si y cuando se active el desbloqueo opcional de pago único «Historias ilimitadas», el pago lo gestiona íntegramente Apple a través del App Store y no recibimos datos de pago.",
+    "purch_p": "VoiceTale es completamente gratis — todas las funciones, todas las historias, todos los sonidos. La versión 1.0 no contiene compras dentro de la app. Si algún día se introdujeran compras, el pago lo gestionaría íntegramente Apple a través del App Store y no recibiríamos datos de pago.",
     "changes_t": "Cambios",
     "changes_p": "Si cambia la forma en que la app trata los datos, actualizaremos esta página y la fecha de arriba, y señalaremos los cambios importantes en la app.",
     "back": "Volver a la página principal"

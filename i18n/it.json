@@ -18,7 +18,8 @@
   "a11y": {
     "skip": "Vai al contenuto",
     "nav_aria": "Navigazione principale",
-    "lang_aria": "Scegli la lingua del sito"
+    "lang_aria": "Scegli la lingua del sito",
+    "theme": "Passa tra modalità scura e chiara"
   },
   "nav": {
     "features": "Funzionalità",
@@ -34,7 +35,7 @@
     "lead": "Registra le fiabe con la tua voce e lascia che tuo figlio si addormenti con la tua storia della buonanotte — che tu sia in viaggio, torni tardi o sia lontano. Niente IA. Nessuna voce sintetica. Solo tu.",
     "badge_label": "iPhone · Richiede iOS 26",
     "badge_cta": "In arrivo sull'App Store",
-    "badge_note": "Gratis fino a 3 storie · Niente pubblicità · Nessun tracciamento",
+    "badge_note": "Completamente gratis · Niente pubblicità · Nessun tracciamento",
     "cta_anchor": "Scopri come funziona"
   },
   "mock": {
@@ -196,7 +197,7 @@
     "rights_t": "I tuoi diritti (GDPR)",
     "rights_p": "Poiché non riceviamo né conserviamo i tuoi dati personali, accesso, esportazione, rettifica e cancellazione li esegui direttamente nell'app e nelle impostazioni iCloud. Per qualsiasi domanda scrivi all'indirizzo di contatto qui sopra; rispondiamo entro 30 giorni. Puoi anche rivolgerti all'autorità per la protezione dei dati del tuo Paese.",
     "purch_t": "Acquisti",
-    "purch_p": "VoiceTale è gratuita fino a tre storie registrate. Se e quando verrà attivato lo sblocco facoltativo una tantum «Storie illimitate», il pagamento è gestito interamente da Apple tramite l'App Store e non riceviamo dati di pagamento.",
+    "purch_p": "VoiceTale è completamente gratuita — ogni funzione, ogni storia, ogni suono. La versione 1.0 non contiene acquisti in-app. Se un giorno venissero introdotti acquisti, il pagamento sarà gestito interamente da Apple tramite l'App Store e non riceveremo dati di pagamento.",
     "changes_t": "Modifiche",
     "changes_p": "Se cambierà il modo in cui l'app tratta i dati, aggiorneremo questa pagina e la data in alto, e segnaleremo nell'app i cambiamenti importanti.",
     "back": "Torna alla home"

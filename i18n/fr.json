@@ -18,7 +18,8 @@
   "a11y": {
     "skip": "Aller au contenu",
     "nav_aria": "Navigation principale",
-    "lang_aria": "Choisir la langue du site"
+    "lang_aria": "Choisir la langue du site",
+    "theme": "Basculer entre le mode sombre et clair"
   },
   "nav": {
     "features": "Fonctionnalités",
@@ -34,7 +35,7 @@
     "lead": "Enregistrez des contes avec votre propre voix et laissez votre enfant s'endormir avec votre histoire du soir — que vous voyagiez, rentriez tard ou soyez loin. Pas d'IA. Aucune voix de synthèse. Juste vous.",
     "badge_label": "iPhone · Nécessite iOS 26",
     "badge_cta": "Bientôt sur l'App Store",
-    "badge_note": "Gratuit jusqu'à 3 histoires · Sans publicité · Aucun pistage",
+    "badge_note": "Entièrement gratuit · Sans publicité · Aucun pistage",
     "cta_anchor": "Voir comment ça marche"
   },
   "mock": {
@@ -196,7 +197,7 @@
     "rights_t": "Vos droits (RGPD)",
     "rights_p": "Comme nous ne recevons ni ne conservons vos données personnelles, vous accédez, exportez, corrigez et supprimez vos données directement dans l'app et dans les réglages iCloud. Pour toute question, écrivez à l'adresse de contact ci-dessus ; nous répondons sous 30 jours. Vous pouvez aussi saisir votre autorité locale de protection des données.",
     "purch_t": "Achats",
-    "purch_p": "VoiceTale est gratuite jusqu'à trois histoires enregistrées. Si et quand le déverrouillage facultatif « Histoires illimitées » (paiement unique) est activé, le paiement est entièrement géré par Apple via l'App Store et nous ne recevons aucune donnée de paiement.",
+    "purch_p": "VoiceTale est entièrement gratuite — chaque fonction, chaque histoire, chaque son. La version 1.0 ne contient aucun achat intégré. Si des achats étaient un jour introduits, le paiement serait entièrement géré par Apple via l'App Store, et nous ne recevrions aucune donnée de paiement.",
     "changes_t": "Modifications",
     "changes_p": "Si la façon dont l'app traite les données change, nous mettrons à jour cette page et la date ci-dessus, et signalerons les changements importants dans l'app.",
     "back": "Retour à l'accueil"

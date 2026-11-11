@@ -18,7 +18,8 @@
   "a11y": {
     "skip": "Skip to content",
     "nav_aria": "Main navigation",
-    "lang_aria": "Choose the site language"
+    "lang_aria": "Choose the site language",
+    "theme": "Switch between dark and light mode"
   },
   "nav": {
     "features": "Features",
@@ -34,7 +35,7 @@
     "lead": "Record fairy tales in your own voice and let your child fall asleep to your bedtime story — whether you're travelling, working late, or far away. No AI. No synthetic voices. Just you.",
     "badge_label": "iPhone · Requires iOS 26",
     "badge_cta": "Coming soon to the App Store",
-    "badge_note": "Free up to 3 stories · No ads · No tracking",
+    "badge_note": "Completely free · No ads · No tracking",
     "cta_anchor": "See how it works"
   },
   "mock": {
@@ -196,7 +197,7 @@
     "rights_t": "Your rights (GDPR)",
     "rights_p": "Because we neither receive nor keep your personal data, you access, export, correct and delete it directly in the app and in iCloud settings. For any question write to the contact address above; we reply within 30 days. You may also contact your local data protection authority.",
     "purch_t": "Purchases",
-    "purch_p": "VoiceTale is free up to three recorded stories. If and when the optional one-time \"Unlimited Stories\" unlock is enabled, payment is handled entirely by Apple through the App Store and we receive no payment data.",
+    "purch_p": "VoiceTale is completely free — every feature, every story, every sound. Version 1.0 contains no in-app purchases. If purchases are ever introduced, payment will be handled entirely by Apple through the App Store, and we receive no payment data.",
     "changes_t": "Changes",
     "changes_p": "If the way the app handles data changes, we will update this page and the date above, and flag important changes in the app.",
     "back": "Back to the homepage"

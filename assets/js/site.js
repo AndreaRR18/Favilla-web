@@ -1,24 +1,28 @@
-// VoiceTale site — language menu behavior + scroll reveals.
+// VoiceTale site — theme toggle + scroll reveals.
 // Progressive enhancement only: the site is fully usable without JS.
 (function () {
   "use strict";
 
-  // Close the language menu when clicking (or focusing) outside of it.
-  var menus = document.querySelectorAll(".lang-menu");
-
-  document.addEventListener("click", function (event) {
-    menus.forEach(function (menu) {
-      if (menu.open && !menu.contains(event.target)) {
-        menu.open = false;
+  // Dark / light theme toggle. Initial theme is set inline in <head> so there
+  // is no flash; here we only react to clicks and sync the button state.
+  var toggle = document.querySelector(".theme-toggle");
+  if (toggle) {
+    var syncButton = function () {
+      var light = document.documentElement.dataset.theme === "light";
+      toggle.setAttribute("aria-pressed", light ? "true" : "false");
+    };
+    syncButton();
+    toggle.addEventListener("click", function () {
+      var next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem("vt-theme", next);
+      } catch (e) {
+        /* private mode: the choice just won't persist */
       }
+      syncButton();
     });
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      menus.forEach(function (menu) { menu.open = false; });
-    }
-  });
+  }
 
   // Scroll reveal — disabled under prefers-reduced-motion via CSS.
   var items = document.querySelectorAll(".reveal");
