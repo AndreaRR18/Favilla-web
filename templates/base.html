@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="{{meta_html_lang}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{head_title}}</title>
+  <meta name="description" content="{{head_desc}}">
+  <meta name="theme-color" content="#100B08">
+  <link rel="canonical" href="{{canonical}}">
+  {{hreflang}}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{og_site}}">
+  <meta property="og:title" content="{{og_title}}">
+  <meta property="og:description" content="{{og_desc}}">
+  <meta property="og:url" content="{{og_url}}">
+  <meta property="og:image" content="{{og_image}}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{og_desc}}">
+  <meta property="og:locale" content="{{og_locale}}">
+  {{og_alternates}}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{og_title}}">
+  <meta name="twitter:description" content="{{og_desc}}">
+  <meta name="twitter:image" content="{{og_image}}">
+  <link rel="icon" type="image/svg+xml" href="{{assets}}assets/img/favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="{{assets}}assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="{{assets}}assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&family=Manrope:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="{{assets}}assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">{{a11y_skip}}</a>
+  <div class="night-sky" aria-hidden="true"></div>
+  <header class="site-nav">
+    <nav class="nav-inner" aria-label="{{a11y_nav_aria}}">
+      <a class="brand" href="{{nav_home}}">
+        {{brand_glyph}}
+        <span class="brand-text">
+          <span class="brand-name">{{brand_name}}</span>
+          <span class="brand-tag">{{brand_tagline}}</span>
+        </span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        {{nav_links}}
+      </div>
+      <div class="nav-side">
+        {{lang_menu}}
+      </div>
+    </nav>
+  </header>
+  <main id="main">
+{{body}}
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="{{nav_home}}">
+          {{brand_glyph}}
+          <span class="brand-text">
+            <span class="brand-name">{{brand_name}}</span>
+            <span class="brand-tag">{{brand_tagline}}</span>
+          </span>
+        </a>
+        <p class="footer-mission">{{privacy_cta_hint}}</p>
+      </div>
+      <div class="footer-col">
+        <h3>{{footer_pages}}</h3>
+        <ul>
+          <li><a href="{{footer_home}}">{{brand_name}}</a></li>
+          <li><a href="{{footer_privacy}}">{{footer_privacy_link}}</a></li>
+          <li><a href="{{footer_support}}">{{footer_support_link}}</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>{{footer_languages}}</h3>
+        <ul>
+          {{footer_langs}}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>{{footer_contact}}</h3>
+        <ul>
+          <li>{{footer_email}}</li>
+          <li><a href="{{footer_github}}" rel="noopener">{{footer_gh_label}}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>{{footer_published_note}} · © {{year}} {{footer_publisher}}</p>
+      <p class="footer-fine">{{footer_paper}} {{footer_trademark}}</p>
+    </div>
+  </footer>
+  <script src="{{assets}}assets/js/site.js" defer></script>
+</body>
+</html>
