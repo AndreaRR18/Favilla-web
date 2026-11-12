@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Build the VoiceTale static website.
+"""Build the Favilla static website.
 
 Renders templates/*.html for every language in i18n/*.json, copies assets,
 generates raster icons (stdlib-only PNG writer), and emits sitemap/robots.
 
-Design tokens mirror the iOS DesignSystem package (dark-first, warm amber).
+Design tokens mirror the iOS DesignSystem package (dark-first, warm amber,
+#C4923F on #100B08). The mascot is a firefly: a soft amber light that stays
+lit in the dark. Never sparkle icons (they read as "AI") and never flames.
 Run:  python3 scripts/build.py [--out _site] [--dry-run]
 """
 
@@ -28,6 +30,14 @@ LANG_NAMES = {"en": "English", "it": "Italiano", "fr": "Français", "de": "Deuts
 LANG_CODES = {"en": "EN", "it": "IT", "fr": "FR", "de": "DE", "es": "ES"}
 OG_LOCALES = {"en": "en_US", "it": "it_IT", "fr": "fr_FR", "de": "de_DE", "es": "es_ES"}
 PAGES = {"index": "index.html", "privacy": "privacy.html", "support": "support.html", "404": "404.html"}
+
+# The wordmark as it appears in nav and footer: lowercase "favilla" with the
+# dot of the i in amber. The dotless i keeps the font's own dot out of the way.
+WORDMARK = (
+    '<span class="wordmark">fav'
+    '<span class="wordmark-i">ı<span class="wordmark-dot"></span></span>'
+    'lla</span>'
+)
 
 # Six catalog tales shown on the landing page (titles and credits localized).
 TALES = [
@@ -68,9 +78,6 @@ TALES = [
         "year": {"it": "1490 ca.", "en": "c. 1490", "fr": "vers 1490", "de": "um 1490", "es": "h. 1490"},
     },
 ]
-
-MOCK_COUNTRIES = {"fr": TALES[0]["country"], "de": TALES[2]["country"], "jp": TALES[4]["country"]}
-
 
 # ---------------------------------------------------------------------------
 # i18n loading and validation
@@ -119,6 +126,66 @@ def svg(inner, size=24, cls=""):
     )
 
 
+def _firefly_glyph():
+    """Small firefly mark: glowing amber abdomen, dark thorax, wing hints."""
+    return svg(
+        '<circle cx="12" cy="13.4" r="8.5" fill="#C4923F" opacity="0.13"/>'
+        '<circle cx="12" cy="13.4" r="4.8" fill="#C4923F" opacity="0.17"/>'
+        '<path d="M9 9.8C6.5 10.9 5.2 12.8 5.3 15.1M15 9.8c2.5 1.1 3.8 3 3.7 5.3" '
+        'fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>'
+        '<ellipse cx="12" cy="13.9" rx="3" ry="3.9" fill="#C4923F"/>'
+        '<ellipse cx="12" cy="14.2" rx="1.3" ry="1.8" fill="#F5E9D0"/>'
+        '<ellipse cx="12" cy="7.1" rx="2.35" ry="2.7" fill="#6A5F55"/>'
+        '<path d="M10.7 5.1 9.6 3.3M13.3 5.1l1.1-1.8" '
+        'fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>',
+        size=26,
+    )
+
+
+def mascot_svg():
+    """The hero mascot: a firefly at rest in the dark, with drifting sparks.
+
+    The gradients use unique prefixes (ffm-) — this SVG appears once per page.
+    """
+    return (
+        '<svg class="mascot" viewBox="0 0 140 120" width="140" height="120" aria-hidden="true">'
+        '<defs>'
+        '<radialGradient id="ffm-glow">'
+        '<stop offset="0" stop-color="#E8B869" stop-opacity="0.42"/>'
+        '<stop offset="0.45" stop-color="#C4923F" stop-opacity="0.18"/>'
+        '<stop offset="1" stop-color="#C4923F" stop-opacity="0"/>'
+        '</radialGradient>'
+        '<radialGradient id="ffm-core" cx="0.5" cy="0.62" r="0.66">'
+        '<stop offset="0" stop-color="#F5E9D0"/>'
+        '<stop offset="0.55" stop-color="#E8B869"/>'
+        '<stop offset="1" stop-color="#C4923F"/>'
+        '</radialGradient>'
+        '</defs>'
+        '<circle cx="70" cy="76" r="46" fill="url(#ffm-glow)"/>'
+        '<g fill="none" stroke="#CBB59A" stroke-opacity="0.5" stroke-width="1.6">'
+        '<ellipse cx="48" cy="52" rx="17" ry="5" transform="rotate(-33 48 52)"/>'
+        '<ellipse cx="92" cy="52" rx="17" ry="5" transform="rotate(33 92 52)"/>'
+        '</g>'
+        '<g fill="none" stroke="#CBB59A" stroke-opacity="0.6" stroke-width="1.6" stroke-linecap="round">'
+        '<path d="M64 44C58 34 49 30 43 31"/>'
+        '<path d="M76 44c6-10 15-14 21-13"/>'
+        '</g>'
+        '<ellipse cx="70" cy="41" rx="7" ry="7" fill="#2A1F14" stroke="#5A4A38" stroke-opacity="0.4"/>'
+        '<ellipse cx="70" cy="60" rx="9.5" ry="12" fill="#33261A" stroke="#5A4A38" stroke-opacity="0.4"/>'
+        '<ellipse cx="70" cy="84" rx="14" ry="17.5" fill="url(#ffm-core)"/>'
+        '<ellipse cx="70" cy="84" rx="14" ry="17.5" fill="none" stroke="#C4923F" stroke-opacity="0.7"/>'
+        '<circle cx="70" cy="84" r="4.5" fill="#F5E9D0" opacity="0.85"/>'
+        '<g fill="#E8B869">'
+        '<circle cx="26" cy="96" r="2.6" opacity="0.7"/>'
+        '<circle cx="112" cy="58" r="2.2" opacity="0.8"/>'
+        '<circle cx="102" cy="102" r="1.9" opacity="0.55"/>'
+        '<circle cx="34" cy="26" r="1.7" opacity="0.45"/>'
+        '<circle cx="120" cy="88" r="1.5" opacity="0.5"/>'
+        '</g>'
+        '</svg>'
+    )
+
+
 GLYPHS = {
     "moon": lambda: svg('<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/>'),
     "crescent": lambda: svg('<path d="M14 3.5A9 9 0 1 0 20.5 14 7.2 7.2 0 0 1 14 3.5Z"/>', size=20),
@@ -126,6 +193,8 @@ GLYPHS = {
     "heart": lambda: svg('<path d="M12 21s-7.5-4.6-9.3-9A5.4 5.4 0 0 1 12 6.2 5.4 5.4 0 0 1 21.3 12c-1.8 4.4-9.3 9-9.3 9Z"/>'),
     "play": lambda: svg('<path d="M8 5v14l11-7L8 5Z"/>', size=14),
     "arrow": lambda: svg('<path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'),
+    "firefly": _firefly_glyph,
+    "brand": _firefly_glyph,
     "noise": lambda: svg('<path d="M3 9h2.5v6H3zM7.5 6H10v12H7.5zM12 3h2.5v18H12zM16.5 7H19v10h-2.5z"/>'),
     "rain": lambda: svg('<path d="M7 14h10a4 4 0 0 0 .5-8A5.5 5.5 0 0 0 6.9 4.9 4 4 0 0 0 7 14Z"/>'),
     "heartbeat": lambda: svg('<path d="M2.5 11.5h4l1.6-4 4 9.5 2.2-5.5h6.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'),
@@ -195,11 +264,6 @@ def png_bytes(width, height, pixel):
             + chunk(b"IDAT", zlib.compress(bytes(rows), 6)) + chunk(b"IEND", b""))
 
 
-def mix(base, over, alpha):
-    alpha = max(0.0, min(1.0, alpha))
-    return tuple(int(base[i] + (over[i] - base[i]) * alpha + 0.5) for i in range(3)) + (255,)
-
-
 def _rounded_square(x, y, big, r):
     if r <= 0:
         return 0 <= x < big and 0 <= y < big
@@ -209,38 +273,129 @@ def _rounded_square(x, y, big, r):
     return dx * dx + dy * dy <= r * r
 
 
+# Firefly mascot colors (in 64-unit local space)
+FF_AMBER = (196, 146, 63)
+FF_HOT = (232, 184, 105)
+FF_PARCH = (245, 233, 208)
+FF_DARK = (38, 28, 19)
+FF_WING = (205, 180, 145)
+FF_WINGS = (  # cx, cy, rx, ry, rotation (radians); swept up-out from the thorax
+    (23.5, 21.0, 8.9, 2.0, 0.58),
+    (40.5, 21.0, 8.9, 2.0, -0.58),
+)
+FF_ANTENNAE = (  # start, control, end; curves out of the head
+    ((30.3, 19.6), (27.2, 15.2), (24.6, 13.6)),
+    ((33.7, 19.6), (36.8, 15.2), (39.4, 13.6)),
+)
+FF_SPARKS = (  # x, y, radius, alpha — small drifting sparks around the firefly
+    (17.5, 41.5, 1.2, 0.55),
+    (45.5, 29.5, 1.0, 0.70),
+    (41.0, 50.0, 0.9, 0.45),
+    (21.5, 60.0, 0.8, 0.35),
+    (49.0, 52.0, 0.7, 0.50),
+)
+
+
+def _mixn(color, over, alpha):
+    return tuple(int(color[i] + (over[i] - color[i]) * alpha + 0.5) for i in range(3)) + (255,)
+
+
+def _clamp01(value):
+    return max(0.0, min(1.0, value))
+
+
+def _nd_ellipse(px, py, cx, cy, rx, ry, rot=0.0):
+    """Normalized ellipse distance (>1 outside, 1 at the rim)."""
+    dx, dy = px - cx, py - cy
+    if rot:
+        c_rot, s_rot = math.cos(rot), math.sin(rot)
+        dx, dy = dx * c_rot + dy * s_rot, -dx * s_rot + dy * c_rot
+    return math.hypot(dx / rx, dy / ry)
+
+
+def _firefly_layers(px, py, detail=True, zoom=1.0, cx0=32.0, cy0=40.0):
+    """(color, alpha) paints of the mascot in 64-unit local space, or None.
+
+    Everything is shaped so the abdomen glows softly: a wide, low halo
+    first, then wings, then the dark body, then faint sparks. The antennae
+    are only worth painting on big renders (detail=True). zoom=1.0 keeps
+    the local-space size; larger values magnify the firefly around its glow.
+    """
+    px = cx0 + (px - cx0) / zoom
+    py = cy0 + (py - cy0) / zoom
+    if not (-10 <= px <= 76 and -10 <= py <= 76):
+        return None
+
+    layers = []
+
+    # warm glow around the abdomen
+    d_ab = math.hypot(px - 32.0, py - 40.5)
+    g_inner = _clamp01(1.0 - d_ab / 13.0)
+    glow = 0.30 * g_inner * g_inner
+    g_outer = max(0.0, 1.0 - d_ab / 40.0)
+    glow += 0.12 * g_outer ** 1.5
+    if glow > 0.004:
+        layers.append((FF_AMBER, glow))
+
+    # wings: soft fill, then a stroke rim
+    for cx, cy, rx, ry, rot in FF_WINGS:
+        nd = _nd_ellipse(px, py, cx, cy, rx, ry, rot)
+        if nd < 1.0:
+            layers.append((FF_WING, 0.14 * (1.0 - nd)))
+        if 0.78 <= nd <= 1.0:
+            layers.append((FF_WING, 0.55 * (1.0 - abs(nd - 0.89) / 0.11)))
+
+    # glowing abdomen with a hot core
+    nd_ab = _nd_ellipse(px, py, 32.0, 40.5, 7.4, 9.4)
+    if nd_ab <= 1.0:
+        core = min(1.0, 1.0 - nd_ab) ** 2 * 0.85
+        layers.append((_mixn(FF_AMBER, FF_PARCH, core)[:3], 1.0))
+
+    # thorax and head, dark against the night, outlined just enough
+    if _nd_ellipse(px, py, 32.0, 27.0, 3.9, 5.0) <= 1.0:
+        layers.append((FF_DARK, 0.96))
+    if math.hypot(px - 32.0, py - 20.2) <= 3.1:
+        layers.append((FF_DARK, 0.96))
+
+    # antennae (paint only on large renders)
+    if detail:
+        for (ax, ay), (cx, cy), (bx, by) in FF_ANTENNAE:
+            hit = False
+            for step in range(13):
+                t = step / 12
+                u = 1.0 - t
+                qx = u * u * ax + 2 * u * t * cx + t * t * bx
+                qy = u * u * ay + 2 * u * t * cy + t * t * by
+                if math.hypot(px - qx, py - qy) <= 0.85:
+                    hit = True
+                    break
+            if hit:
+                layers.append((FF_WING, 0.7))
+
+    # drifting sparks
+    for sx, sy, sr, sa in FF_SPARKS:
+        d = math.hypot(px - sx, py - sy)
+        if d <= sr + 1.1:
+            layers.append((FF_HOT, sa * _clamp01(1.0 - d / (sr + 1.1))))
+
+    return layers or None
+
+
 def _icon_png(size, corner_radius, supersample):
-    """Dark rounded square with a centered amber waveform, supersampled."""
+    """Warm dark rounded square with the firefly at rest, supersampled."""
     big = size * supersample
-    bars = [0.30, 0.55, 0.85, 0.55, 0.30]
-    bar_w = big * 0.082
-    gap = big * 0.034
-    total_w = 5 * bar_w + 4 * gap
-    x0 = (big - total_w) / 2
-    cy = big / 2
-    bg = (28, 20, 16)
-    amber = (196, 146, 63)
-    hot = (232, 184, 105)
+    scale = big / 64.0
     r_sq = corner_radius * supersample
+    bg_top, bg_bottom = (32, 23, 15), (9, 6, 4)
 
     def pixel(x, y):
         if not _rounded_square(x, y, big, r_sq):
             return (0, 0, 0, 0)
-        color = bg + (255,)
-        for index, amp in enumerate(bars):
-            bx = x0 + index * (bar_w + gap)
-            bh = big * amp * 0.17
-            top, bottom = cy - bh, cy + bh
-            if bx <= x <= bx + bar_w and top <= y <= bottom:
-                if x - bx < bar_w * 0.28:
-                    edge = (x - bx) / (bar_w * 0.28)
-                else:
-                    edge = (bx + bar_w - x) / (bar_w * 0.28)
-                edge = min(max(edge, 0), 1)
-                shade = mix(bg, amber, edge * 0.85)[:3] + (255,)
-                mid = max(0.0, 1 - abs((y - cy) / (bh * 0.5)))
-                color = mix(shade[:3], hot, mid * 0.5)
-        return color
+        color = tuple(bg_top[i] + (bg_bottom[i] - bg_top[i]) * (y / big) for i in range(3))
+        layers = _firefly_layers(x / scale, y / scale, zoom=1.18, cx0=32.0, cy0=39.0)
+        for col, alpha in layers or ():
+            color = _mixn(color, col, alpha)
+        return (min(255, int(color[0] + 0.5)), min(255, int(color[1] + 0.5)), min(255, int(color[2] + 0.5)), 255)
 
     big_img = png_bytes(big, big, pixel)
     return big_img if supersample == 1 else _shrink_png(big_img, supersample)
@@ -316,60 +471,65 @@ def _decode_rgba(data):
 
 
 def og_image_bytes():
-    """1200x630 night scene: gradient, amber glows, waveform bars, a crescent."""
+    """1200x630 night scene: warm dark sky, a crescent, fireflies, one hill."""
     width, height = 1200, 630
-    top, bottom = (28, 20, 16), (10, 7, 5)
-    glow_cx, glow_cy, glow_r = 600.0, 470.0, 560.0
-    bars = [0.30, 0.5, 0.78, 0.42, 0.9, 0.55, 0.72, 1.0, 0.62, 0.85, 0.45, 0.68,
-            0.95, 0.5, 0.75, 0.38, 0.6, 0.88]
-    bar_w, gap = 30.0, 12.0
-    total_w = len(bars) * bar_w + (len(bars) - 1) * gap
-    x0 = (width - total_w) / 2
-    cy = 300.0
-    moon_cx, moon_cy, moon_r = 1000.0, 148.0, 56.0
+    top, bottom = (36, 26, 17), (8, 5, 3)
+    # abdomen position (fx, fy), scale, opacity multiplier, fine details flag
+    scene = [(880, 235, 1.5, 1.0, True), (1005, 360, 0.85, 0.7, False), (760, 355, 0.7, 0.5, False)]
+    scene_offsets = [(fx - 32.0 * s, fy - 40.5 * s, s, m, det) for fx, fy, s, m, det in scene]
+    sparks = [
+        (150, 300, 5.0, 0.32),
+        (330, 190, 4.0, 0.28),
+        (1105, 150, 5.0, 0.38),
+        (520, 460, 4.5, 0.30),
+        (660, 500, 3.5, 0.30),
+        (60, 480, 3.5, 0.30),
+    ]
 
     def lerp3(a, b, t):
         return tuple(a[i] + (b[i] - a[i]) * t for i in range(3))
 
     def pixel(x, y):
-        t = y / height
-        color = lerp3(top, bottom, t)
-        d = math.hypot(x - glow_cx, y - glow_cy)
-        if d < glow_r:
-            falloff = 1 - d / glow_r
-            color = mix(color, (196, 146, 63), falloff ** 2 * 0.30)[:3]
-        d2 = math.hypot(x - 240, y - 120)
-        if d2 < 300:
-            color = mix(color, (196, 146, 63), (1 - d2 / 300) ** 2 * 0.12)[:3]
-        dc = math.hypot(x - moon_cx, y - moon_cy)
-        if dc < moon_r:
-            inner = math.hypot(x - (moon_cx + 24), y - (moon_cy - 9))
-            crescent_zone = dc / moon_r
-            if inner > moon_r * 0.92 and crescent_zone < 1.0:
-                alpha = 0.85 * (1 - abs(dc - moon_r * 0.5) / (moon_r * 0.5))
-                alpha = max(0.0, min(1.0, alpha))
-                if inner > moon_r:
-                    color = mix(color, (245, 233, 208), alpha)[:3]
-                else:
-                    soft = max(0.0, (inner - moon_r * 0.8) / (moon_r * 0.2))
-                    color = mix(color, (245, 233, 208), alpha * soft)[:3]
-        for index, amp in enumerate(bars):
-            bx = x0 + index * (bar_w + gap)
-            bh = 250.0 * amp
-            top_y, bottom_y = cy - bh, cy + bh
-            if bx <= x < bx + bar_w and top_y <= y <= bottom_y:
-                mid = 1 - abs(y - cy) / (bh * 0.9)
-                bar = mix((196, 146, 63), (245, 233, 208), max(0.0, mid) * 0.55)[:3]
-                edge = 1.0
-                if x - bx < 4:
-                    edge = (x - bx) / 4
-                elif bx + bar_w - x < 4:
-                    edge = (bx + bar_w - x) / 4
-                cap = min(1.0, (y - top_y) / 14, (bottom_y - y) / 14)
-                a = min(1.0, edge) * max(0.0, cap)
-                color = mix(color, bar, a)
-                break
-        return (int(color[0] + 0.5), int(color[1] + 0.5), int(color[2] + 0.5), 255)
+        color = lerp3(top, bottom, y / height)
+
+        # broad warm glow rising from the bottom
+        d = math.hypot((x - 600) / 1.35, (y - 560) / 1.0)
+        if d < 500:
+            color = _mixn(color, FF_AMBER, (1 - d / 500) ** 2 * 0.30)
+
+        # thin crescent, upper left
+        dc = math.hypot(x - 200, y - 110)
+        if dc < 60:
+            d_in = math.hypot(x - 226, y - 98)
+            if d_in > 40:
+                edge = _clamp01(1 - abs(dc - 46) / 6)
+                rim = _clamp01((d_in - 40) / 8)
+                color = _mixn(color, FF_PARCH, 0.8 * edge * rim)
+
+        # the hill, a soft arc along the bottom
+        if y >= 540:
+            inside = 1 - ((x - 600) / 1180.0) ** 2
+            if inside > 0:
+                y_hill = 900 - 348 * math.sqrt(inside)
+                if y >= y_hill:
+                    color = _mixn(color, (5, 3, 2), min(1.0, 0.55 + (y - y_hill) / 60))
+
+        # fireflies
+        for ox, oy, s, mult, detail in scene_offsets:
+            lx = (x - ox) / s
+            ly = (y - oy) / s
+            if not (-10 <= lx <= 76 and -10 <= ly <= 76):
+                continue
+            for col, alpha in _firefly_layers(lx, ly, detail) or ():
+                color = _mixn(color, col, min(1.0, alpha * mult))
+
+        # far sparks
+        for sx, sy, sr, sa in sparks:
+            d = math.hypot(x - sx, y - sy)
+            if d < sr * 3:
+                color = _mixn(color, FF_HOT, sa * _clamp01(1 - d / (sr * 3)) ** 2)
+
+        return (min(255, int(color[0] + 0.5)), min(255, int(color[1] + 0.5)), min(255, int(color[2] + 0.5)), 255)
 
     return png_bytes(width, height, pixel)
 
@@ -486,12 +646,6 @@ def build(config, strings, out_dir):
             for key, value in list(ctx.items()):
                 ctx[key.replace(".", "_")] = value
 
-            # list-valued i18n keys flattened to named slots
-            for tab in ("lib", "cat", "snd", "abt"):
-                bullets = i18n[f"tabs.{tab}_bullets"]
-                for i, text in enumerate(bullets[:3], 1):
-                    ctx[f"tabs_{tab}_b{i}"] = text
-
             # meta
             title_key = {"index": "meta.title_index", "privacy": "meta.title_privacy",
                          "support": "meta.title_support", "404": "meta.title_404"}[page]
@@ -522,14 +676,15 @@ def build(config, strings, out_dir):
             # navigation
             nav_file = "" if page == "index" else "index.html"
             nav_links = [
-                f'<a href="{nav_file}#features">{esc(i18n["nav.features"])}</a>',
+                f'<a href="{nav_file}#idea">{esc(i18n["nav.idea"])}</a>',
+                f'<a href="{nav_file}#how">{esc(i18n["nav.how"])}</a>',
                 f'<a href="{nav_file}#app">{esc(i18n["nav.app"])}</a>',
-                f'<a href="{nav_file}#why">{esc(i18n["nav.why"])}</a>',
                 f'<a href="{nav_file}#privacy">{esc(i18n["nav.privacy"])}</a>',
                 f'<a href="support.html">{esc(i18n["nav.support"])}</a>',
             ]
             ctx["nav_links"] = "".join(nav_links)
             ctx["nav_home"] = "index.html"
+            ctx["brand_wordmark"] = WORDMARK
 
             # language switcher (visible, top right) and theme toggle
             def href_for(other, page=page, lang=lang):
@@ -562,8 +717,8 @@ def build(config, strings, out_dir):
                 path_prefix = urlparse(base_url).path
                 ctx["assets"] = path_prefix
                 ctx["nav_home"] = path_prefix
-                nav_anchors_404 = [("features", "nav.features"), ("app", "nav.app"),
-                                   ("why", "nav.why"), ("privacy", "nav.privacy")]
+                nav_anchors_404 = [("idea", "nav.idea"), ("how", "nav.how"),
+                                   ("app", "nav.app"), ("privacy", "nav.privacy")]
                 ctx["nav_links"] = "".join(
                     f'<a href="{path_prefix}#{anchor}">{esc(i18n[key])}</a>'
                     for anchor, key in nav_anchors_404)
@@ -575,12 +730,13 @@ def build(config, strings, out_dir):
                 ctx["footer_privacy"] = path_prefix + "privacy.html"
                 ctx["footer_support"] = path_prefix + "support.html"
 
-            # glyphs and waves
+            # glyphs, waves and the hero mascot
             for name, glyph in GLYPHS.items():
                 ctx[f"{name}_glyph"] = glyph()
             for wave_id, amps in MINI_AMPS.items():
                 ctx[f"wave_{wave_id}"] = wave_svg(f"m{wave_id}", amps, 44, 16)
             ctx["hero_wave"] = wave_svg("hero", HERO_AMPS, 800, 120)
+            ctx["mascot_svg"] = mascot_svg()
 
             # store badge
             store_url = config.get("app_store_url") or ""
@@ -594,10 +750,6 @@ def build(config, strings, out_dir):
             ctx["tale1_title"] = esc(TALES[0]["titles"][lang])
             ctx["tale2_title"] = esc(TALES[1]["titles"][lang])
             ctx["tale3_title"] = esc(TALES[2]["titles"][lang])
-            ctx["tale4_title"] = esc(TALES[3]["titles"][lang])
-            ctx["country_fr"] = esc(MOCK_COUNTRIES["fr"][lang])
-            ctx["country_de"] = esc(MOCK_COUNTRIES["de"][lang])
-            ctx["country_jp"] = esc(MOCK_COUNTRIES["jp"][lang])
             ctx["tale_cards"] = "".join(
                 f'<article class="tale glass reveal">'
                 f'<h3 class="tale-title">{esc(t["titles"][lang])}</h3>'
@@ -645,7 +797,7 @@ def build(config, strings, out_dir):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Build the VoiceTale static website")
+    parser = argparse.ArgumentParser(description="Build the Favilla static website")
     parser.add_argument("--out", default="_site")
     parser.add_argument("--base-url", default=None, help="override base URL from config.json")
     parser.add_argument("--dry-run", action="store_true")

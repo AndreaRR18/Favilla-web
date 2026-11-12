@@ -11,7 +11,7 @@
   <script>
   (function () {
     try {
-      var chosen = localStorage.getItem("vt-theme");
+      var chosen = localStorage.getItem("fv-theme");
       var light = chosen === "light" || (!chosen && window.matchMedia("(prefers-color-scheme: light)").matches);
       document.documentElement.dataset.theme = light ? "light" : "dark";
     } catch (e) {
@@ -49,11 +49,11 @@
   <div class="night-sky" aria-hidden="true"></div>
   <header class="site-nav">
     <nav class="nav-inner" aria-label="{{a11y_nav_aria}}">
-      <a class="brand" href="{{nav_home}}">
+      <a class="brand" href="{{nav_home}}" aria-label="{{brand_name}}">
         {{brand_glyph}}
-        <span class="brand-text">
-          <span class="brand-name">{{brand_name}}</span>
-          <span class="brand-tag">{{brand_tagline}}</span>
+        <span class="brand-text" aria-hidden="true">
+          <span class="brand-name">{{brand_wordmark}}</span>
+          <span class="brand-tag">{{brand_tagline_short}}</span>
         </span>
       </a>
       <div class="nav-links" id="nav-links">
@@ -71,10 +71,10 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a class="brand" href="{{nav_home}}">
+        <a class="brand" href="{{nav_home}}" aria-label="{{brand_name}}">
           {{brand_glyph}}
-          <span class="brand-text">
-            <span class="brand-name">{{brand_name}}</span>
+          <span class="brand-text" aria-hidden="true">
+            <span class="brand-name">{{brand_wordmark}}</span>
             <span class="brand-tag">{{brand_tagline}}</span>
           </span>
         </a>
@@ -107,6 +107,10 @@
       <p class="footer-fine">{{footer_paper}} {{footer_trademark}}</p>
     </div>
   </footer>
+  <div class="cursor-fly" aria-hidden="true">
+    <span class="fly-halo"></span>
+    <span class="fly-shell"></span>
+  </div>
   <script src="{{assets}}assets/js/site.js" defer></script>
 </body>
 </html>
