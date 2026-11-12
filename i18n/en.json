@@ -30,13 +30,13 @@
     "support": "Support"
   },
   "hero": {
-    "kicker": "For the goodnight hour",
+    "kicker": "For the last light of the day",
     "h1a": "Tonight's story, in your voice.",
     "h1b": "Even when you can't be there.",
     "lead": "Record a bedtime story in your own voice, and keep it for the nights you can't be there. No AI and no synthetic voices: your child falls asleep to you, every night.",
     "badge_label": "iPhone · Requires iOS 26",
     "badge_cta": "Coming soon to the App Store",
-    "badge_note": "Free · No ads · No tracking",
+    "badge_note": "Free · no ads · no tracking — and it stays that way",
     "cta_anchor": "How it works"
   },
   "idea": {
@@ -62,7 +62,7 @@
   },
   "tabs": {
     "kicker": "Inside the app",
-    "title": "Everything a goodnight needs",
+    "title": "Everything a goodnight needs — nothing it doesn't",
     "lib_tag": "Your stories",
     "lib_name": "Library",
     "lib_body": "Every story you have told, kept like a small bookshelf: folders, tags, favourites.",

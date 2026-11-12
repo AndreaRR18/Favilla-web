@@ -30,13 +30,13 @@
     "support": "Assistance"
   },
   "hero": {
-    "kicker": "Pour l'heure du coucher",
+    "kicker": "Pour la dernière lumière du jour",
     "h1a": "L'histoire de ce soir, avec ta voix.",
     "h1b": "Même quand tu ne peux pas être là.",
     "lead": "Enregistre une histoire du soir avec ta propre voix, une seule fois. Les soirs où tu rentres tard ou où tu voyages, ton enfant s'endort quand même avec toi : pas d'IA, pas de voix de synthèse.",
     "badge_label": "iPhone · Nécessite iOS 26",
     "badge_cta": "Bientôt sur l'App Store",
-    "badge_note": "Gratuit · Sans pub · Sans pistage",
+    "badge_note": "Gratuit · sans pub · sans pistage — et ça ne changera pas",
     "cta_anchor": "Comment ça marche"
   },
   "idea": {
@@ -62,7 +62,7 @@
   },
   "tabs": {
     "kicker": "Dans l'app",
-    "title": "Tout ce qu'il faut pour une bonne nuit",
+    "title": "Tout ce qu'il faut pour le coucher — et rien de plus",
     "lib_tag": "Tes histoires",
     "lib_name": "Bibliothèque",
     "lib_body": "Chaque histoire que tu as racontée, rangée comme une petite étagère : dossiers, étiquettes, favoris.",

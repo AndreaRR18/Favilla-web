@@ -30,13 +30,13 @@
     "support": "Ayuda"
   },
   "hero": {
-    "kicker": "Para la hora de dormir",
+    "kicker": "Para la última luz del día",
     "h1a": "El cuento de esta noche, con tu voz.",
     "h1b": "Aunque no puedas estar.",
     "lead": "Graba un cuento para dormir con tu propia voz, una sola vez. En las noches de trabajo tarde o de viaje, tu pequeño se duerme igual contigo: sin IA, sin voz sintética.",
     "badge_label": "iPhone · Requiere iOS 26",
     "badge_cta": "Pronto en el App Store",
-    "badge_note": "Gratis · Sin anuncios · Sin rastreo",
+    "badge_note": "Gratis · sin anuncios · sin rastreo — y seguirá así",
     "cta_anchor": "Cómo funciona"
   },
   "idea": {
@@ -62,7 +62,7 @@
   },
   "tabs": {
     "kicker": "Dentro de la app",
-    "title": "Todo lo que hace falta para una buena noche",
+    "title": "Todo lo que hace falta para dormir — y nada más",
     "lib_tag": "Tus cuentos",
     "lib_name": "Biblioteca",
     "lib_body": "Cada cuento que has contado, guardado como una estantería propia: carpetas, etiquetas, favoritos.",

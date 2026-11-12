@@ -28,7 +28,15 @@ config.json           site-level facts (see below)
 ## Editing content
 
 1. Edit `i18n/<lang>.json` (or a template, or the assets).
-2. Preview locally:
+2. Preview locally with a single command:
+
+   ```bash
+   ./run.sh          # builds into _site/ and serves on http://localhost:8000
+   ./run.sh 3000     # custom port
+   ```
+
+   `run.sh` is just a wrapper around the two steps below, if you prefer them
+   separately:
 
    ```bash
    python3 scripts/build.py --out _site

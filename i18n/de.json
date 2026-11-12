@@ -30,13 +30,13 @@
     "support": "Hilfe"
   },
   "hero": {
-    "kicker": "Für die Gutenacht-Stunde",
+    "kicker": "Für das letzte Licht des Tages",
     "h1a": "Die Geschichte von heute Abend, in deiner Stimme.",
     "h1b": "Auch wenn du nicht dabei sein kannst.",
     "lead": "Nimm eine Gutenachtgeschichte einmal mit deiner eigenen Stimme auf. An den Abenden, an denen du spät arbeitest oder unterwegs bist, schläft dein Kind trotzdem mit dir ein: keine KI, keine synthetische Stimme.",
     "badge_label": "iPhone · Benötigt iOS 26",
     "badge_cta": "Bald im App Store",
-    "badge_note": "Kostenlos · Keine Werbung · Kein Tracking",
+    "badge_note": "Kostenlos · keine Werbung · kein Tracking — und das bleibt so",
     "cta_anchor": "So funktioniert es"
   },
   "idea": {
@@ -62,7 +62,7 @@
   },
   "tabs": {
     "kicker": "In der App",
-    "title": "Alles, was eine gute Nacht braucht",
+    "title": "Alles, was eine gute Nacht braucht — und nichts darüber hinaus",
     "lib_tag": "Deine Geschichten",
     "lib_name": "Bibliothek",
     "lib_body": "Jede Geschichte, die du erzählt hast, aufbewahrt wie ein eigenes Regal: Ordner, Tags, Favoriten.",

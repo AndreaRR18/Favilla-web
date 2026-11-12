@@ -30,13 +30,13 @@
     "support": "Supporto"
   },
   "hero": {
-    "kicker": "Per l'ora della buonanotte",
+    "kicker": "Per l'ultima luce del giorno",
     "h1a": "La storia di stasera, con la tua voce.",
     "h1b": "Anche quando tu non puoi esserci.",
     "lead": "Registra una storia della buonanotte con la tua voce, una volta sola. Le sere in cui torni tardi o sei in viaggio, tuo figlio si addormenta comunque con te: niente IA, nessuna voce sintetica.",
     "badge_label": "iPhone · Richiede iOS 26",
     "badge_cta": "In arrivo sull'App Store",
-    "badge_note": "Gratis · Niente pubblicità · Nessun tracciamento",
+    "badge_note": "Gratis · niente pubblicità · nessun tracciamento — e resterà così",
     "cta_anchor": "Come funziona"
   },
   "idea": {
@@ -62,7 +62,7 @@
   },
   "tabs": {
     "kicker": "Dentro l'app",
-    "title": "Tutto ciò che serve a una buonanotte",
+    "title": "Tutto ciò che serve alla nanna — e niente di più",
     "lib_tag": "Le tue storie",
     "lib_name": "Libreria",
     "lib_body": "Ogni storia che hai raccontato, tenuta come uno scaffale tutto tuo: cartelle, tag, preferiti.",
