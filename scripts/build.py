@@ -5,8 +5,9 @@ Renders templates/*.html for every language in i18n/*.json, copies assets,
 generates raster icons (stdlib-only PNG writer), and emits sitemap/robots.
 
 Design tokens mirror the iOS DesignSystem package (dark-first, warm amber,
-#C4923F on #100B08). The mascot is a firefly: a soft amber light that stays
-lit in the dark. Never sparkle icons (they read as "AI") and never flames.
+#C4923F on #100B08). The mark is the Favilla symbol exactly as the app draws
+it in FireflyField: a bright dot with three flat concentric rings. Never
+sparkle icons (they read as "AI") and never flames or insect drawings.
 Run:  python3 scripts/build.py [--out _site] [--dry-run]
 """
 
@@ -126,63 +127,36 @@ def svg(inner, size=24, cls=""):
     )
 
 
+# The Favilla mark, exactly as the app draws a firefly in FireflyField.swift:
+# a bright core with three flat concentric rings — radii 6x, 4x, 2.5x the core
+# at 0.08, 0.14, 0.24 of its alpha, stacked over each other.
+MARK_RINGS = ((6.0, 0.08), (4.0, 0.14), (2.5, 0.24))
+
+
+def _mark_svg(cx, cy, core_r, cls=""):
+    """One dot-and-rings mark as inline SVG, in currentColor."""
+    klass = f' class="{cls}"' if cls else ""
+    rings = "".join(
+        f'<circle cx="{cx}" cy="{cy}" r="{core_r * scale:.1f}" fill="currentColor" fill-opacity="{weight}"/>'
+        for scale, weight in MARK_RINGS)
+    return f'<g{klass}>{rings}<circle cx="{cx}" cy="{cy}" r="{core_r:.1f}" fill="currentColor"/></g>'
+
+
 def _firefly_glyph():
-    """Small firefly mark: glowing amber abdomen, dark thorax, wing hints."""
-    return svg(
-        '<circle cx="12" cy="13.4" r="8.5" fill="#C4923F" opacity="0.13"/>'
-        '<circle cx="12" cy="13.4" r="4.8" fill="#C4923F" opacity="0.17"/>'
-        '<path d="M9 9.8C6.5 10.9 5.2 12.8 5.3 15.1M15 9.8c2.5 1.1 3.8 3 3.7 5.3" '
-        'fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>'
-        '<ellipse cx="12" cy="13.9" rx="3" ry="3.9" fill="#C4923F"/>'
-        '<ellipse cx="12" cy="14.2" rx="1.3" ry="1.8" fill="#F5E9D0"/>'
-        '<ellipse cx="12" cy="7.1" rx="2.35" ry="2.7" fill="#6A5F55"/>'
-        '<path d="M10.7 5.1 9.6 3.3M13.3 5.1l1.1-1.8" '
-        'fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>',
-        size=26,
-    )
+    """The Favilla mark, small: a bright dot with three flat concentric rings."""
+    return svg(_mark_svg(12, 12, 1.9), size=26)
 
 
 def mascot_svg():
-    """The hero mascot: a firefly at rest in the dark, with drifting sparks.
-
-    The gradients use unique prefixes (ffm-) — this SVG appears once per page.
-    """
+    """The hero mark: the dot-and-rings symbol, large, with two smaller ones
+    drifting nearby — the same drawing the app uses for its fireflies."""
     return (
-        '<svg class="mascot" viewBox="0 0 140 120" width="140" height="120" aria-hidden="true">'
-        '<defs>'
-        '<radialGradient id="ffm-glow">'
-        '<stop offset="0" stop-color="#E8B869" stop-opacity="0.42"/>'
-        '<stop offset="0.45" stop-color="#C4923F" stop-opacity="0.18"/>'
-        '<stop offset="1" stop-color="#C4923F" stop-opacity="0"/>'
-        '</radialGradient>'
-        '<radialGradient id="ffm-core" cx="0.5" cy="0.62" r="0.66">'
-        '<stop offset="0" stop-color="#F5E9D0"/>'
-        '<stop offset="0.55" stop-color="#E8B869"/>'
-        '<stop offset="1" stop-color="#C4923F"/>'
-        '</radialGradient>'
-        '</defs>'
-        '<circle class="mascot-glow" cx="70" cy="76" r="46" fill="url(#ffm-glow)"/>'
-        '<g fill="none" stroke="#CBB59A" stroke-opacity="0.5" stroke-width="1.6">'
-        '<g class="mascot-wing mascot-wing-l"><ellipse cx="48" cy="52" rx="17" ry="5" transform="rotate(-33 48 52)"/></g>'
-        '<g class="mascot-wing mascot-wing-r"><ellipse cx="92" cy="52" rx="17" ry="5" transform="rotate(33 92 52)"/></g>'
-        '</g>'
-        '<g fill="none" stroke="#CBB59A" stroke-opacity="0.6" stroke-width="1.6" stroke-linecap="round">'
-        '<path d="M64 44C58 34 49 30 43 31"/>'
-        '<path d="M76 44c6-10 15-14 21-13"/>'
-        '</g>'
-        '<ellipse cx="70" cy="41" rx="7" ry="7" fill="#2A1F14" stroke="#5A4A38" stroke-opacity="0.4"/>'
-        '<ellipse cx="70" cy="60" rx="9.5" ry="12" fill="#33261A" stroke="#5A4A38" stroke-opacity="0.4"/>'
-        '<ellipse cx="70" cy="84" rx="14" ry="17.5" fill="url(#ffm-core)"/>'
-        '<ellipse cx="70" cy="84" rx="14" ry="17.5" fill="none" stroke="#C4923F" stroke-opacity="0.7"/>'
-        '<circle cx="70" cy="84" r="4.5" fill="#F5E9D0" opacity="0.85"/>'
-        '<g fill="#E8B869">'
-        '<circle class="mascot-spark" cx="26" cy="96" r="2.6" opacity="0.7"/>'
-        '<circle class="mascot-spark" cx="112" cy="58" r="2.2" opacity="0.8"/>'
-        '<circle class="mascot-spark" cx="102" cy="102" r="1.9" opacity="0.55"/>'
-        '<circle class="mascot-spark" cx="34" cy="26" r="1.7" opacity="0.45"/>'
-        '<circle class="mascot-spark" cx="120" cy="88" r="1.5" opacity="0.5"/>'
-        '</g>'
-        '</svg>'
+        '<svg class="mascot" viewBox="0 0 160 160" width="150" height="150" aria-hidden="true">'
+        + _mark_svg(80, 80, 13)
+        + _mark_svg(34, 122, 4, cls="mascot-spark")
+        + _mark_svg(128, 40, 3.2, cls="mascot-spark")
+        + _mark_svg(122, 130, 2.6, cls="mascot-spark")
+        + '</svg>'
     )
 
 
@@ -272,27 +246,8 @@ def _rounded_square(x, y, big, r):
     return dx * dx + dy * dy <= r * r
 
 
-# Firefly mascot colors (in 64-unit local space)
+# Favilla mark color
 FF_AMBER = (196, 146, 63)
-FF_HOT = (232, 184, 105)
-FF_PARCH = (245, 233, 208)
-FF_DARK = (38, 28, 19)
-FF_WING = (205, 180, 145)
-FF_WINGS = (  # cx, cy, rx, ry, rotation (radians); swept up-out from the thorax
-    (23.5, 21.0, 8.9, 2.0, 0.58),
-    (40.5, 21.0, 8.9, 2.0, -0.58),
-)
-FF_ANTENNAE = (  # start, control, end; curves out of the head
-    ((30.3, 19.6), (27.2, 15.2), (24.6, 13.6)),
-    ((33.7, 19.6), (36.8, 15.2), (39.4, 13.6)),
-)
-FF_SPARKS = (  # x, y, radius, alpha — small drifting sparks around the firefly
-    (17.5, 41.5, 1.2, 0.55),
-    (45.5, 29.5, 1.0, 0.70),
-    (41.0, 50.0, 0.9, 0.45),
-    (21.5, 60.0, 0.8, 0.35),
-    (49.0, 52.0, 0.7, 0.50),
-)
 
 
 def _mixn(color, over, alpha):
@@ -303,97 +258,36 @@ def _clamp01(value):
     return max(0.0, min(1.0, value))
 
 
-def _nd_ellipse(px, py, cx, cy, rx, ry, rot=0.0):
-    """Normalized ellipse distance (>1 outside, 1 at the rim)."""
-    dx, dy = px - cx, py - cy
-    if rot:
-        c_rot, s_rot = math.cos(rot), math.sin(rot)
-        dx, dy = dx * c_rot + dy * s_rot, -dx * s_rot + dy * c_rot
-    return math.hypot(dx / rx, dy / ry)
+def _mark_alpha(d, core_r):
+    """Alpha of the dot-and-rings mark at distance d from its centre.
 
-
-def _firefly_layers(px, py, detail=True, zoom=1.0, cx0=32.0, cy0=40.0):
-    """(color, alpha) paints of the mascot in 64-unit local space, or None.
-
-    Everything is shaped so the abdomen glows softly: a wide, low halo
-    first, then wings, then the dark body, then faint sparks. The antennae
-    are only worth painting on big renders (detail=True). zoom=1.0 keeps
-    the local-space size; larger values magnify the firefly around its glow.
+    Mirrors the app's FireflyField: flat rings stacked source-over, so the
+    combined alpha inside ring i is 1 - prod(1 - w_j) for all rings j that
+    contain the point.
     """
-    px = cx0 + (px - cx0) / zoom
-    py = cy0 + (py - cy0) / zoom
-    if not (-10 <= px <= 76 and -10 <= py <= 76):
-        return None
-
-    layers = []
-
-    # warm glow around the abdomen
-    d_ab = math.hypot(px - 32.0, py - 40.5)
-    g_inner = _clamp01(1.0 - d_ab / 13.0)
-    glow = 0.30 * g_inner * g_inner
-    g_outer = max(0.0, 1.0 - d_ab / 40.0)
-    glow += 0.12 * g_outer ** 1.5
-    if glow > 0.004:
-        layers.append((FF_AMBER, glow))
-
-    # wings: soft fill, then a stroke rim
-    for cx, cy, rx, ry, rot in FF_WINGS:
-        nd = _nd_ellipse(px, py, cx, cy, rx, ry, rot)
-        if nd < 1.0:
-            layers.append((FF_WING, 0.14 * (1.0 - nd)))
-        if 0.78 <= nd <= 1.0:
-            layers.append((FF_WING, 0.55 * (1.0 - abs(nd - 0.89) / 0.11)))
-
-    # glowing abdomen with a hot core
-    nd_ab = _nd_ellipse(px, py, 32.0, 40.5, 7.4, 9.4)
-    if nd_ab <= 1.0:
-        core = min(1.0, 1.0 - nd_ab) ** 2 * 0.85
-        layers.append((_mixn(FF_AMBER, FF_PARCH, core)[:3], 1.0))
-
-    # thorax and head, dark against the night, outlined just enough
-    if _nd_ellipse(px, py, 32.0, 27.0, 3.9, 5.0) <= 1.0:
-        layers.append((FF_DARK, 0.96))
-    if math.hypot(px - 32.0, py - 20.2) <= 3.1:
-        layers.append((FF_DARK, 0.96))
-
-    # antennae (paint only on large renders)
-    if detail:
-        for (ax, ay), (cx, cy), (bx, by) in FF_ANTENNAE:
-            hit = False
-            for step in range(13):
-                t = step / 12
-                u = 1.0 - t
-                qx = u * u * ax + 2 * u * t * cx + t * t * bx
-                qy = u * u * ay + 2 * u * t * cy + t * t * by
-                if math.hypot(px - qx, py - qy) <= 0.85:
-                    hit = True
-                    break
-            if hit:
-                layers.append((FF_WING, 0.7))
-
-    # drifting sparks
-    for sx, sy, sr, sa in FF_SPARKS:
-        d = math.hypot(px - sx, py - sy)
-        if d <= sr + 1.1:
-            layers.append((FF_HOT, sa * _clamp01(1.0 - d / (sr + 1.1))))
-
-    return layers or None
+    if d <= core_r:
+        return 1.0
+    transmittance = 1.0
+    for scale, weight in MARK_RINGS:
+        if d <= core_r * scale:
+            transmittance *= (1.0 - weight)
+    return 1.0 - transmittance
 
 
 def _icon_png(size, corner_radius, supersample):
-    """Warm dark rounded square with the firefly at rest, supersampled."""
+    """Warm dark rounded square with the Favilla mark at its centre."""
     big = size * supersample
-    scale = big / 64.0
     r_sq = corner_radius * supersample
     bg_top, bg_bottom = (32, 23, 15), (9, 6, 4)
+    core_r = big * 0.11
 
     def pixel(x, y):
         if not _rounded_square(x, y, big, r_sq):
             return (0, 0, 0, 0)
         color = tuple(bg_top[i] + (bg_bottom[i] - bg_top[i]) * (y / big) for i in range(3))
-        layers = _firefly_layers(x / scale, y / scale, zoom=1.18, cx0=32.0, cy0=39.0)
-        for col, alpha in layers or ():
-            color = _mixn(color, col, alpha)
+        alpha = _mark_alpha(math.hypot(x - big / 2, y - big / 2), core_r)
+        if alpha > 0.003:
+            color = _mixn(color, FF_AMBER, alpha)
         return (min(255, int(color[0] + 0.5)), min(255, int(color[1] + 0.5)), min(255, int(color[2] + 0.5)), 255)
 
     big_img = png_bytes(big, big, pixel)
@@ -470,19 +364,20 @@ def _decode_rgba(data):
 
 
 def og_image_bytes():
-    """1200x630 night scene: warm dark sky, a crescent, fireflies, one hill."""
+    """1200x630 night scene: warm dark sky, a soft glow from below, and a few
+    Favilla marks (dot + concentric rings) scattered like fireflies."""
     width, height = 1200, 630
     top, bottom = (36, 26, 17), (8, 5, 3)
-    # abdomen position (fx, fy), scale, opacity multiplier, fine details flag
-    scene = [(880, 235, 1.5, 1.0, True), (1005, 360, 0.85, 0.7, False), (760, 355, 0.7, 0.5, False)]
-    scene_offsets = [(fx - 32.0 * s, fy - 40.5 * s, s, m, det) for fx, fy, s, m, det in scene]
-    sparks = [
-        (150, 300, 5.0, 0.32),
-        (330, 190, 4.0, 0.28),
-        (1105, 150, 5.0, 0.38),
-        (520, 460, 4.5, 0.30),
-        (660, 500, 3.5, 0.30),
-        (60, 480, 3.5, 0.30),
+    # mark position (x, y), core radius, opacity multiplier
+    scene = [
+        (880, 235, 11.0, 1.0),
+        (1005, 360, 7.0, 0.75),
+        (760, 355, 5.5, 0.6),
+        (300, 180, 4.5, 0.55),
+        (520, 470, 5.5, 0.55),
+        (150, 330, 4.0, 0.45),
+        (660, 520, 4.5, 0.5),
+        (1100, 150, 3.5, 0.45),
     ]
 
     def lerp3(a, b, t):
@@ -494,39 +389,13 @@ def og_image_bytes():
         # broad warm glow rising from the bottom
         d = math.hypot((x - 600) / 1.35, (y - 560) / 1.0)
         if d < 500:
-            color = _mixn(color, FF_AMBER, (1 - d / 500) ** 2 * 0.30)
+            color = _mixn(color, FF_AMBER, (1 - d / 500) ** 2 * 0.22)
 
-        # thin crescent, upper left
-        dc = math.hypot(x - 200, y - 110)
-        if dc < 60:
-            d_in = math.hypot(x - 226, y - 98)
-            if d_in > 40:
-                edge = _clamp01(1 - abs(dc - 46) / 6)
-                rim = _clamp01((d_in - 40) / 8)
-                color = _mixn(color, FF_PARCH, 0.8 * edge * rim)
-
-        # the hill, a soft arc along the bottom
-        if y >= 540:
-            inside = 1 - ((x - 600) / 1180.0) ** 2
-            if inside > 0:
-                y_hill = 900 - 348 * math.sqrt(inside)
-                if y >= y_hill:
-                    color = _mixn(color, (5, 3, 2), min(1.0, 0.55 + (y - y_hill) / 60))
-
-        # fireflies
-        for ox, oy, s, mult, detail in scene_offsets:
-            lx = (x - ox) / s
-            ly = (y - oy) / s
-            if not (-10 <= lx <= 76 and -10 <= ly <= 76):
-                continue
-            for col, alpha in _firefly_layers(lx, ly, detail) or ():
-                color = _mixn(color, col, min(1.0, alpha * mult))
-
-        # far sparks
-        for sx, sy, sr, sa in sparks:
-            d = math.hypot(x - sx, y - sy)
-            if d < sr * 3:
-                color = _mixn(color, FF_HOT, sa * _clamp01(1 - d / (sr * 3)) ** 2)
+        # the marks
+        for ox, oy, core_r, mult in scene:
+            alpha = _mark_alpha(math.hypot(x - ox, y - oy), core_r) * mult
+            if alpha > 0.003:
+                color = _mixn(color, FF_AMBER, min(1.0, alpha))
 
         return (min(255, int(color[0] + 0.5)), min(255, int(color[1] + 0.5)), min(255, int(color[2] + 0.5)), 255)
 

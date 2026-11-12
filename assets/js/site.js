@@ -33,7 +33,7 @@
     var sky = document.querySelector(".night-sky");
 
     // a scatter of tiny stars, each twinkling on its own clock
-    for (var i = 0; i < 42; i++) {
+    for (var i = 0; i < 30; i++) {
       var star = document.createElement("i");
       star.className = "star";
       var size = (Math.random() * 1.4 + 0.8).toFixed(1);
@@ -68,17 +68,17 @@
     });
   }
 
-  // The cursor's firefly: a tiny companion that wanders near the pointer,
-  // perches on links, sheds a spark or two when it flies fast, bursts on
-  // click, and drifts off when you rest. Only on fine pointers, never under
-  // reduced motion.
+  // The cursor's companion: the Favilla mark — a bright dot with three flat
+  // concentric rings — wandering near the pointer, perching on links, shedding
+  // a spark or two when it moves fast, bursting on click, drifting off when
+  // you rest. Only on fine pointers, never under reduced motion.
   if (!fine || calm) {
     var lonely = document.querySelector(".cursor-fly");
     if (lonely) { lonely.remove(); }
   } else {
     var fly = document.querySelector(".cursor-fly");
-    var shell = fly ? fly.querySelector(".fly-shell") : null;
-    if (fly && shell) {
+    var core = fly ? fly.querySelector(".fly-core") : null;
+    if (fly && core) {
       var px = 0, py = 0;        // pointer, in viewport units
       var fx = window.innerWidth / 2, fy = window.innerHeight / 2; // the firefly
       var lastFx = fx, lastFy = fy;
@@ -178,7 +178,7 @@
           } else if (!leaving) {
             // wander around the pointer, lazy loops instead of a spotlight
             phase += 0.012;
-            var radius = 26 + 14 * Math.sin(phase * 0.7);
+            var radius = 34 + 16 * Math.sin(phase * 0.7);
             targetX = px + Math.cos(phase * 1.1) * radius;
             targetY = py + Math.sin(phase * 1.4) * radius * 0.62;
             ease = 0.055;
@@ -208,9 +208,6 @@
           }
 
           fly.style.transform = "translate3d(" + fx.toFixed(1) + "px," + fy.toFixed(1) + "px,0)";
-          var climb = Math.max(-20, Math.min(20, vy * 26));
-          var sway = Math.sin(time * 0.004) * 6;
-          shell.style.transform = "rotate(" + (climb + sway).toFixed(1) + "deg)";
         }
         window.requestAnimationFrame(tick);
       };
