@@ -9,6 +9,24 @@
    favicon — and as a small light that follows the cursor.
 --------------------------------------------------------------------------- */
 
+/* Self-hosted variable fonts (SIL OFL, licenses in assets/fonts): no request
+   ever leaves this site. Latin subset, which includes the dotless ı the
+   wordmark is built on. */
+@font-face {
+  font-family: "Epilogue";
+  src: url("../fonts/epilogue.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("../fonts/manrope.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* backgrounds (dark) */
   --bg-primary: #100B08;
@@ -248,13 +266,10 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
     0 0 calc(12px + var(--fly-glow, 0) * 16px) rgb(232 184 105 / 0.4);
   animation: ff-blink 3.8s ease-in-out infinite;
 }
-:root[data-theme="light"] .fly-core {
-  box-shadow:
-    0 0 0 calc(6px + var(--fly-glow, 0) * 4px) var(--ring-strong),
-    0 0 0 calc(12px + var(--fly-glow, 0) * 8px) var(--ring-mid),
-    0 0 0 calc(20px + var(--fly-glow, 0) * 12px) var(--ring-soft),
-    0 0 calc(12px + var(--fly-glow, 0) * 16px) rgb(138 100 40 / 0.3);
-}
+/* fireflies only come out at night: no companion in light mode (site.js
+   doesn't run it either; this is the backstop) */
+:root[data-theme="light"] .cursor-fly,
+:root[data-theme="light"] .fly-spark { display: none; }
 
 /* sparks the mark sheds while moving fast, or in a burst on click (JS) */
 .fly-spark {
@@ -680,94 +695,77 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   gap: 12px;
 }
 
-.mock-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-.mock-title { font-family: var(--font-head); font-weight: 700; font-size: 1.02rem; color: var(--text-primary); }
-.mock-plus {
+/* Library, as the app draws it: an amber mic button in the toolbar, a large
+   bold title, a search pill, and rows with an amber-tint play tile, a serif
+   title and the duration underneath. */
+.mock-toolbar { display: flex; justify-content: flex-end; margin: -24px 0 0; }
+.mock-mic {
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--accent);
-  color: var(--bg-primary);
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1;
+  color: var(--bg-sunken);
 }
-
-.mock-story {
+.mock-large-title {
+  margin: 10px 0 2px;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.mock-search {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 14px;
-  background: rgb(250 247 242 / 0.045);
-  border: 1px solid var(--line);
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgb(250 247 242 / 0.07);
+  color: var(--text-tertiary);
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  margin-bottom: 6px;
 }
-.mini-wave { width: 44px; flex: none; }
-.mock-story-text { display: flex; flex-direction: column; min-width: 0; }
-.mock-story-text b { font-family: var(--font-head); font-weight: 600; font-size: 0.86rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.mock-story-text span { font-size: 0.72rem; color: var(--text-tertiary); font-family: var(--font-label); }
-.mock-play {
-  margin-left: auto;
+.mock-story { display: flex; align-items: center; gap: 14px; padding: 8px 2px; }
+.mock-tile {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   background: var(--accent-tint);
   color: var(--accent);
-  flex: none;
   padding-left: 2px;
 }
-.mock-new {
-  margin-top: auto;
+.mock-story-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+.mock-story-text b { font-family: var(--font-body); font-weight: 400; font-size: 1rem; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mock-story-text span { font-family: var(--font-body); font-size: 0.8rem; color: var(--text-tertiary); font-variant-numeric: tabular-nums; }
+.mock-fav { margin-left: auto; color: var(--accent); flex: none; display: grid; }
+.mock-fav svg { width: 16px; height: 16px; }
+
+/* Forest, as the app's Forest tab draws it at night (Color+Forest.swift) */
+.mock-forest .mock-screen { padding: 0; overflow: hidden; background: #070B1A; min-height: 470px; }
+.forest { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.mock-forest-title {
+  position: relative;
+  margin: 58px 0 0;
   text-align: center;
-  padding: 11px;
-  border-radius: 999px;
-  border: 1.5px dashed var(--accent-dim);
-  color: var(--accent);
   font-family: var(--font-label);
-  font-weight: 600;
-  font-size: 0.8rem;
+  font-weight: 700;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgb(237 231 210 / 0.6);
 }
-
-.mock-sound-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 14px;
-  background: rgb(250 247 242 / 0.03);
-  border: 1px solid var(--line);
-  color: var(--slate);
-}
-.mock-sound-row span { color: var(--text-primary); font-family: var(--font-label); font-weight: 600; font-size: 0.85rem; }
-
-.mock-sleep .mock-screen { background: radial-gradient(140% 90% at 50% 0%, #161B1F 0%, #10141A 55%, #0B0D10 100%); }
-.mock-sleep .mock-timer {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid rgb(112 128 144 / 0.25);
-  background: rgb(112 128 144 / 0.08);
-  color: var(--slate);
-  font-family: var(--font-label);
-  font-weight: 600;
-  font-size: 0.82rem;
-}
-.mock-timer-ring {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  flex: none;
-  background:
-    radial-gradient(closest-side, #10141A 78%, transparent 79% 100%),
-    conic-gradient(var(--slate) 65%, rgb(112 128 144 / 0.2) 0);
+.forest-fly { animation: forest-pulse 4.2s ease-in-out infinite; }
+.forest-fly:nth-of-type(3n) { animation-duration: 5.1s; animation-delay: -1.7s; }
+.forest-fly:nth-of-type(3n + 1) { animation-duration: 3.6s; animation-delay: -2.4s; }
+@keyframes forest-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
 }
 
 /*----------------------------------------------------------------------------
@@ -776,8 +774,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .tale-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .tale { padding: 22px 22px 18px; border-left: 3px solid var(--accent-dim); }
-.tale-title { font-size: 1.05rem; margin-bottom: 8px; }
-.tale-caption { margin: 0; font-family: var(--font-label); font-size: 0.78rem; letter-spacing: 0.03em; color: var(--text-tertiary); text-transform: uppercase; }
+.tale-title { font-family: var(--font-body); font-style: italic; font-weight: 400; font-size: 1.32rem; letter-spacing: 0; color: var(--title-2); margin-bottom: 8px; }
+.tale-caption { margin: 0; font-size: 0.92rem; color: var(--text-secondary); }
 
 /*----------------------------------------------------------------------------
    Indie section
@@ -963,12 +961,11 @@ mark.todo {
    Reveal animation — elements rise into place
 ---------------------------------------------------------------------------- */
 
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-.reveal.revealed { opacity: 1; transform: none; }
+/* Hidden only while scripting is on (the inline head script adds .js). With
+   JavaScript off everything is simply visible; if site.js fails to load or
+   breaks, the head script takes .js away again after a few seconds. */
+.reveal { transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+.js .reveal:not(.revealed) { opacity: 0; transform: translateY(14px); }
 
 /*----------------------------------------------------------------------------
    Responsive
@@ -1001,10 +998,9 @@ mark.todo {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal, .js .reveal:not(.revealed) { opacity: 1; transform: none; transition: none; }
   .scroll-firefly, .hero-mascot svg, .ff, .fly-core, .star, .fly-spark,
-  .mascot-spark, .indie-fly { animation: none; }
+  .mascot-spark, .indie-fly, .forest-fly { animation: none; }
   .ff { opacity: 0.5; }
-  .cursor-fly { display: none; }
   * { transition-duration: 0.01ms !important; }
 }
