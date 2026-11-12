@@ -12,6 +12,8 @@ Run:  python3 scripts/build.py [--out _site] [--dry-run]
 """
 
 import argparse
+import base64
+import hashlib
 import html
 import json
 import math
@@ -39,6 +41,37 @@ WORDMARK = (
     '<span class="wordmark-i">ı<span class="wordmark-dot"></span></span>'
     'lla</span>'
 )
+
+# The only inline script: it sets the theme before first paint (no flash of the
+# wrong theme) and marks the page as scripted (html.js), so `.reveal` content
+# is hidden for its fade-in. If site.js hasn't taken over (html.fv-ready)
+# within 3 s — blocked, failed or broken — it un-hides everything. Its hash
+# goes into the
+# Content-Security-Policy, so the policy can forbid every other inline script.
+THEME_SCRIPT = (
+    '(function(){var d=document.documentElement;d.classList.add("js");'
+    'setTimeout(function(){if(!d.classList.contains("fv-ready"))d.classList.remove("js");},3000);'
+    'try{var c=localStorage.getItem("fv-theme");'
+    'var l=c==="light"||(!c&&matchMedia("(prefers-color-scheme: light)").matches);'
+    'd.dataset.theme=l?"light":"dark";}catch(e){d.dataset.theme="dark";}})();'
+)
+THEME_SCRIPT_HASH = base64.b64encode(hashlib.sha256(THEME_SCRIPT.encode("utf-8")).digest()).decode("ascii")
+
+# Content-Security-Policy, delivered as a <meta> tag because GitHub Pages
+# cannot send custom headers. Everything is first-party: fonts are self-hosted,
+# there are no analytics, no embeds and no forms. (`frame-ancestors` is ignored
+# in a <meta> policy, so it is not listed.)
+CSP = "; ".join([
+    "default-src 'none'",
+    f"script-src 'self' 'sha256-{THEME_SCRIPT_HASH}'",
+    "style-src 'self'",
+    "font-src 'self'",
+    "img-src 'self'",
+    "connect-src 'none'",
+    "manifest-src 'self'",
+    "base-uri 'none'",
+    "form-action 'none'",
+])
 
 # Six catalog tales shown on the landing page (titles and credits localized).
 TALES = [
@@ -133,9 +166,10 @@ def svg(inner, size=24, cls=""):
 MARK_RINGS = ((6.0, 0.08), (4.0, 0.14), (2.5, 0.24))
 
 
-def _mark_svg(cx, cy, core_r, cls=""):
-    """One dot-and-rings mark as inline SVG, in currentColor."""
-    klass = f' class="{cls}"' if cls else ""
+def _mark_svg(cx, cy, core_r, cls="", color=""):
+    """One dot-and-rings mark as inline SVG, in currentColor (or `color`, set as
+    a presentation attribute: inline style attributes are blocked by the CSP)."""
+    klass = (f' class="{cls}"' if cls else "") + (f' color="{color}"' if color else "")
     rings = "".join(
         f'<circle cx="{cx}" cy="{cy}" r="{core_r * scale:.1f}" fill="currentColor" fill-opacity="{weight}"/>'
         for scale, weight in MARK_RINGS)
@@ -162,23 +196,61 @@ def mascot_svg():
 
 GLYPHS = {
     "moon": lambda: svg('<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/>'),
-    "crescent": lambda: svg('<path d="M14 3.5A9 9 0 1 0 20.5 14 7.2 7.2 0 0 1 14 3.5Z"/>', size=20),
-    "shield": lambda: svg('<path d="M12 3 4 6v5c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6l-8-3Zm0 2.2 6 2.2V11c0 4.2-2.6 7.2-6 8.7-3.4-1.5-6-4.5-6-8.7V7.4l6-2.2Z"/>'),
     "heart": lambda: svg('<path d="M12 21s-7.5-4.6-9.3-9A5.4 5.4 0 0 1 12 6.2 5.4 5.4 0 0 1 21.3 12c-1.8 4.4-9.3 9-9.3 9Z"/>'),
     "play": lambda: svg('<path d="M8 5v14l11-7L8 5Z"/>', size=14),
     "arrow": lambda: svg('<path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'),
     "firefly": _firefly_glyph,
     "brand": _firefly_glyph,
-    "noise": lambda: svg('<path d="M3 9h2.5v6H3zM7.5 6H10v12H7.5zM12 3h2.5v18H12zM16.5 7H19v10h-2.5z"/>'),
-    "rain": lambda: svg('<path d="M7 14h10a4 4 0 0 0 .5-8A5.5 5.5 0 0 0 6.9 4.9 4 4 0 0 0 7 14Z"/>'),
-    "heartbeat": lambda: svg('<path d="M2.5 11.5h4l1.6-4 4 9.5 2.2-5.5h6.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'),
-    "music": lambda: svg('<path d="M9.5 17.8a2.6 2.6 0 1 1-1.4-2.3V4.6L18 3v2.1l-8.5 1.4v8.9a2.6 2.6 0 0 1 1.9-1 2.6 2.6 0 0 1 1.4 4.9l6.7-1.8v2.2L9.5 21Z"/>'),
-    "timer": lambda: svg('<path d="M9 2h6v2H9zM12 3.5a8.5 8.5 0 1 0 8.5 8.5A8.5 8.5 0 0 0 12 3.5Zm0 2a6.5 6.5 0 1 1-6.5 6.5A6.5 6.5 0 0 1 12 5.5ZM11 8h2v3.6l2.7 2.7-1.4 1.4-3.3-3.3Z"/>'),
-    "import": lambda: svg('<path d="M10 3H4v18h16V3h-6v2h4v14H6V5h4Zm1 4v7.6l2.3-2.3 1.4 1.4L11 17.4l-3.7-3.7 1.4-1.4L11 14.6V7Z"/>'),
-    "globe": lambda: svg('<path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm6.9 7h-3a15.4 15.4 0 0 0-1.1-4.4A8 8 0 0 1 18.9 9ZM12 4c.8 1.2 1.9 3.6 2.3 7H9.7C10.1 7.6 11.2 5.2 12 4ZM9.2 4.6A15.4 15.4 0 0 0 8.1 9h-3a8 8 0 0 1 4.1-4.4ZM4.3 11h3.5c-.1 1-.1 2 0 3H4.3a8 8 0 0 1 0-3Zm.8 5h3a15.4 15.4 0 0 0 1.1 4.4A8 8 0 0 1 5.1 16Zm6.9 4.4c-.8-1.2-1.9-3.6-2.3-7h4.6c-.4 3.4-1.5 5.8-2.3 7Zm3.8-.4a15.4 15.4 0 0 0 1.1-4h3a8 8 0 0 1-4.1 4.4ZM19.7 14h-3.5c.1-1 .1-2 0-3h3.5a8 8 0 0 1 0 3Z"/>'),
     "sun": lambda: svg('<circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.6v2.4M12 19v2.4M2.6 12h2.4M19 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>', size=16),
     "search": lambda: svg('<path d="M10.5 3a7.5 7.5 0 1 0 4.55 13.45l4.75 4.75 1.4-1.4-4.75-4.75A7.5 7.5 0 0 0 10.5 3Zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z"/>', size=15),
+    "mic": lambda: svg('<path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v3.5M9 20.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>', size=16),
 }
+
+
+# The Forest tab, drawn the way FireflyForestView draws it at night: a sky
+# gradient, a haloed moon, stars, three rows of pine silhouettes, and fireflies
+# in the five palette colours (Color+Forest.swift).
+FOREST = {
+    "sky_top": "#070B1A", "sky_bottom": "#17243D", "moon": "#EDE7D2",
+    "far": "#12202F", "mid": "#0C1722", "near": "#060D14",
+    "palette": ["#C4923F", "#7FE08A", "#6FD6E8", "#F08AC8", "#B592F0"],
+}
+FOREST_STARS = [(22, 40), (58, 92), (96, 30), (128, 76), (150, 18), (176, 120), (214, 52), (246, 98),
+                (38, 150), (88, 174), (122, 138), (232, 162), (70, 60), (190, 82), (260, 30), (12, 110)]
+# (x, y, core radius, palette index)
+FOREST_FLIES = [(40, 110, 2.6, 2), (92, 196, 3.2, 1), (150, 150, 2.4, 4), (212, 222, 3.0, 3),
+                (60, 300, 3.4, 0), (122, 262, 2.8, 2), (236, 318, 2.6, 1), (176, 348, 3.4, 4),
+                (28, 396, 2.8, 3), (104, 404, 3.0, 0), (250, 410, 2.4, 2), (64, 214, 2.2, 0)]
+
+
+def _pines(base_y, height, width, count, offset, color):
+    step = 276 / (count - 1)
+    trees = []
+    for i in range(count):
+        cx = offset + i * step
+        h = height * (0.78 + 0.22 * ((i * 37) % 10) / 10)
+        trees.append(f'M{cx - width / 2:.1f} {base_y}L{cx:.1f} {base_y - h:.1f}L{cx + width / 2:.1f} {base_y}Z')
+    return f'<path fill="{color}" d="{"".join(trees)}"/>'
+
+
+def forest_svg():
+    f = FOREST
+    stars = "".join(f'<circle cx="{x}" cy="{y}" r="0.9"/>' for x, y in FOREST_STARS)
+    flies = "".join(_mark_svg(x, y, r, cls="forest-fly", color=f["palette"][hue])
+                    for x, y, r, hue in FOREST_FLIES)
+    return (
+        '<svg class="forest" viewBox="0 0 276 470" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
+        f'<defs><linearGradient id="forest-sky" x1="0" y1="0" x2="0" y2="1">'
+        f'<stop offset="0" stop-color="{f["sky_top"]}"/><stop offset="0.62" stop-color="{f["sky_bottom"]}"/></linearGradient></defs>'
+        '<rect width="276" height="470" fill="url(#forest-sky)"/>'
+        f'<g fill="{f["moon"]}" opacity="0.7">{stars}</g>'
+        f'<g fill="{f["moon"]}"><circle cx="212" cy="150" r="38" fill-opacity="0.05"/>'
+        '<circle cx="212" cy="150" r="26" fill-opacity="0.08"/><circle cx="212" cy="150" r="14" fill-opacity="0.9"/></g>'
+        + _pines(340, 120, 46, 9, -10, f["far"])
+        + _pines(392, 150, 58, 7, 6, f["mid"])
+        + _pines(470, 190, 74, 6, -18, f["near"])
+        + f'<rect y="440" width="276" height="30" fill="{f["near"]}"/>'
+        + flies + '</svg>')
 
 
 def wave_svg(uid, amps, width, height):
@@ -208,11 +280,6 @@ def wave_svg(uid, amps, width, height):
 
 HERO_AMPS = [0.28, 0.42, 0.6, 0.38, 0.72, 0.5, 0.86, 0.64, 0.46, 0.9, 0.58, 0.34,
              0.7, 0.92, 0.52, 0.4, 0.66, 0.3, 0.78, 0.48, 0.36, 0.62, 0.44, 0.8, 0.32, 0.5]
-MINI_AMPS = {
-    "a": [0.4, 0.7, 0.5, 0.85, 0.45, 0.65, 0.9, 0.5],
-    "b": [0.6, 0.35, 0.8, 0.5, 0.9, 0.4, 0.7, 0.55],
-    "c": [0.5, 0.85, 0.4, 0.6, 0.75, 0.35, 0.8, 0.45],
-}
 
 
 # ---------------------------------------------------------------------------
@@ -411,7 +478,7 @@ def esc(value):
 
 
 def fmt(template, values):
-    out = template
+    out = esc(template)
     for key, value in values.items():
         out = out.replace("{" + key + "}", esc(value))
     return out
@@ -434,8 +501,9 @@ def lang_switcher_html(i18n, lang, href_for):
             f'<a lang="{other}" hreflang="{other}" href="{href_for(other)}" '
             f'title="{esc(LANG_NAMES[other])}" aria-label="{esc(LANG_NAMES[other])}"{current}>'
             f'{LANG_CODES[other]}</a>')
-    return ('<nav class="lang-switcher" aria-label="'
-            + esc(i18n["a11y.lang_aria"]) + '">' + "".join(items) + '</nav>')
+    # a group, not a <nav>: it already sits inside the main navigation landmark
+    return ('<div class="lang-switcher" role="group" aria-label="'
+            + esc(i18n["a11y.lang_aria"]) + '">' + "".join(items) + '</div>')
 
 
 def theme_toggle_html(i18n):
@@ -469,7 +537,49 @@ def page_set_url(base_url, page, lang):
     return base_url + prefix + PAGES[page]
 
 
+# An App Store product link, with or without the country and the name slug:
+# https://apps.apple.com/[<cc>/]app/[<name>/]id<digits>[?query]
+APP_STORE_URL = re.compile(r"""^https://apps\.apple\.com/(?:[a-z]{2}/)?app/(?:[^/?#\s]+/)?id\d+(?:\?[^\s"'<>]*)?$""")
+
+
+def validate_config(config):
+    """Fail the build on a config that would ship a broken or unsafe site."""
+    errors = []
+    base = urlparse(config.get("base_url", ""))
+    local = base.hostname in ("localhost", "127.0.0.1")
+    if not base.netloc or not (base.scheme == "https" or (base.scheme == "http" and local)):
+        errors.append("base_url must be an absolute https:// URL (http:// only for localhost)")
+    store = config.get("app_store_url") or ""
+    if store and not APP_STORE_URL.match(store):
+        errors.append("app_store_url must look like https://apps.apple.com/[<cc>/]app/[<name>/]id<digits>")
+    email = config.get("contact_email") or ""
+    if email and not re.match(r"^[^@\s<>\"']+@[^@\s<>\"']+\.[a-z]{2,}$", email, re.I):
+        errors.append("contact_email is not a valid address")
+    github = config.get("github_url") or ""
+    if github and not github.startswith("https://github.com/"):
+        errors.append("github_url must start with https://github.com/")
+    missing = [field for field in ("contact_email", "publisher_name") if not config.get(field)]
+    if store and missing:
+        # App Store review requires reachable contact details on the support
+        # page: never publish the download link next to a placeholder.
+        errors.append(f"app_store_url is set but {', '.join(missing)} is empty")
+    elif missing:
+        print(f"warning: config.json {', '.join(missing)} empty — pages show a red placeholder", file=sys.stderr)
+    if errors:
+        for error in errors:
+            print(f"config.json: {error}", file=sys.stderr)
+        sys.exit(1)
+
+
+def file_version(path):
+    """Short content hash, appended as ?v= so a new deploy is never served
+    with the previous CSS/JS from a browser or CDN cache."""
+    with open(path, "rb") as fh:
+        return hashlib.sha256(fh.read()).hexdigest()[:10]
+
+
 def build(config, strings, out_dir):
+    validate_config(config)
     base_url = config["base_url"].rstrip("/") + "/"
     year = date.today().year
     os.makedirs(out_dir, exist_ok=True)
@@ -478,6 +588,13 @@ def build(config, strings, out_dir):
     assets_dest = os.path.join(out_dir, "assets")
     if os.path.isdir(assets_src):
         shutil.copytree(assets_src, assets_dest, dirs_exist_ok=True)
+    drawings = {f"{name}_glyph": glyph() for name, glyph in GLYPHS.items()}
+    drawings.update(hero_wave=wave_svg("hero", HERO_AMPS, 800, 120),
+                    mascot_svg=mascot_svg(), forest_svg=forest_svg())
+    versions = {
+        "v_css": file_version(os.path.join(assets_src, "css", "site.css")),
+        "v_js": file_version(os.path.join(assets_src, "js", "site.js")),
+    }
 
     img_dir = os.path.join(assets_dest, "img")
     os.makedirs(img_dir, exist_ok=True)
@@ -508,11 +625,17 @@ def build(config, strings, out_dir):
             if page == "404" and lang != "en":
                 continue
 
-            ctx = dict(i18n)
+            # Translations are text, never markup: escape them once here, so a
+            # quote or an ampersand in a string can never break an attribute.
+            ctx = {key: esc(value) for key, value in i18n.items()}
 
             # dotted i18n keys are also reachable in underscore form ({{privacy_cta_hint}})
             for key, value in list(ctx.items()):
                 ctx[key.replace(".", "_")] = value
+
+            ctx["csp"] = CSP
+            ctx["theme_script"] = f"<script>{THEME_SCRIPT}</script>"
+            ctx.update(versions)
 
             # meta
             title_key = {"index": "meta.title_index", "privacy": "meta.title_privacy",
@@ -530,11 +653,11 @@ def build(config, strings, out_dir):
                 f'<meta property="og:locale:alternate" content="{OG_LOCALES[l]}">'
                 for l in LANGS if l != lang)
             ctx["canonical"] = page_url
-            ctx["head_title"] = i18n[title_key]
-            ctx["head_desc"] = i18n[desc_key]
-            ctx["og_site"] = i18n["meta.site_name"]
-            ctx["og_title"] = i18n[title_key]
-            ctx["og_desc"] = i18n[desc_key]
+            ctx["head_title"] = ctx[title_key]
+            ctx["head_desc"] = ctx[desc_key]
+            ctx["og_site"] = ctx["meta.site_name"]
+            ctx["og_title"] = ctx[title_key]
+            ctx["og_desc"] = ctx[desc_key]
             ctx["og_url"] = page_url
             ctx["og_image"] = base_url + "assets/img/og-image.png"
             ctx["og_locale"] = OG_LOCALES[lang]
@@ -575,9 +698,9 @@ def build(config, strings, out_dir):
             ctx["footer_email"] = email_html
             ctx["footer_github"] = config["github_url"]
             ctx["footer_gh_label"] = "GitHub"
-            ctx["footer_published_note"] = i18n["footer.published"]
+            ctx["footer_published_note"] = ctx["footer.published"]
             ctx["footer_publisher"] = publisher_html
-            ctx["privacy_cta_hint"] = i18n["privacy.cta_hint"]
+            ctx["privacy_cta_hint"] = ctx["privacy.cta_hint"]
 
             # legacy: 404 is served for any missing path under any prefix,
             # so root-relative absolute URLs are the only safe links there.
@@ -598,21 +721,16 @@ def build(config, strings, out_dir):
                 ctx["footer_privacy"] = path_prefix + "privacy.html"
                 ctx["footer_support"] = path_prefix + "support.html"
 
-            # glyphs, waves and the hero mascot
-            for name, glyph in GLYPHS.items():
-                ctx[f"{name}_glyph"] = glyph()
-            for wave_id, amps in MINI_AMPS.items():
-                ctx[f"wave_{wave_id}"] = wave_svg(f"m{wave_id}", amps, 44, 16)
-            ctx["hero_wave"] = wave_svg("hero", HERO_AMPS, 800, 120)
-            ctx["mascot_svg"] = mascot_svg()
+            # glyphs, the hero wave, the mascot and the forest (built once)
+            ctx.update(drawings)
 
             # store badge
             store_url = config.get("app_store_url") or ""
             ctx["badge_attributes"] = (
-                f'href="{esc(store_url)}" target="_blank" rel="noopener"'
+                f'href="{esc(store_url)}" rel="noopener noreferrer"'
                 if store_url else 'href="#app" aria-disabled="true"')
-            ctx["badge_label"] = i18n["hero.badge_label"]
-            ctx["hero_badge_cta"] = i18n["hero.badge_cta"]
+            ctx["badge_label"] = ctx["hero.badge_label"]
+            ctx["hero_badge_cta"] = ctx["hero.badge_cta"]
 
             # tale data (mock rows and showcase)
             ctx["tale1_title"] = esc(TALES[0]["titles"][lang])

@@ -1,11 +1,11 @@
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-mascot reveal" aria-hidden="true">{{mascot_svg}}</div>
-    <p class="kicker reveal">{{hero_kicker}}</p>
-    <h1 class="hero-title reveal">{{hero_h1a}}<br><span class="hero-title-accent">{{hero_h1b}}</span></h1>
-    <p class="hero-lead reveal">{{hero_lead}}</p>
-    <div class="hero-cta reveal">
-      <a class="store-badge" {{badge_attributes}} rel="noopener">
+    <div class="hero-mascot" aria-hidden="true">{{mascot_svg}}</div>
+    <p class="kicker">{{hero_kicker}}</p>
+    <h1 class="hero-title">{{hero_h1a}}<br><span class="hero-title-accent">{{hero_h1b}}</span></h1>
+    <p class="hero-lead">{{hero_lead}}</p>
+    <div class="hero-cta">
+      <a class="store-badge" {{badge_attributes}}>
         <span class="store-badge-glyph" aria-hidden="true">{{firefly_glyph}}</span>
         <span class="store-badge-text">
           <span class="store-badge-note">{{badge_label}}</span>
@@ -15,10 +15,10 @@
       <p class="hero-note">{{hero_badge_note}}</p>
     </div>
   </div>
-  <div class="hero-wave reveal" aria-hidden="true">
+  <div class="hero-wave" aria-hidden="true">
     {{hero_wave}}
   </div>
-  <div class="hero-scroll reveal">
+  <div class="hero-scroll">
     <a class="scroll-hint" href="#idea"><span class="scroll-firefly" aria-hidden="true">{{firefly_glyph}}</span>{{hero_cta_anchor}}</a>
   </div>
 </section>
@@ -101,11 +101,12 @@
         <div class="mock">
           <div class="mock-notch"></div>
           <div class="mock-screen">
-            <div class="mock-title-row"><span class="mock-title">{{tabs_lib_name}}</span><span class="mock-plus">+</span></div>
-            <div class="mock-story"><span class="mini-wave">{{wave_a}}</span><span class="mock-story-text"><b>{{tale1_title}}</b><span>{{mock_duration_1}}</span></span><span class="mock-play">{{play_glyph}}</span></div>
-            <div class="mock-story"><span class="mini-wave">{{wave_b}}</span><span class="mock-story-text"><b>{{tale2_title}}</b><span>{{mock_duration_2}}</span></span><span class="mock-play">{{play_glyph}}</span></div>
-            <div class="mock-story"><span class="mini-wave">{{wave_c}}</span><span class="mock-story-text"><b>{{tale3_title}}</b><span>{{mock_duration_3}}</span></span><span class="mock-play">{{play_glyph}}</span></div>
-            <div class="mock-new">{{mock_rec_new}}</div>
+            <div class="mock-toolbar"><span class="mock-mic">{{mic_glyph}}</span></div>
+            <p class="mock-large-title">{{tabs_lib_name}}</p>
+            <div class="mock-search">{{search_glyph}}<span>{{mock_search}}</span></div>
+            <div class="mock-story"><span class="mock-tile">{{play_glyph}}</span><span class="mock-story-text"><b>{{tale1_title}}</b><span>5:12</span></span><span class="mock-fav">{{heart_glyph}}</span></div>
+            <div class="mock-story"><span class="mock-tile">{{play_glyph}}</span><span class="mock-story-text"><b>{{tale2_title}}</b><span>9:00</span></span></div>
+            <div class="mock-story"><span class="mock-tile">{{play_glyph}}</span><span class="mock-story-text"><b>{{tale3_title}}</b><span>3:00</span></span></div>
           </div>
         </div>
       </div>
@@ -136,25 +137,21 @@
 
     <div class="feature-row feature-row-flip">
       <div class="feature-text reveal">
-        <p class="feature-tag">{{tabs_snd_tag}}</p>
-        <h3>{{tabs_snd_name}}</h3>
-        <p class="feature-body">{{tabs_snd_body}}</p>
+        <p class="feature-tag">{{tabs_frs_tag}}</p>
+        <h3>{{tabs_frs_name}}</h3>
+        <p class="feature-body">{{tabs_frs_body}}</p>
         <ul class="checklist">
-          <li>{{tabs_snd_b1}}</li>
-          <li>{{tabs_snd_b2}}</li>
-          <li>{{tabs_snd_b3}}</li>
+          <li>{{tabs_frs_b1}}</li>
+          <li>{{tabs_frs_b2}}</li>
+          <li>{{tabs_frs_b3}}</li>
         </ul>
       </div>
       <div class="mock-wrap reveal" aria-hidden="true">
-        <div class="mock mock-sleep">
+        <div class="mock mock-forest">
           <div class="mock-notch"></div>
           <div class="mock-screen">
-            <div class="mock-title-row"><span class="mock-title">{{tabs_snd_name}}</span></div>
-            <div class="mock-sound-row">{{noise_glyph}}<span>{{sounds_s_white}}</span></div>
-            <div class="mock-sound-row">{{rain_glyph}}<span>{{sounds_s_rain}}</span></div>
-            <div class="mock-sound-row">{{heart_glyph}}<span>{{sounds_s_heartbeat}}</span></div>
-            <div class="mock-sound-row">{{music_glyph}}<span>{{sounds_s_lullaby}}</span></div>
-            <div class="mock-timer"><span class="mock-timer-ring"></span>{{mock_timer_label}}</div>
+            {{forest_svg}}
+            <p class="mock-forest-title">{{mock_forest_title}}</p>
           </div>
         </div>
       </div>
