@@ -292,6 +292,20 @@ def check_support(rel, root, errors, config):
         errors.append(f"{rel}: support needs one a.row.link to privacy.html")
 
 
+def check_404(root, errors, base_path):
+    """404 is served for any missing path, at any depth: only root-relative URLs."""
+    forest = root.all(cls="forest")
+    if len(forest) != 1 or not forest[0].all("h1"):
+        errors.append("404.html: the h1 belongs inside the night forest card")
+    for node in root.walk():
+        for attr in ("href", "src"):
+            url = node.attrs.get(attr)
+            if url is None or node.tag in ("link", "meta") and attr == "href" and url.startswith("http"):
+                continue
+            if not url.startswith((base_path, "mailto:", "https://", "#")):
+                errors.append(f"404.html: {node.tag} {attr}={url!r} breaks at a nested path")
+
+
 def check_no_phone(rel, root, errors):
     for node in root.all("a"):
         if (node.attrs.get("href") or "").startswith("tel:"):
@@ -312,6 +326,8 @@ def check_pages(out, config):
             check_privacy(rel, root, errors)
         if os.path.basename(rel) == "support.html":
             check_support(rel, root, errors, config)
+        if rel == "404.html":
+            check_404(root, errors, urlparse(config["base_url"]).path)
     return errors
 
 

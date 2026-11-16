@@ -435,3 +435,9 @@ a.row:hover { background: var(--hover); text-decoration: none; }
   .faq summary svg { transition: none; }
   .cursor-fly { transition: none; }
 }
+
+/* 404: lost in the forest — taller card, the way home on it */
+.forest-tall { min-height: 460px; }
+.forest .capsule { margin-top: 22px; color: #FAF7F2; }
+.forest .capsule .tile .icon { width: 18px; height: 18px; }
+.forest { --glass: linear-gradient(rgb(28 20 16 / 0.25), rgb(28 20 16 / 0.25)), rgb(250 247 242 / 0.09); --glass-edge: rgba(255, 244, 224, 0.10); }
