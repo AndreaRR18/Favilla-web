@@ -18,16 +18,16 @@
   },
   "a11y": {
     "skip": "Aller au contenu",
-    "nav_aria": "Navigation principale",
     "lang_aria": "Choisissez la langue du site",
-    "theme": "Basculer entre le mode sombre et le mode clair"
+    "theme": "Basculer entre le mode sombre et le mode clair",
+    "tabs": "Sections",
+    "back": "Retour à Favilla"
   },
-  "nav": {
-    "idea": "L'idée",
-    "how": "Comment ça marche",
-    "app": "L'app",
-    "privacy": "Confidentialité",
-    "support": "Assistance"
+  "tabbar": {
+    "home": "Favilla",
+    "catalog": "Catalogue",
+    "privacy": "Vie privée",
+    "support": "Aide"
   },
   "hero": {
     "kicker": "Pour la dernière lumière du jour",

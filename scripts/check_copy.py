@@ -157,9 +157,61 @@ def built_pages(out):
     return pages
 
 
+RETIRED_CLASSES = {"reveal", "glass", "grid-3", "grid-4", "kicker"}  # the old landing-page look
+TAB_LABEL_MAX = 11  # longest label that fits a tab at 375 px ("Datenschutz")
+CALM_SELECTORS = (".sky .fly", ".forest-fly", ".faq summary svg")
+
+
+def check_shell(rel, root, errors):
+    """Every page: one tab bar, one language menu, one h1, no retired classes."""
+    bars = root.all("nav", cls="tabbar")
+    if len(bars) != 1:
+        errors.append(f"{rel}: expected one nav.tabbar, found {len(bars)}")
+    else:
+        tabs = bars[0].all("a", cls="tab")
+        if len(tabs) != 4:
+            errors.append(f"{rel}: tab bar has {len(tabs)} tabs, expected 4")
+        current = [t for t in tabs if t.attrs.get("aria-current") == "page"]
+        want = 0 if rel == "404.html" else 1
+        if len(current) != want:
+            errors.append(f"{rel}: {len(current)} current tab(s), expected {want}")
+    menus = root.all("details", cls="lang-menu")
+    if len(menus) != 1 or len(menus[0].all("a")) != len(LANGS):
+        errors.append(f"{rel}: expected one details.lang-menu with {len(LANGS)} links")
+    if len(root.all("h1")) != 1:
+        errors.append(f"{rel}: expected exactly one h1")
+    for node in root.walk():
+        retired = node.classes & RETIRED_CLASSES
+        if retired:
+            errors.append(f"{rel}: retired class(es) {sorted(retired)} on <{node.tag}>")
+            break
+
+
+def check_globals(strings, errors):
+    """Rules that are not about one page."""
+    from build import THEME_SCRIPT
+    if 'classList.add("js")' in THEME_SCRIPT or "fv-ready" in THEME_SCRIPT:
+        errors.append("THEME_SCRIPT still hides content until site.js runs (js / fv-ready)")
+    for lang in LANGS:
+        for key, value in strings[lang].items():
+            if key.startswith("tabbar.") and len(value) > TAB_LABEL_MAX:
+                errors.append(f"{lang}: {key}: tab label longer than {TAB_LABEL_MAX} characters")
+    with open(os.path.join(ROOT, "assets", "css", "site.css"), encoding="utf-8") as fh:
+        css = fh.read()
+    calm = re.findall(r"@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{(.*?)\n\}", css, re.S)
+    calm_text = "\n".join(calm)
+    for selector in CALM_SELECTORS:
+        if selector not in calm_text:
+            errors.append(f"site.css: {selector!r} keeps moving under prefers-reduced-motion")
+
+
 def check_pages(out, config):
     """Structure rules on the built HTML."""
     errors = []
+    check_globals(load_i18n(), errors)
+    for rel, path in sorted(built_pages(out).items()):
+        root = parse(path)
+        check_shell(rel, root, errors)
     return errors
 
 

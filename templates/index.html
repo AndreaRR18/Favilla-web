@@ -1,7 +1,7 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-mascot" aria-hidden="true">{{mascot_svg}}</div>
-    <p class="kicker">{{hero_kicker}}</p>
+    <p class="label">{{hero_kicker}}</p>
     <h1 class="hero-title">{{hero_h1a}}<br><span class="hero-title-accent">{{hero_h1b}}</span></h1>
     <p class="hero-lead">{{hero_lead}}</p>
     <div class="hero-cta">
@@ -25,21 +25,21 @@
 
 <section id="idea" class="section">
   <div class="container">
-    <header class="section-head reveal">
-      <p class="kicker">{{idea_kicker}}</p>
+    <header class="section-head">
+      <p class="label">{{idea_kicker}}</p>
       <h2>{{idea_title}}</h2>
       <p class="section-lead">{{idea_body}}</p>
     </header>
-    <div class="grid grid-3">
-      <article class="card glass reveal">
+    <div class="grid">
+      <article class="card">
         <h3>{{idea_p1_t}}</h3>
         <p>{{idea_p1_b}}</p>
       </article>
-      <article class="card glass reveal">
+      <article class="card">
         <h3>{{idea_p2_t}}</h3>
         <p>{{idea_p2_b}}</p>
       </article>
-      <article class="card glass reveal">
+      <article class="card">
         <h3>{{idea_p3_t}}</h3>
         <p>{{idea_p3_b}}</p>
       </article>
@@ -49,26 +49,26 @@
 
 <section id="how" class="section section-alt">
   <div class="container">
-    <header class="section-head reveal">
-      <p class="kicker">{{how_kicker}}</p>
+    <header class="section-head">
+      <p class="label">{{how_kicker}}</p>
       <h2>{{how_title}}</h2>
     </header>
     <ol class="steps">
-      <li class="step reveal">
+      <li class="step">
         <span class="step-num">1</span>
         <div>
           <h3>{{how_s1_t}}</h3>
           <p>{{how_s1_b}}</p>
         </div>
       </li>
-      <li class="step reveal">
+      <li class="step">
         <span class="step-num">2</span>
         <div>
           <h3>{{how_s2_t}}</h3>
           <p>{{how_s2_b}}</p>
         </div>
       </li>
-      <li class="step reveal">
+      <li class="step">
         <span class="step-num">3</span>
         <div>
           <h3>{{how_s3_t}}</h3>
@@ -81,13 +81,13 @@
 
 <section id="app" class="section">
   <div class="container">
-    <header class="section-head reveal">
-      <p class="kicker">{{tabs_kicker}}</p>
+    <header class="section-head">
+      <p class="label">{{tabs_kicker}}</p>
       <h2>{{tabs_title}}</h2>
     </header>
 
     <div class="feature-row">
-      <div class="feature-text reveal">
+      <div class="feature-text">
         <p class="feature-tag">{{tabs_lib_tag}}</p>
         <h3>{{tabs_lib_name}}</h3>
         <p class="feature-body">{{tabs_lib_body}}</p>
@@ -97,7 +97,7 @@
           <li>{{tabs_lib_b3}}</li>
         </ul>
       </div>
-      <div class="mock-wrap reveal" aria-hidden="true">
+      <div class="mock-wrap" aria-hidden="true">
         <div class="mock">
           <div class="mock-notch"></div>
           <div class="mock-screen">
@@ -113,7 +113,7 @@
     </div>
 
     <div class="grid grid-2 app-cards">
-      <article class="card glass reveal">
+      <article class="card">
         <p class="card-tag">{{tabs_cat_tag}}</p>
         <h3>{{tabs_cat_name}}</h3>
         <p>{{tabs_cat_body}}</p>
@@ -123,7 +123,7 @@
           <li>{{tabs_cat_b3}}</li>
         </ul>
       </article>
-      <article class="card glass reveal">
+      <article class="card">
         <p class="card-tag">{{tabs_abt_tag}}</p>
         <h3>{{tabs_abt_name}}</h3>
         <p>{{tabs_abt_body}}</p>
@@ -136,7 +136,7 @@
     </div>
 
     <div class="feature-row feature-row-flip">
-      <div class="feature-text reveal">
+      <div class="feature-text">
         <p class="feature-tag">{{tabs_frs_tag}}</p>
         <h3>{{tabs_frs_name}}</h3>
         <p class="feature-body">{{tabs_frs_body}}</p>
@@ -146,7 +146,7 @@
           <li>{{tabs_frs_b3}}</li>
         </ul>
       </div>
-      <div class="mock-wrap reveal" aria-hidden="true">
+      <div class="mock-wrap" aria-hidden="true">
         <div class="mock mock-forest">
           <div class="mock-notch"></div>
           <div class="mock-screen">
@@ -157,88 +157,88 @@
       </div>
     </div>
 
-    <header class="section-head reveal">
-      <p class="kicker">{{showcase_kicker}}</p>
+    <header class="section-head">
+      <p class="label">{{showcase_kicker}}</p>
       <h2>{{showcase_title}}</h2>
     </header>
-    <div class="tale-grid">
+    <div class="tale-grid" id="catalog">
       {{tale_cards}}
     </div>
-    <p class="section-footnote reveal">{{showcase_footnote}}</p>
+    <p class="section-footnote">{{showcase_footnote}}</p>
   </div>
 </section>
 
 <section id="why" class="section section-alt">
   <div class="container">
-    <header class="section-head reveal">
-      <p class="kicker">{{personas_kicker}}</p>
+    <header class="section-head">
+      <p class="label">{{personas_kicker}}</p>
       <h2>{{personas_title}}</h2>
     </header>
     <div class="grid grid-2">
-      <article class="card glass reveal">
+      <article class="card">
         <p class="card-tag">{{personas_parent_t}}</p>
         <p>{{personas_parent_b}}</p>
       </article>
-      <article class="card glass reveal">
+      <article class="card">
         <p class="card-tag">{{personas_child_t}}</p>
         <p>{{personas_child_b}}</p>
       </article>
     </div>
 
-    <header class="section-head reveal">
-      <p class="kicker">{{science_kicker}}</p>
+    <header class="section-head">
+      <p class="label">{{science_kicker}}</p>
       <h2>{{science_title}}</h2>
     </header>
     <div class="grid grid-2">
-      <article class="card glass reveal">
+      <article class="card">
         <h3>{{science_i1_t}}</h3>
         <p>{{science_i1_b}}</p>
       </article>
-      <article class="card glass reveal">
+      <article class="card">
         <h3>{{science_i2_t}}</h3>
         <p>{{science_i2_b}}</p>
       </article>
     </div>
-    <p class="section-footnote reveal">{{science_footnote}}</p>
+    <p class="section-footnote">{{science_footnote}}</p>
   </div>
 </section>
 
 <section id="privacy" class="section">
   <div class="container">
-    <header class="section-head reveal">
-      <p class="kicker">{{privacy_kicker}}</p>
+    <header class="section-head">
+      <p class="label">{{privacy_kicker}}</p>
       <h2>{{privacy_title}}</h2>
     </header>
-    <div class="grid grid-4">
-      <article class="card glass reveal">
+    <div class="grid">
+      <article class="card">
         <h3>{{privacy_s1_t}}</h3>
         <p>{{privacy_s1_b}}</p>
       </article>
-      <article class="card glass reveal">
+      <article class="card">
         <h3>{{privacy_s2_t}}</h3>
         <p>{{privacy_s2_b}}</p>
       </article>
-      <article class="card glass reveal">
+      <article class="card">
         <h3>{{privacy_s3_t}}</h3>
         <p>{{privacy_s3_b}}</p>
       </article>
-      <article class="card glass reveal">
+      <article class="card">
         <h3>{{privacy_s4_t}}</h3>
         <p>{{privacy_s4_b}}</p>
       </article>
     </div>
-    <a class="privacy-cta reveal" href="{{privacy_href}}">
+    <a class="privacy-cta" href="{{privacy_href}}">
       <span class="privacy-cta-glyph" aria-hidden="true">{{arrow_glyph}}</span>
       {{privacy_cta}}
     </a>
-    <p class="section-footnote reveal">{{privacy_cta_hint}}</p>
+    <p class="section-footnote">{{privacy_cta_hint}}</p>
   </div>
 </section>
 
 <section class="section section-indie">
   <div class="container">
-    <div class="indie-panel glass reveal">
-      <p class="kicker">{{indie_kicker}}</p>
+    <div class="indie-panel">
+      <p class="label">{{indie_kicker}}</p>
       <h2>{{indie_title}}</h2>
       <p class="indie-body">{{indie_body}}</p>
       <p class="indie-fly" aria-hidden="true">{{firefly_glyph}}</p>

@@ -1,36 +1,10 @@
-// Favilla site — reveals, theme toggle, night sky (stars + fireflies), the
-// cursor's little firefly. Progressive enhancement only: the site is fully
-// usable without JS.
+// Favilla site — theme toggle, the language menu closing on an outside click,
+// and the cursor's little firefly. Progressive enhancement only: without JS
+// the site follows the OS theme and every page is complete.
 (function () {
   "use strict";
 
   var root = document.documentElement;
-
-  // Scroll reveal — runs first, so nothing below can stop content appearing.
-  // The inline head script hides `.reveal` content (html.js) and un-hides it
-  // after a few seconds unless this file says it is in charge (fv-ready):
-  // a blocked, failed or broken site.js never leaves the page invisible.
-  // Disabled under prefers-reduced-motion via CSS.
-  (function () {
-    var items = document.querySelectorAll(".reveal");
-    if (!("IntersectionObserver" in window)) {
-      items.forEach(function (item) { item.classList.add("revealed"); });
-    } else {
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("revealed");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
-      );
-      items.forEach(function (item) { observer.observe(item); });
-    }
-    root.classList.add("fv-ready");
-  })();
 
   // Dark / light theme toggle. Initial theme is set inline in <head> so there
   // is no flash; here we only react to clicks and sync the button state.
@@ -67,48 +41,15 @@
     });
   }
 
+  // The language menu is a <details>: close it when the click lands elsewhere.
+  document.addEventListener("click", function (event) {
+    document.querySelectorAll("details.lang-menu[open]").forEach(function (menu) {
+      if (!menu.contains(event.target)) { menu.removeAttribute("open"); }
+    });
+  });
+
   var fine = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
   var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Night sky — dark theme only, none if reduced motion is requested.
-  if (!calm && document.querySelector(".night-sky")) {
-    var sky = document.querySelector(".night-sky");
-
-    // a scatter of tiny stars, each twinkling on its own clock
-    for (var i = 0; i < 30; i++) {
-      var star = document.createElement("i");
-      star.className = "star";
-      var size = (Math.random() * 1.4 + 0.8).toFixed(1);
-      star.style.width = size + "px";
-      star.style.height = size + "px";
-      star.style.left = (Math.random() * 100).toFixed(2) + "vw";
-      star.style.top = (Math.random() * 92).toFixed(2) + "vh";
-      star.style.setProperty("--st-dur", (Math.random() * 4 + 2.5).toFixed(2) + "s");
-      star.style.setProperty("--st-delay", (-Math.random() * 6).toFixed(2) + "s");
-      sky.appendChild(star);
-    }
-
-    // ambient fireflies. Positions are fixed so the look is always composed.
-    var SPOTS = [
-      { x: "12vw", y: "22vh", dx: "26px", dy: "-34px", d: "17s", delay: "0s" },
-      { x: "78vw", y: "14vh", dx: "-34px", dy: "22px", d: "21s", delay: "-7s" },
-      { x: "64vw", y: "52vh", dx: "20px", dy: "-26px", d: "24s", delay: "-12s" },
-      { x: "30vw", y: "66vh", dx: "-24px", dy: "-18px", d: "19s", delay: "-4s" },
-      { x: "88vw", y: "70vh", dx: "18px", dy: "-30px", d: "26s", delay: "-16s" },
-      { x: "45vw", y: "36vh", dx: "-16px", dy: "-24px", d: "23s", delay: "-9s" },
-    ];
-    SPOTS.forEach(function (spot) {
-      var ff = document.createElement("i");
-      ff.className = "ff";
-      ff.style.left = spot.x;
-      ff.style.top = spot.y;
-      ff.style.setProperty("--ff-dx", spot.dx);
-      ff.style.setProperty("--ff-dy", spot.dy);
-      ff.style.setProperty("--ff-duration", spot.d);
-      ff.style.setProperty("--ff-delay", spot.delay);
-      sky.appendChild(ff);
-    });
-  }
 
   // The cursor's companion: the Favilla mark — a bright dot with three flat
   // concentric rings — wandering near the pointer, perching on links, shedding

@@ -42,15 +42,13 @@ WORDMARK = (
     'lla</span>'
 )
 
-# The only inline script: it sets the theme before first paint (no flash of the
-# wrong theme) and marks the page as scripted (html.js), so `.reveal` content
-# is hidden for its fade-in. If site.js hasn't taken over (html.fv-ready)
-# within 3 s — blocked, failed or broken — it un-hides everything. Its hash
-# goes into the
-# Content-Security-Policy, so the policy can forbid every other inline script.
+# The only inline script: it sets the theme before first paint, so there is
+# no flash of the wrong theme. Nothing on the page waits for JavaScript: with
+# scripts blocked the site follows the OS theme and shows everything. Its hash
+# goes into the Content-Security-Policy, so the policy can forbid every other
+# inline script.
 THEME_SCRIPT = (
-    '(function(){var d=document.documentElement;d.classList.add("js");'
-    'setTimeout(function(){if(!d.classList.contains("fv-ready"))d.classList.remove("js");},3000);'
+    '(function(){var d=document.documentElement;'
     'try{var c=localStorage.getItem("fv-theme");'
     'var l=c==="light"||(!c&&matchMedia("(prefers-color-scheme: light)").matches);'
     'd.dataset.theme=l?"light":"dark";}catch(e){d.dataset.theme="dark";}})();'
@@ -206,6 +204,72 @@ GLYPHS = {
     "mic": lambda: svg('<path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v3.5M9 20.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>', size=16),
 }
 
+
+
+# Icons for rows, tiles and the tab bar, drawn after the SF Symbols the app
+# uses: 24x24, one colour (currentColor), filled unless the symbol is a stroke.
+_STROKE = 'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"'
+ICONS = {
+    "mic": '<rect x="8.5" y="2.5" width="7" height="12.5" rx="3.5"/>'
+           f'<path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3" {_STROKE}/>',
+    "cloud": '<path d="M7 19.5a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a5 5 0 0 1-.5 10Z"/>',
+    "moon": '<path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/>',
+    "sun": f'<g {_STROKE}><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></g>',
+    "book": '<path d="M2.5 5.2c3-1.1 6.2-.9 8.7.8v14c-2.6-1.6-5.7-1.8-8.7-.8Zm19 0c-3-1.1-6.2-.9-8.7.8v14c2.6-1.6 5.7-1.8 8.7-.8Z"/>',
+    "books": '<rect x="3" y="4" width="4" height="16" rx="1"/><rect x="8.5" y="7" width="4" height="13" rx="1"/><path d="m14.2 6.4 3.6-1 3.7 13.6-3.6 1Z"/>',
+    "tree": '<path d="M12 2.5a5 5 0 0 1 4.8 3.6A4.5 4.5 0 0 1 17 15h-4v6.5h-2V15H7a4.5 4.5 0 0 1 .2-8.9A5 5 0 0 1 12 2.5Z"/>',
+    "info": '<path d="M12 2.5a9.5 9.5 0 1 1 0 19 9.5 9.5 0 0 1 0-19Zm-1.2 8v7h2.4v-7Zm1.2-4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/>',
+    "shield": '<path d="M12 2.5 4.5 5.5v6c0 4.6 3.2 8.6 7.5 10 4.3-1.4 7.5-5.4 7.5-10v-6Z"/>',
+    "person_slash": f'<g {_STROKE}><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0M3.5 3.5l17 17"/></g>',
+    "eye_slash": f'<g {_STROKE}><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/><path d="M4 3.5 20 20.5"/></g>',
+    "chevron": '<path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>',
+    "back": '<path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+    "pause": '<rect x="6" y="4.5" width="4" height="15" rx="1.4"/><rect x="14" y="4.5" width="4" height="15" rx="1.4"/>',
+    "waveform": f'<path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2" {_STROKE} stroke-width="2"/>',
+    "phone": f'<g {_STROKE}><rect x="6.5" y="2.5" width="11" height="19" rx="2.8"/><path d="M10.5 18.5h3"/></g>',
+}
+
+
+def icon(name, cls="icon"):
+    """One of ICONS as inline SVG, decorative (its row or label carries the meaning)."""
+    return (f'<svg class="{cls}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" '
+            f'focusable="false">{ICONS[name]}</svg>')
+
+
+# The tab bar mirrors the app's floating glass pill: four tabs, the current one
+# amber. `current` is "index", "catalog", "privacy", "support" or "" (404).
+TABS = (("index", "tabbar.home", None), ("catalog", "tabbar.catalog", "books"),
+        ("privacy", "tabbar.privacy", "shield"), ("support", "tabbar.support", "info"))
+
+
+def tab_bar_html(i18n, current, home, privacy, support):
+    hrefs = {"index": home, "catalog": home + "#catalog", "privacy": privacy, "support": support}
+    items = []
+    for name, key, glyph in TABS:
+        mark = '<span class="fly fly-sm" aria-hidden="true"></span>' if glyph is None else icon(glyph)
+        here = ' aria-current="page"' if name == current else ""
+        items.append(f'<a class="tab" href="{hrefs[name]}"{here}>{mark}<span>{esc(i18n[key])}</span></a>')
+    return (f'<nav class="tabbar" aria-label="{esc(i18n["a11y.tabs"])}">' + "".join(items) + '</nav>')
+
+
+def lang_menu_html(i18n, lang, href_for):
+    """The round language button: a <details> that opens the five languages."""
+    items = []
+    for other in LANGS:
+        here = ' aria-current="true"' if other == lang else ""
+        items.append(
+            f'<li><a lang="{other}" hreflang="{other}" href="{href_for(other)}"{here}>'
+            f'<b>{LANG_CODES[other]}</b>{esc(LANG_NAMES[other])}</a></li>')
+    return (
+        '<details class="lang-menu">'
+        f'<summary class="round" aria-label="{esc(i18n["a11y.lang_aria"])}" title="{esc(i18n["a11y.lang_aria"])}">'
+        f'{LANG_CODES[lang]}</summary>'
+        '<ul>' + "".join(items) + '</ul></details>')
+
+
+def back_link_html(i18n, href):
+    return (f'<a class="back" href="{href}" aria-label="{esc(i18n["a11y.back"])}">'
+            f'{icon("back")}<span>{esc(i18n["brand.name"])}</span></a>')
 
 # The Forest tab, drawn the way FireflyForestView draws it at night: a sky
 # gradient, a haloed moon, stars, three rows of pine silhouettes, and fireflies
@@ -492,29 +556,14 @@ def mailto(email, label=None):
     return f'<a href="mailto:{esc(email)}">{esc(label or email)}</a>'
 
 
-def lang_switcher_html(i18n, lang, href_for):
-    """A visible language strip: EN IT FR DE ES, current one highlighted."""
-    items = []
-    for other in LANGS:
-        current = ' aria-current="true"' if other == lang else ""
-        items.append(
-            f'<a lang="{other}" hreflang="{other}" href="{href_for(other)}" '
-            f'title="{esc(LANG_NAMES[other])}" aria-label="{esc(LANG_NAMES[other])}"{current}>'
-            f'{LANG_CODES[other]}</a>')
-    # a group, not a <nav>: it already sits inside the main navigation landmark
-    return ('<div class="lang-switcher" role="group" aria-label="'
-            + esc(i18n["a11y.lang_aria"]) + '">' + "".join(items) + '</div>')
-
-
 def theme_toggle_html(i18n):
-    """Sun/moon icon button; the visible icon follows the active theme."""
+    """Round sun/moon button; the visible icon follows the active theme."""
     label = esc(i18n["a11y.theme"])
     return (
-        '<button type="button" class="theme-toggle" aria-pressed="false" '
+        '<button type="button" class="round theme-toggle" aria-pressed="false" '
         f'aria-label="{label}" title="{label}">'
-        '<span class="theme-icon theme-icon-sun">' + GLYPHS["sun"]() + '</span>'
-        '<span class="theme-icon theme-icon-moon">' + GLYPHS["moon"]() + '</span>'
-        '</button>')
+        + icon("sun", "icon theme-icon-sun") + icon("moon", "icon theme-icon-moon")
+        + '</button>')
 
 
 PLACEHOLDER = re.compile(r"\{\{([a-zA-Z0-9_.]+)\}\}")
@@ -664,33 +713,27 @@ def build(config, strings, out_dir):
             ctx["assets"] = assets
             ctx["year"] = year
 
-            # navigation
-            nav_file = "" if page == "index" else "index.html"
-            nav_links = [
-                f'<a href="{nav_file}#idea">{esc(i18n["nav.idea"])}</a>',
-                f'<a href="{nav_file}#how">{esc(i18n["nav.how"])}</a>',
-                f'<a href="{nav_file}#app">{esc(i18n["nav.app"])}</a>',
-                f'<a href="{nav_file}#privacy">{esc(i18n["nav.privacy"])}</a>',
-                f'<a href="support.html">{esc(i18n["nav.support"])}</a>',
-            ]
-            ctx["nav_links"] = "".join(nav_links)
+            # navigation: toolbar (wordmark, language, theme), back capsule on
+            # pushed pages, and the tab bar
             ctx["nav_home"] = "index.html"
             ctx["brand_wordmark"] = WORDMARK
 
-            # language switcher (visible, top right) and theme toggle
             def href_for(other, page=page, lang=lang):
                 name = PAGES[page] if page != "index" else "index.html"
                 if lang == "en":
                     return name if other == "en" else other + "/" + name
                 return ("../" if other == "en" else f"../{other}/") + name
 
-            ctx["lang_switcher"] = lang_switcher_html(i18n, lang, href_for)
+            ctx["lang_menu"] = lang_menu_html(i18n, lang, href_for)
             ctx["theme_toggle"] = theme_toggle_html(i18n)
+            ctx["back_link"] = "" if page == "index" else back_link_html(i18n, "index.html")
+            ctx["tab_bar"] = tab_bar_html(i18n, page if page != "404" else "",
+                                          "index.html", "privacy.html", "support.html")
 
             # footer
             ctx["footer_langs"] = "".join(
-                f'<li><a lang="{other}" hreflang="{other}" href="{page_set_url(base_url, "index", other)}">'
-                f'{LANG_NAMES[other]}</a></li>'
+                f'<a lang="{other}" hreflang="{other}" href="{page_set_url(base_url, page if page != "404" else "index", other)}" '
+                f'title="{esc(LANG_NAMES[other])}"' + (' aria-current="true"' if other == lang else "") + f'>{LANG_CODES[other]}</a>'
                 for other in LANGS)
             ctx["footer_home"] = "index.html"
             ctx["footer_privacy"] = "privacy.html"
@@ -708,15 +751,12 @@ def build(config, strings, out_dir):
                 path_prefix = urlparse(base_url).path
                 ctx["assets"] = path_prefix
                 ctx["nav_home"] = path_prefix
-                nav_anchors_404 = [("idea", "nav.idea"), ("how", "nav.how"),
-                                   ("app", "nav.app"), ("privacy", "nav.privacy")]
-                ctx["nav_links"] = "".join(
-                    f'<a href="{path_prefix}#{anchor}">{esc(i18n[key])}</a>'
-                    for anchor, key in nav_anchors_404)
-                ctx["nav_links"] += f'<a href="{path_prefix}support.html">{esc(i18n["nav.support"])}</a>'
-                ctx["lang_switcher"] = lang_switcher_html(
+                ctx["lang_menu"] = lang_menu_html(
                     i18n, lang,
                     lambda other, pp=path_prefix: pp + ("" if other == "en" else other + "/"))
+                ctx["back_link"] = back_link_html(i18n, path_prefix)
+                ctx["tab_bar"] = tab_bar_html(i18n, "", path_prefix, path_prefix + "privacy.html",
+                                              path_prefix + "support.html")
                 ctx["footer_home"] = path_prefix
                 ctx["footer_privacy"] = path_prefix + "privacy.html"
                 ctx["footer_support"] = path_prefix + "support.html"
@@ -737,7 +777,7 @@ def build(config, strings, out_dir):
             ctx["tale2_title"] = esc(TALES[1]["titles"][lang])
             ctx["tale3_title"] = esc(TALES[2]["titles"][lang])
             ctx["tale_cards"] = "".join(
-                f'<article class="tale glass reveal">'
+                f'<article class="tale">'
                 f'<h3 class="tale-title">{esc(t["titles"][lang])}</h3>'
                 f'<p class="tale-caption">{fmt(i18n["showcase.caption"], {"author": t["author"][lang], "country": t["country"][lang], "year": t["year"][lang]})}</p>'
                 f'</article>'

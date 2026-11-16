@@ -18,14 +18,14 @@
   },
   "a11y": {
     "skip": "Zum Inhalt springen",
-    "nav_aria": "Hauptnavigation",
     "lang_aria": "Sprache der Website wählen",
-    "theme": "Zwischen dunklem und hellem Modus wechseln"
+    "theme": "Zwischen dunklem und hellem Modus wechseln",
+    "tabs": "Bereiche",
+    "back": "Zurück zu Favilla"
   },
-  "nav": {
-    "idea": "Die Idee",
-    "how": "So funktioniert es",
-    "app": "Die App",
+  "tabbar": {
+    "home": "Favilla",
+    "catalog": "Katalog",
     "privacy": "Datenschutz",
     "support": "Hilfe"
   },
