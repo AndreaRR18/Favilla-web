@@ -1,46 +1,85 @@
-<section class="page-head">
-  <div class="container">
-    <p class="kicker">{{brand_tagline}}</p>
-    <h1>{{support_page_title}}</h1>
-    <p class="page-lead">{{support_page_intro}}</p>
-  </div>
-</section>
+<div class="page">
+  <section class="page-title">
+    <h1 class="large-title">{{support_page_title}}</h1>
+    <p class="lead">{{support_page_intro}}</p>
+  </section>
 
-<article class="page-body">
-  <div class="container container-narrow">
-    <section class="faq reveal">
-      <details class="faq-item">
-        <summary>{{support_page_coming_q}}</summary>
-        <div class="faq-body"><p>{{support_page_coming_a}}</p></div>
+  <section class="section">
+    <h2 class="section-title">{{support_page_faq_t}}</h2>
+    <div class="group faq">
+      <details>
+        <summary><span>{{support_page_faq_coming_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_coming_a}}</p></div>
       </details>
-      <details class="faq-item">
-        <summary>{{support_page_q2q}}</summary>
-        <div class="faq-body"><p>{{support_page_q2a}}</p></div>
+      <details>
+        <summary><span>{{support_page_faq_account_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_account_a}}</p></div>
       </details>
-      <details class="faq-item">
-        <summary>{{support_page_q3q}}</summary>
-        <div class="faq-body"><p>{{support_page_q3a}}</p></div>
+      <details>
+        <summary><span>{{support_page_faq_where_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_where_a}}</p></div>
       </details>
-      <details class="faq-item">
-        <summary>{{support_page_q4q}}</summary>
-        <div class="faq-body"><p>{{support_page_q4a}}</p></div>
+      <details>
+        <summary><span>{{support_page_faq_mic_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_mic_a}}</p></div>
       </details>
-      <details class="faq-item">
-        <summary>{{support_page_q5q}}</summary>
-        <div class="faq-body"><p>{{support_page_q5a}}</p></div>
+      <details>
+        <summary><span>{{support_page_faq_sum_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_sum_a}}</p></div>
       </details>
-      <details class="faq-item">
-        <summary>{{support_page_q6q}}</summary>
-        <div class="faq-body"><p>{{support_page_q6a}}</p></div>
+      <details>
+        <summary><span>{{support_page_faq_locked_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_locked_a}}</p></div>
       </details>
-    </section>
+      <details>
+        <summary><span>{{support_page_faq_sync_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_sync_a}}</p></div>
+      </details>
+      <details>
+        <summary><span>{{support_page_faq_share_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_share_a}}</p></div>
+      </details>
+      <details>
+        <summary><span>{{support_page_faq_long_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_long_a}}</p></div>
+      </details>
+      <details>
+        <summary><span>{{support_page_faq_ai_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_ai_a}}</p></div>
+      </details>
+      <details>
+        <summary><span>{{support_page_faq_languages_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_languages_a}}</p></div>
+      </details>
+      <details>
+        <summary><span>{{support_page_faq_fireflies_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_fireflies_a}}</p></div>
+      </details>
+      <details>
+        <summary><span>{{support_page_faq_forest_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_forest_a}}</p></div>
+      </details>
+      <details>
+        <summary><span>{{support_page_faq_delete_q}}</span>{{icon_chev}}</summary>
+        <div class="answer"><p>{{support_page_faq_delete_a}}</p></div>
+      </details>
+    </div>
+  </section>
 
-    <section class="card glass contact-card reveal">
-      <h2>{{support_page_contact_t}}</h2>
-      <p>{{support_page_contact_b}} <span class="contact-mail">{{contact_email}}</span>.</p>
-      <p class="contact-hint">{{support_page_contact_hint}}</p>
-    </section>
+  <section class="section">
+    <h2 class="section-title">{{support_page_contact_t}}</h2>
+    <div class="group kv">
+      <div class="row"><span class="k">{{support_page_contact_email}}</span><span class="v">{{contact_email}}</span></div>
+    </div>
+    <p class="group-footer">{{support_page_contact_hint}}</p>
+  </section>
 
-    <p class="page-back"><a class="privacy-cta" href="{{nav_home}}"><span class="privacy-cta-glyph" aria-hidden="true">{{arrow_glyph}}</span>{{support_page_back}}</a></p>
-  </div>
-</article>
+  <section class="section">
+    <div class="group">
+      <a class="row link" href="privacy.html">
+        <span class="tile" aria-hidden="true">{{icon_shield}}</span>
+        <span class="text"><span class="t">{{privacy_page_title}}</span></span>{{icon_chev}}
+      </a>
+    </div>
+  </section>
+</div>

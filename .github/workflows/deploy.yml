@@ -37,6 +37,9 @@ jobs:
       - name: Check links, assets and security rules
         run: python3 scripts/check_site.py _site
 
+      - name: Check copy and page structure
+        run: python3 scripts/check_copy.py _site
+
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0

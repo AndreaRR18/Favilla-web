@@ -8,6 +8,8 @@ Design tokens mirror the iOS DesignSystem package (dark-first, warm amber,
 #C4923F on #100B08). The mark is the Favilla symbol exactly as the app draws
 it in FireflyField: a bright dot with three flat concentric rings. Never
 sparkle icons (they read as "AI") and never flames or insect drawings.
+Pages are drawn with the app's components (grouped lists, glass tab bar,
+the recording phone, the night forest); see README "Design".
 Run:  python3 scripts/build.py [--out _site] [--dry-run]
 """
 
@@ -42,18 +44,16 @@ WORDMARK = (
     'lla</span>'
 )
 
-# The only inline script: it sets the theme before first paint (no flash of the
-# wrong theme) and marks the page as scripted (html.js), so `.reveal` content
-# is hidden for its fade-in. If site.js hasn't taken over (html.fv-ready)
-# within 3 s — blocked, failed or broken — it un-hides everything. Its hash
-# goes into the
-# Content-Security-Policy, so the policy can forbid every other inline script.
+# The only inline script: it sets the theme before first paint, so there is
+# no flash of the wrong theme. Nothing on the page waits for JavaScript: with
+# scripts blocked the site follows the OS theme and shows everything. Its hash
+# goes into the Content-Security-Policy, so the policy can forbid every other
+# inline script.
 THEME_SCRIPT = (
-    '(function(){var d=document.documentElement;d.classList.add("js");'
-    'setTimeout(function(){if(!d.classList.contains("fv-ready"))d.classList.remove("js");},3000);'
+    '(function(){var d=document.documentElement;'
     'try{var c=localStorage.getItem("fv-theme");'
     'var l=c==="light"||(!c&&matchMedia("(prefers-color-scheme: light)").matches);'
-    'd.dataset.theme=l?"light":"dark";}catch(e){d.dataset.theme="dark";}})();'
+    'd.dataset.theme=l?"light":"dark";}catch(e){d.dataset.theme=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}})();'
 )
 THEME_SCRIPT_HASH = base64.b64encode(hashlib.sha256(THEME_SCRIPT.encode("utf-8")).digest()).decode("ascii")
 
@@ -76,36 +76,42 @@ CSP = "; ".join([
 # Six catalog tales shown on the landing page (titles and credits localized).
 TALES = [
     {
+        "emoji": "🧺",
         "titles": {"it": "Cappuccetto Rosso", "en": "Little Red Riding Hood", "fr": "Le Petit Chaperon rouge", "de": "Rotkäppchen", "es": "Caperucita Roja"},
         "author": {"it": "Charles Perrault", "en": "Charles Perrault", "fr": "Charles Perrault", "de": "Charles Perrault", "es": "Charles Perrault"},
         "country": {"it": "Francia", "en": "France", "fr": "France", "de": "Frankreich", "es": "Francia"},
         "year": {"it": "1697", "en": "1697", "fr": "1697", "de": "1697", "es": "1697"},
     },
     {
+        "emoji": "🦢",
         "titles": {"it": "Il Brutto Anatroccolo", "en": "The Ugly Duckling", "fr": "Le Vilain Petit Canard", "de": "Das hässliche Entlein", "es": "El patito feo"},
         "author": {"it": "Hans Christian Andersen", "en": "Hans Christian Andersen", "fr": "Hans Christian Andersen", "de": "Hans Christian Andersen", "es": "Hans Christian Andersen"},
         "country": {"it": "Danimarca", "en": "Denmark", "fr": "Danemark", "de": "Dänemark", "es": "Dinamarca"},
         "year": {"it": "1843", "en": "1843", "fr": "1843", "de": "1843", "es": "1843"},
     },
     {
+        "emoji": "🏠",
         "titles": {"it": "Hansel e Gretel", "en": "Hansel and Gretel", "fr": "Hansel et Gretel", "de": "Hänsel und Gretel", "es": "Hansel y Gretel"},
         "author": {"it": "Fratelli Grimm", "en": "The Brothers Grimm", "fr": "Frères Grimm", "de": "Brüder Grimm", "es": "Hermanos Grimm"},
         "country": {"it": "Germania", "en": "Germany", "fr": "Allemagne", "de": "Deutschland", "es": "Alemania"},
         "year": {"it": "1812", "en": "1812", "fr": "1812", "de": "1812", "es": "1812"},
     },
     {
+        "emoji": "🐢",
         "titles": {"it": "La Lepre e la Tartaruga", "en": "The Tortoise and the Hare", "fr": "Le Lièvre et la Tortue", "de": "Der Hase und die Schildkröte", "es": "La liebre y la tortuga"},
         "author": {"it": "Esopo", "en": "Aesop", "fr": "Ésope", "de": "Äsop", "es": "Esopo"},
         "country": {"it": "Grecia antica", "en": "Ancient Greece", "fr": "Grèce antique", "de": "Antikes Griechenland", "es": "Antigua Grecia"},
         "year": {"it": "VI sec. a.C.", "en": "6th century BC", "fr": "VIᵉ s. av. J.-C.", "de": "6. Jh. v. Chr.", "es": "s. VI a. C."},
     },
     {
+        "emoji": "🍑",
         "titles": {"it": "Momotaro, il Bambino Pesca", "en": "Momotaro, the Peach Boy", "fr": "Momotaro, l'enfant pêche", "de": "Momotaro, der Pfirsichjunge", "es": "Momotaro, el niño melocotón"},
         "author": {"it": "Fiaba popolare giapponese", "en": "Japanese folk tale", "fr": "Conte populaire japonais", "de": "Japanisches Volksmärchen", "es": "Cuento popular japonés"},
         "country": {"it": "Giappone", "en": "Japan", "fr": "Japon", "de": "Japan", "es": "Japón"},
         "year": {"it": "Periodo Edo", "en": "Edo period", "fr": "période Edo", "de": "Edo-Zeit", "es": "período Edo"},
     },
     {
+        "emoji": "🐒",
         "titles": {"it": "La Scimmia e l'Uccellino", "en": "The Monkey and the Little Bird", "fr": "Le Singe et le Petit Oiseau", "de": "Der Affe und das Vöglein", "es": "El mono y el pajarito"},
         "author": {"it": "Leonardo da Vinci", "en": "Leonardo da Vinci", "fr": "Léonard de Vinci", "de": "Leonardo da Vinci", "es": "Leonardo da Vinci"},
         "country": {"it": "Italia", "en": "Italy", "fr": "Italie", "de": "Italien", "es": "Italia"},
@@ -152,14 +158,6 @@ def load_i18n():
 # SVG fragments
 
 
-def svg(inner, size=24, cls=""):
-    klass = f' class="{cls}"' if cls else ""
-    return (
-        f'<svg{klass} viewBox="0 0 24 24" width="{size}" height="{size}" '
-        f'fill="currentColor" aria-hidden="true">{inner}</svg>'
-    )
-
-
 # The Favilla mark, exactly as the app draws a firefly in FireflyField.swift:
 # a bright core with three flat concentric rings — radii 6x, 4x, 2.5x the core
 # at 0.08, 0.14, 0.24 of its alpha, stacked over each other.
@@ -176,36 +174,70 @@ def _mark_svg(cx, cy, core_r, cls="", color=""):
     return f'<g{klass}>{rings}<circle cx="{cx}" cy="{cy}" r="{core_r:.1f}" fill="currentColor"/></g>'
 
 
-def _firefly_glyph():
-    """The Favilla mark, small: a bright dot with three flat concentric rings."""
-    return svg(_mark_svg(12, 12, 1.9), size=26)
-
-
-def mascot_svg():
-    """The hero mark: the dot-and-rings symbol, large, with two smaller ones
-    drifting nearby — the same drawing the app uses for its fireflies."""
-    return (
-        '<svg class="mascot" viewBox="0 0 160 160" width="150" height="150" aria-hidden="true">'
-        + _mark_svg(80, 80, 13)
-        + _mark_svg(34, 122, 4, cls="mascot-spark")
-        + _mark_svg(128, 40, 3.2, cls="mascot-spark")
-        + _mark_svg(122, 130, 2.6, cls="mascot-spark")
-        + '</svg>'
-    )
-
-
-GLYPHS = {
-    "moon": lambda: svg('<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/>'),
-    "heart": lambda: svg('<path d="M12 21s-7.5-4.6-9.3-9A5.4 5.4 0 0 1 12 6.2 5.4 5.4 0 0 1 21.3 12c-1.8 4.4-9.3 9-9.3 9Z"/>'),
-    "play": lambda: svg('<path d="M8 5v14l11-7L8 5Z"/>', size=14),
-    "arrow": lambda: svg('<path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'),
-    "firefly": _firefly_glyph,
-    "brand": _firefly_glyph,
-    "sun": lambda: svg('<circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.6v2.4M12 19v2.4M2.6 12h2.4M19 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>', size=16),
-    "search": lambda: svg('<path d="M10.5 3a7.5 7.5 0 1 0 4.55 13.45l4.75 4.75 1.4-1.4-4.75-4.75A7.5 7.5 0 0 0 10.5 3Zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z"/>', size=15),
-    "mic": lambda: svg('<path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v3.5M9 20.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>', size=16),
+# Icons for rows, tiles and the tab bar, drawn after the SF Symbols the app
+# uses: 24x24, one colour (currentColor), filled unless the symbol is a stroke.
+_STROKE = 'fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"'
+ICONS = {
+    "mic": '<rect x="8.5" y="2.5" width="7" height="12.5" rx="3.5"/>'
+           f'<path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3" {_STROKE}/>',
+    "cloud": '<path d="M7 19.5a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a5 5 0 0 1-.5 10Z"/>',
+    "moon": '<path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z"/>',
+    "sun": f'<g {_STROKE}><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></g>',
+    "book": '<path d="M2.5 5.2c3-1.1 6.2-.9 8.7.8v14c-2.6-1.6-5.7-1.8-8.7-.8Zm19 0c-3-1.1-6.2-.9-8.7.8v14c2.6-1.6 5.7-1.8 8.7-.8Z"/>',
+    "books": '<rect x="3" y="4" width="4" height="16" rx="1"/><rect x="8.5" y="7" width="4" height="13" rx="1"/><path d="m14.2 6.4 3.6-1 3.7 13.6-3.6 1Z"/>',
+    "tree": '<path d="M12 2.5a5 5 0 0 1 4.8 3.6A4.5 4.5 0 0 1 17 15h-4v6.5h-2V15H7a4.5 4.5 0 0 1 .2-8.9A5 5 0 0 1 12 2.5Z"/>',
+    "info": '<path d="M12 2.5a9.5 9.5 0 1 1 0 19 9.5 9.5 0 0 1 0-19Zm-1.2 8v7h2.4v-7Zm1.2-4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/>',
+    "shield": '<path d="M12 2.5 4.5 5.5v6c0 4.6 3.2 8.6 7.5 10 4.3-1.4 7.5-5.4 7.5-10v-6Z"/>',
+    "person_slash": f'<g {_STROKE}><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0M3.5 3.5l17 17"/></g>',
+    "eye_slash": f'<g {_STROKE}><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/><path d="M4 3.5 20 20.5"/></g>',
+    "chevron": '<path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>',
+    "back": '<path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+    "pause": '<rect x="6" y="4.5" width="4" height="15" rx="1.4"/><rect x="14" y="4.5" width="4" height="15" rx="1.4"/>',
+    "waveform": f'<path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2" {_STROKE} stroke-width="2"/>',
+    "phone": f'<g {_STROKE}><rect x="6.5" y="2.5" width="11" height="19" rx="2.8"/><path d="M10.5 18.5h3"/></g>',
 }
 
+
+def icon(name, cls="icon"):
+    """One of ICONS as inline SVG, decorative (its row or label carries the meaning)."""
+    return (f'<svg class="{cls}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" '
+            f'focusable="false">{ICONS[name]}</svg>')
+
+
+# The tab bar mirrors the app's floating glass pill: four tabs, the current one
+# amber. `current` is "index", "catalog", "privacy", "support" or "" (404).
+TABS = (("index", "tabbar.home", None), ("catalog", "tabbar.catalog", "books"),
+        ("privacy", "tabbar.privacy", "shield"), ("support", "tabbar.support", "info"))
+
+
+def tab_bar_html(i18n, current, home, privacy, support):
+    hrefs = {"index": home, "catalog": home + "#catalog", "privacy": privacy, "support": support}
+    items = []
+    for name, key, glyph in TABS:
+        mark = '<span class="fly fly-sm" aria-hidden="true"></span>' if glyph is None else icon(glyph)
+        here = ' aria-current="page"' if name == current else ""
+        items.append(f'<a class="tab" href="{hrefs[name]}"{here}>{mark}<span>{esc(i18n[key])}</span></a>')
+    return (f'<nav class="tabbar" aria-label="{esc(i18n["a11y.tabs"])}">' + "".join(items) + '</nav>')
+
+
+def lang_menu_html(i18n, lang, href_for):
+    """The round language button: a <details> that opens the five languages."""
+    items = []
+    for other in LANGS:
+        here = ' aria-current="true"' if other == lang else ""
+        items.append(
+            f'<li><a lang="{other}" hreflang="{other}" href="{href_for(other)}"{here}>'
+            f'<b>{LANG_CODES[other]}</b>{esc(LANG_NAMES[other])}</a></li>')
+    return (
+        '<details class="lang-menu">'
+        f'<summary class="round" aria-label="{esc(i18n["a11y.lang_aria"])}" title="{esc(i18n["a11y.lang_aria"])}">'
+        f'{LANG_CODES[lang]}</summary>'
+        '<ul>' + "".join(items) + '</ul></details>')
+
+
+def back_link_html(i18n, href):
+    return (f'<a class="back" href="{href}" aria-label="{esc(i18n["a11y.back"])}">'
+            f'{icon("back")}<span>{esc(i18n["brand.name"])}</span></a>')
 
 # The Forest tab, drawn the way FireflyForestView draws it at night: a sky
 # gradient, a haloed moon, stars, three rows of pine silhouettes, and fireflies
@@ -217,73 +249,71 @@ FOREST = {
 }
 FOREST_STARS = [(22, 40), (58, 92), (96, 30), (128, 76), (150, 18), (176, 120), (214, 52), (246, 98),
                 (38, 150), (88, 174), (122, 138), (232, 162), (70, 60), (190, 82), (260, 30), (12, 110)]
-# (x, y, core radius, palette index)
-FOREST_FLIES = [(40, 110, 2.6, 2), (92, 196, 3.2, 1), (150, 150, 2.4, 4), (212, 222, 3.0, 3),
-                (60, 300, 3.4, 0), (122, 262, 2.8, 2), (236, 318, 2.6, 1), (176, 348, 3.4, 4),
-                (28, 396, 2.8, 3), (104, 404, 3.0, 0), (250, 410, 2.4, 2), (64, 214, 2.2, 0)]
 
 
-def _pines(base_y, height, width, count, offset, color):
-    step = 276 / (count - 1)
-    trees = []
-    for i in range(count):
-        cx = offset + i * step
-        h = height * (0.78 + 0.22 * ((i * 37) % 10) / 10)
-        trees.append(f'M{cx - width / 2:.1f} {base_y}L{cx:.1f} {base_y - h:.1f}L{cx + width / 2:.1f} {base_y}Z')
-    return f'<path fill="{color}" d="{"".join(trees)}"/>'
+def _ridge(base, peaks, height, color, width=720, depth=380):
+    """One row of pines across the card: a jagged ridge of triangles."""
+    step = width / peaks
+    pts = [f"0 {depth}", f"0 {base}"]
+    for n in range(peaks):
+        x = n * step
+        h = height * (0.7 + 0.3 * ((n * 37) % 10) / 10)
+        pts += [f"{x + step / 2:.0f} {base - h:.0f}", f"{x + step:.0f} {base}"]
+    pts.append(f"{width} {depth}")
+    return f'<path fill="{color}" d="M{"L".join(pts)}Z"/>'
 
 
-def forest_svg():
+# (x, y, core radius, palette index) on the 720x380 card
+FOREST_CARD_FLIES = [(140, 200, 3, 0), (330, 225, 3, 1), (455, 180, 3, 2), (560, 250, 3, 3),
+                     (250, 290, 3, 4), (660, 300, 2.4, 0), (60, 255, 2.4, 2), (400, 300, 2.4, 3)]
+
+
+def forest_card_svg():
+    """The Forest tab at night as a wide card: moon, stars, three ridges of
+    pines and fireflies in the five colours (Color+Forest.swift)."""
     f = FOREST
-    stars = "".join(f'<circle cx="{x}" cy="{y}" r="0.9"/>' for x, y in FOREST_STARS)
+    stars = "".join(f'<circle cx="{x * 2.6:.0f}" cy="{y * 0.9:.0f}" r="1"/>' for x, y in FOREST_STARS[:10])
     flies = "".join(_mark_svg(x, y, r, cls="forest-fly", color=f["palette"][hue])
-                    for x, y, r, hue in FOREST_FLIES)
+                    for x, y, r, hue in FOREST_CARD_FLIES)
     return (
-        '<svg class="forest" viewBox="0 0 276 470" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
-        f'<defs><linearGradient id="forest-sky" x1="0" y1="0" x2="0" y2="1">'
-        f'<stop offset="0" stop-color="{f["sky_top"]}"/><stop offset="0.62" stop-color="{f["sky_bottom"]}"/></linearGradient></defs>'
-        '<rect width="276" height="470" fill="url(#forest-sky)"/>'
-        f'<g fill="{f["moon"]}" opacity="0.7">{stars}</g>'
-        f'<g fill="{f["moon"]}"><circle cx="212" cy="150" r="38" fill-opacity="0.05"/>'
-        '<circle cx="212" cy="150" r="26" fill-opacity="0.08"/><circle cx="212" cy="150" r="14" fill-opacity="0.9"/></g>'
-        + _pines(340, 120, 46, 9, -10, f["far"])
-        + _pines(392, 150, 58, 7, 6, f["mid"])
-        + _pines(470, 190, 74, 6, -18, f["near"])
-        + f'<rect y="440" width="276" height="30" fill="{f["near"]}"/>'
+        '<svg class="scene" viewBox="0 0 720 380" preserveAspectRatio="xMidYMax slice" aria-hidden="true">'
+        f'<g fill="{f["moon"]}" opacity="0.55">{stars}</g>'
+        f'<g fill="{f["moon"]}"><circle cx="620" cy="70" r="48" fill-opacity="0.06"/>'
+        '<circle cx="620" cy="70" r="26"/></g>'
+        + _ridge(300, 9, 90, f["far"]) + _ridge(330, 8, 75, f["mid"]) + _ridge(362, 10, 60, f["near"])
         + flies + '</svg>')
 
 
-def wave_svg(uid, amps, width, height):
-    """A centered, mirrored waveform of rounded bars with one vertical gradient."""
-    count = len(amps)
-    slot = width / count
-    bar_w = slot * 0.52
-    bars = []
-    for index, amp in enumerate(amps):
-        bar_h = max(height * amp, 5)
-        x = index * slot + (slot - bar_w) / 2
-        y = (height - bar_h) / 2
-        r = min(bar_w / 2, 4)
-        bars.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{bar_h:.1f}" rx="{r:.1f}"/>')
-    grad = (
-        f'<linearGradient id="w-{uid}" x1="0" y1="0" x2="0" y2="1">'
-        '<stop offset="0" stop-color="#C4923F" stop-opacity="0.9"/>'
-        '<stop offset="0.5" stop-color="#E8B869"/>'
-        '<stop offset="1" stop-color="#C4923F" stop-opacity="0.9"/></linearGradient>'
-    )
+def catalog_rows_html(lang, caption):
+    """The landing page's catalog: rows drawn like the app's catalog list."""
+    return "".join(
+        '<div class="row">'
+        f'<span class="tile" aria-hidden="true"><span class="emoji">{t["emoji"]}</span></span>'
+        f'<span class="text"><span class="t">{esc(t["titles"][lang])}</span>'
+        f'<span class="s">{fmt(caption, {"country": t["country"][lang], "author": t["author"][lang], "year": t["year"][lang]})}</span></span>'
+        '</div>'
+        for t in TALES)
+
+
+# the recording screen's waveform: dots, a few taller where the voice is
+WELL = "......uUuUu.........u.............."
+
+
+def recording_phone_html(i18n):
+    """The app's recording screen, as on the App Store screenshot: timer,
+    waveform well, REC, Pause and Finish, fireflies around."""
+    bars = "".join({"." : "<i></i>", "u": '<i class="u"></i>', "U": '<i class="uu"></i>'}[c] for c in WELL)
+    flies = "".join(f'<span class="fly{" fly-sm" if n % 2 == 0 else ""} ph-{n}"></span>' for n in range(1, 6))
     return (
-        f'<svg class="wave" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid meet" '
-        f'aria-hidden="true">{grad}'
-        f'<g fill="url(#w-{uid})">{"".join(bars)}</g></svg>'
-    )
-
-
-HERO_AMPS = [0.28, 0.42, 0.6, 0.38, 0.72, 0.5, 0.86, 0.64, 0.46, 0.9, 0.58, 0.34,
-             0.7, 0.92, 0.52, 0.4, 0.66, 0.3, 0.78, 0.48, 0.36, 0.62, 0.44, 0.8, 0.32, 0.5]
-
-
-# ---------------------------------------------------------------------------
-# PNG writer (stdlib only)
+        '<div class="phone" aria-hidden="true"><div class="screen">'
+        '<span class="grab"></span>' + flies
+        + '<span class="timer">00:08</span>'
+        f'<span class="well">{bars}</span>'
+        '<span class="rec">REC</span>'
+        '<span class="controls">'
+        f'<span class="ctl"><b class="pause">{icon("pause")}</b>{esc(i18n["hero.rec_pause"])}</span>'
+        f'<span class="ctl"><b class="stop"><i></i></b>{esc(i18n["hero.rec_finish"])}</span>'
+        '</span></div></div>')
 
 
 def png_bytes(width, height, pixel):
@@ -492,29 +522,14 @@ def mailto(email, label=None):
     return f'<a href="mailto:{esc(email)}">{esc(label or email)}</a>'
 
 
-def lang_switcher_html(i18n, lang, href_for):
-    """A visible language strip: EN IT FR DE ES, current one highlighted."""
-    items = []
-    for other in LANGS:
-        current = ' aria-current="true"' if other == lang else ""
-        items.append(
-            f'<a lang="{other}" hreflang="{other}" href="{href_for(other)}" '
-            f'title="{esc(LANG_NAMES[other])}" aria-label="{esc(LANG_NAMES[other])}"{current}>'
-            f'{LANG_CODES[other]}</a>')
-    # a group, not a <nav>: it already sits inside the main navigation landmark
-    return ('<div class="lang-switcher" role="group" aria-label="'
-            + esc(i18n["a11y.lang_aria"]) + '">' + "".join(items) + '</div>')
-
-
 def theme_toggle_html(i18n):
-    """Sun/moon icon button; the visible icon follows the active theme."""
+    """Round sun/moon button; the visible icon follows the active theme."""
     label = esc(i18n["a11y.theme"])
     return (
-        '<button type="button" class="theme-toggle" aria-pressed="false" '
+        '<button type="button" class="round theme-toggle" aria-pressed="false" '
         f'aria-label="{label}" title="{label}">'
-        '<span class="theme-icon theme-icon-sun">' + GLYPHS["sun"]() + '</span>'
-        '<span class="theme-icon theme-icon-moon">' + GLYPHS["moon"]() + '</span>'
-        '</button>')
+        + icon("sun", "icon theme-icon-sun") + icon("moon", "icon theme-icon-moon")
+        + '</button>')
 
 
 PLACEHOLDER = re.compile(r"\{\{([a-zA-Z0-9_.]+)\}\}")
@@ -588,9 +603,9 @@ def build(config, strings, out_dir):
     assets_dest = os.path.join(out_dir, "assets")
     if os.path.isdir(assets_src):
         shutil.copytree(assets_src, assets_dest, dirs_exist_ok=True)
-    drawings = {f"{name}_glyph": glyph() for name, glyph in GLYPHS.items()}
-    drawings.update(hero_wave=wave_svg("hero", HERO_AMPS, 800, 120),
-                    mascot_svg=mascot_svg(), forest_svg=forest_svg())
+    drawings = {f"icon_{name}": icon(name) for name in ICONS}
+    drawings["forest_card"] = forest_card_svg()
+    drawings["icon_chev"] = icon("chevron", "chev")
     versions = {
         "v_css": file_version(os.path.join(assets_src, "css", "site.css")),
         "v_js": file_version(os.path.join(assets_src, "js", "site.js")),
@@ -664,43 +679,34 @@ def build(config, strings, out_dir):
             ctx["assets"] = assets
             ctx["year"] = year
 
-            # navigation
-            nav_file = "" if page == "index" else "index.html"
-            nav_links = [
-                f'<a href="{nav_file}#idea">{esc(i18n["nav.idea"])}</a>',
-                f'<a href="{nav_file}#how">{esc(i18n["nav.how"])}</a>',
-                f'<a href="{nav_file}#app">{esc(i18n["nav.app"])}</a>',
-                f'<a href="{nav_file}#privacy">{esc(i18n["nav.privacy"])}</a>',
-                f'<a href="support.html">{esc(i18n["nav.support"])}</a>',
-            ]
-            ctx["nav_links"] = "".join(nav_links)
+            # navigation: toolbar (wordmark, language, theme), back capsule on
+            # pushed pages, and the tab bar
             ctx["nav_home"] = "index.html"
             ctx["brand_wordmark"] = WORDMARK
 
-            # language switcher (visible, top right) and theme toggle
             def href_for(other, page=page, lang=lang):
                 name = PAGES[page] if page != "index" else "index.html"
                 if lang == "en":
                     return name if other == "en" else other + "/" + name
                 return ("../" if other == "en" else f"../{other}/") + name
 
-            ctx["lang_switcher"] = lang_switcher_html(i18n, lang, href_for)
+            ctx["lang_menu"] = lang_menu_html(i18n, lang, href_for)
             ctx["theme_toggle"] = theme_toggle_html(i18n)
+            ctx["back_link"] = "" if page == "index" else back_link_html(i18n, "index.html")
+            ctx["tab_bar"] = tab_bar_html(i18n, page if page != "404" else "",
+                                          "index.html", "privacy.html", "support.html")
 
             # footer
             ctx["footer_langs"] = "".join(
-                f'<li><a lang="{other}" hreflang="{other}" href="{page_set_url(base_url, "index", other)}">'
-                f'{LANG_NAMES[other]}</a></li>'
+                f'<a lang="{other}" hreflang="{other}" href="{page_set_url(base_url, page if page != "404" else "index", other)}" '
+                f'title="{esc(LANG_NAMES[other])}"' + (' aria-current="true"' if other == lang else "") + f'>{LANG_CODES[other]}</a>'
                 for other in LANGS)
-            ctx["footer_home"] = "index.html"
             ctx["footer_privacy"] = "privacy.html"
             ctx["footer_support"] = "support.html"
             ctx["footer_email"] = email_html
             ctx["footer_github"] = config["github_url"]
             ctx["footer_gh_label"] = "GitHub"
-            ctx["footer_published_note"] = ctx["footer.published"]
             ctx["footer_publisher"] = publisher_html
-            ctx["privacy_cta_hint"] = ctx["privacy.cta_hint"]
 
             # legacy: 404 is served for any missing path under any prefix,
             # so root-relative absolute URLs are the only safe links there.
@@ -708,20 +714,16 @@ def build(config, strings, out_dir):
                 path_prefix = urlparse(base_url).path
                 ctx["assets"] = path_prefix
                 ctx["nav_home"] = path_prefix
-                nav_anchors_404 = [("idea", "nav.idea"), ("how", "nav.how"),
-                                   ("app", "nav.app"), ("privacy", "nav.privacy")]
-                ctx["nav_links"] = "".join(
-                    f'<a href="{path_prefix}#{anchor}">{esc(i18n[key])}</a>'
-                    for anchor, key in nav_anchors_404)
-                ctx["nav_links"] += f'<a href="{path_prefix}support.html">{esc(i18n["nav.support"])}</a>'
-                ctx["lang_switcher"] = lang_switcher_html(
+                ctx["lang_menu"] = lang_menu_html(
                     i18n, lang,
                     lambda other, pp=path_prefix: pp + ("" if other == "en" else other + "/"))
-                ctx["footer_home"] = path_prefix
+                ctx["back_link"] = back_link_html(i18n, path_prefix)
+                ctx["tab_bar"] = tab_bar_html(i18n, "", path_prefix, path_prefix + "privacy.html",
+                                              path_prefix + "support.html")
                 ctx["footer_privacy"] = path_prefix + "privacy.html"
                 ctx["footer_support"] = path_prefix + "support.html"
 
-            # glyphs, the hero wave, the mascot and the forest (built once)
+            # icons and the forest card (built once)
             ctx.update(drawings)
 
             # store badge
@@ -732,27 +734,16 @@ def build(config, strings, out_dir):
             ctx["badge_label"] = ctx["hero.badge_label"]
             ctx["hero_badge_cta"] = ctx["hero.badge_cta"]
 
-            # tale data (mock rows and showcase)
-            ctx["tale1_title"] = esc(TALES[0]["titles"][lang])
-            ctx["tale2_title"] = esc(TALES[1]["titles"][lang])
-            ctx["tale3_title"] = esc(TALES[2]["titles"][lang])
-            ctx["tale_cards"] = "".join(
-                f'<article class="tale glass reveal">'
-                f'<h3 class="tale-title">{esc(t["titles"][lang])}</h3>'
-                f'<p class="tale-caption">{fmt(i18n["showcase.caption"], {"author": t["author"][lang], "country": t["country"][lang], "year": t["year"][lang]})}</p>'
-                f'</article>'
-                for t in TALES)
+            # home: the catalog list and the recording phone
+            ctx["catalog_rows"] = catalog_rows_html(lang, i18n["catalog.caption"])
+            ctx["recording_phone"] = recording_phone_html(i18n)
 
             # privacy page assembly
-            ctx["privacy_page_who_body"] = (
-                esc(i18n["privacy_page.who_published"]) + " " + publisher_html
-                + ', <span class="nowrap">' + esc(i18n["privacy_page.who_contact"]) + " "
-                + email_html + '</span>.')
-
+            # privacy and support: the publisher and the one contact address
+            ctx["publisher"] = publisher_html
             # support page contact card
             ctx["contact_email"] = email_html
 
-            ctx["privacy_href"] = "privacy.html"
 
             page_html = render(templates[page], ctx, page, lang)
             target = os.path.join(out_dir, prefix, filename)
