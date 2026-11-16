@@ -1,0 +1,53 @@
+/* Extra pieces for the inner pages (privacy, support). Builds on app.css. */
+
+/* nav bar of a pushed screen: round back button + inline title */
+.navbar { display: flex; align-items: center; gap: 12px; padding: 18px 0 0; }
+.back { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 16px 0 12px; border-radius: 999px;
+  background: var(--glass); border: 1px solid var(--glass-edge);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  color: var(--accent); font-family: -apple-system, system-ui, sans-serif; font-size: 0.95rem; }
+.back svg { width: 10px; height: 16px; }
+
+.page-title { padding: 36px 0 0; }
+.page-title .large-title { font-size: clamp(2.1rem, 1.6rem + 1.8vw, 2.8rem); }
+.page-title .caption { margin-top: 10px; }
+.page-title .hero-lead { margin-top: 16px; }
+
+/* index: a Settings-style list of sections */
+.toc .row { padding-top: 12px; padding-bottom: 12px; }
+.toc .t { font-size: 1.02rem; }
+
+/* prose under a section header, like a long group footer */
+.prose { margin: 0 4px; }
+.prose p { margin: 0 0 0.9em; }
+.prose p:last-child { margin-bottom: 0; }
+.prose b { color: var(--text); font-weight: 600; }
+.prose .path { font-family: -apple-system, system-ui, sans-serif; font-size: 0.92em; color: var(--text); white-space: nowrap; }
+
+/* data rows: what / why / where */
+.data .row { flex-direction: column; align-items: stretch; gap: 0; padding: 14px 16px; }
+.data .row::before { left: 16px !important; }
+.data dl { margin: 6px 0 0; display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; font-size: 0.93rem; }
+.data dt { font-family: var(--label); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); padding-top: 3px; }
+.data dd { margin: 0; color: var(--text-2); }
+
+/* key/value rows: contact card */
+.kv .row { justify-content: space-between; gap: 20px; }
+.kv .k { font-family: -apple-system, system-ui, sans-serif; color: var(--text); font-size: 1rem; }
+.kv .v { color: var(--text-2); text-align: right; font-size: 0.98rem; }
+.kv .row::before { left: 16px !important; }
+.todo { display: inline-block; padding: 1px 8px; border-radius: 6px; background: rgb(255 75 75 / 0.14); color: var(--coral); font-family: var(--label); font-weight: 600; font-size: 0.78rem; }
+
+/* FAQ: disclosure rows, pure HTML <details> */
+.faq details { position: relative; }
+.faq details + details::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 1px; background: var(--line-strong); }
+.faq summary { list-style: none; display: flex; align-items: center; gap: 14px; padding: 15px 16px; cursor: pointer; color: var(--text); font-size: 1.08rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary span { flex: 1; }
+.faq summary svg { width: 10px; height: 16px; color: var(--text-3); transition: transform 0.2s ease; flex: none; }
+.faq details[open] summary svg { transform: rotate(90deg); color: var(--accent); }
+.faq .answer { padding: 0 16px 16px; color: var(--text-2); font-size: 0.98rem; }
+@media (prefers-reduced-motion: reduce) { .faq summary svg { transition: none; } }
+
+/* small anchor jump target offset */
+[id] { scroll-margin-top: 24px; }

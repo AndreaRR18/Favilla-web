@@ -1,0 +1,187 @@
+
+@font-face { font-family: "Epilogue"; src: url("../../../../../assets/fonts/epilogue.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("../../../../../assets/fonts/manrope.woff2") format("woff2"); font-weight: 200 800; font-display: swap; }
+
+:root {
+  --bg: #100B08;          /* BackgroundPrimary */
+  --bg-2: #1C1410;        /* BackgroundSecondary — rows, cards */
+  --bg-sunken: #0A0705;   /* BackgroundSunken */
+  --text: #FAF7F2;        /* TextPrimary */
+  --text-2: #C4B8AE;      /* TextSecondary */
+  --text-3: #6A5F55;      /* TextTertiary */
+  --accent: #C4923F;      /* AccentDefault */
+  --accent-text: #C4923F;
+  --accent-soft: rgb(196 146 63 / 0.12); /* AccentSoft */
+  --coral: #FF4B4B;       /* RecordingActive (dark) */
+  --line: rgba(255, 244, 224, 0.08);     /* LineSeparator */
+  --line-strong: rgba(255, 244, 224, 0.14);
+  --glass: rgb(58 50 44 / 0.62);
+  --glass-edge: rgba(255, 244, 224, 0.10);
+  --tab-selected: rgb(16 11 8 / 0.75);
+  --head: "Epilogue", -apple-system, "SF Pro Display", system-ui, sans-serif;
+  --body: "New York", ui-serif, -apple-system-serif, Georgia, serif;
+  --label: "Manrope", -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --r: 16px;
+}
+:root:has(#theme:checked) {
+  --bg: #FAF7F2; --bg-2: #F0EBE3; --bg-sunken: #E8E2D9;
+  --text: #1C1410; --text-2: #4A3F35; --text-3: #8A7D72;
+  --accent-text: #8A6428;
+  --coral: #E03030;
+  --line: rgba(28, 20, 16, 0.09); --line-strong: rgba(28, 20, 16, 0.16);
+  --glass: rgb(240 235 227 / 0.78);
+  --glass-edge: rgba(28, 20, 16, 0.08);
+  --tab-selected: rgb(232 226 217 / 0.95);
+}
+#theme { position: absolute; opacity: 0; pointer-events: none; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text-2);
+  font-family: var(--body); font-size: 17px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 120px;
+}
+a { color: var(--accent-text); text-decoration: none; }
+h1, h2, h3 { color: var(--text); margin: 0; }
+
+.page { width: min(720px, calc(100% - 32px)); margin: 0 auto; }
+.page-wide { width: min(1040px, calc(100% - 32px)); margin: 0 auto; }
+
+/* ── toolbar: round glass buttons, like the app's top bar ───────────── */
+.toolbar { display: flex; align-items: center; gap: 12px; padding: 18px 0 0; }
+.wordmark { font-family: var(--head); font-weight: 700; font-size: 1.15rem; color: var(--text); letter-spacing: 0.01em; }
+.wordmark i { font-style: normal; position: relative; }
+.wordmark i::after { content: ""; position: absolute; left: 50%; top: 0.12em; width: 0.2em; height: 0.2em; box-shadow: 0 0 0 1px var(--bg); transform: translateX(-50%); border-radius: 50%; background: var(--accent); }
+.spacer { flex: 1; }
+.round {
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--glass); border: 1px solid var(--glass-edge);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4); backdrop-filter: blur(18px) saturate(1.4);
+  color: var(--accent); cursor: pointer;
+  font-family: var(--label); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em;
+}
+.round svg { width: 20px; height: 20px; }
+.round .sun { display: none; }
+:root:has(#theme:checked) .round .sun { display: block; }
+:root:has(#theme:checked) .round .moon { display: none; }
+
+/* ── firefly mark: core + three flat rings (FireflyField) ───────────── */
+.fly { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 6px rgb(196 146 63 / 0.24), 0 0 0 12px rgb(196 146 63 / 0.14), 0 0 0 19px rgb(196 146 63 / 0.08); }
+.fly-sm { width: 5px; height: 5px; box-shadow: 0 0 0 3px rgb(196 146 63 / 0.24), 0 0 0 7px rgb(196 146 63 / 0.14), 0 0 0 11px rgb(196 146 63 / 0.08); }
+.sky { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.sky .fly { position: absolute; animation: drift 14s ease-in-out infinite alternate; opacity: 0.8; }
+.sky .fly:nth-child(2) { animation-duration: 19s; animation-delay: -6s; }
+.sky .fly:nth-child(3) { animation-duration: 23s; animation-delay: -11s; }
+.sky .fly:nth-child(4) { animation-duration: 17s; animation-delay: -3s; }
+@keyframes drift { 0% { transform: translate(0, 0); } 50% { transform: translate(14px, -22px); } 100% { transform: translate(-10px, 8px); } }
+:root:has(#theme:checked) .sky { display: none; }
+@media (prefers-reduced-motion: reduce) { .sky .fly { animation: none; } }
+main, header { position: relative; z-index: 1; }
+
+/* ── hero: a large title, like a screen opening ─────────────────────── */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; align-items: center; padding: 56px 0 24px; }
+.large-title { font-family: var(--head); font-weight: 700; font-size: clamp(2.2rem, 1.5rem + 2.6vw, 3.4rem); line-height: 1.05; letter-spacing: -0.01em; }
+.hero-sub { font-family: var(--body); font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem); color: var(--text-2); margin: 14px 0 0; line-height: 1.3; }
+.hero-lead { margin: 22px 0 0; max-width: 34em; }
+.capsule {
+  display: inline-flex; align-items: center; gap: 12px; margin-top: 28px;
+  padding: 12px 22px 12px 14px; border-radius: 999px;
+  background: var(--glass); border: 1px solid var(--glass-edge);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  color: var(--text); font-family: var(--label); font-weight: 600; font-size: 0.95rem;
+}
+.capsule .tile { width: 34px; height: 34px; }
+.capsule small { display: block; font-size: 0.72rem; font-weight: 500; color: var(--text-3); letter-spacing: 0.02em; }
+.caption { font-size: 0.85rem; color: var(--text-3); margin: 12px 0 0; }
+
+/* ── phone: the real recording screen ───────────────────────────────── */
+.phone { width: 300px; border-radius: 46px; padding: 11px; background: #0A0705; border: 1px solid rgba(255, 244, 224, 0.14); box-shadow: 0 30px 60px rgb(0 0 0 / 0.35); }
+.screen { position: relative; border-radius: 36px; background: #100B08; height: 600px; overflow: hidden; display: flex; flex-direction: column; align-items: center; color: #FAF7F2; }
+.screen .grab { width: 40px; height: 4px; border-radius: 2px; background: rgba(255, 244, 224, 0.22); margin-top: 18px; }
+.screen .fly { position: absolute; }
+.timer { margin-top: 220px; font-family: ui-monospace, "SF Mono", Menlo, monospace; font-weight: 300; font-size: 2.9rem; letter-spacing: 0.04em; color: #FAF7F2; }
+.wave-well { width: calc(100% - 8px); margin-top: 6px; height: 64px; border-radius: 18px; background: rgb(58 50 44 / 0.7); border: 1px solid rgba(255, 244, 224, 0.10); display: flex; align-items: center; justify-content: center; gap: 3px; }
+.wave-well span { width: 4px; height: 4px; border-radius: 2px; background: #C4923F; }
+.wave-well span.u { height: 10px; } .wave-well span.uu { height: 14px; }
+.rec { margin-top: 14px; font-family: -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 0.82rem; color: #FF4B4B; display: flex; align-items: center; gap: 6px; }
+.rec::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #FF4B4B; }
+.controls { position: absolute; bottom: 38px; display: flex; gap: 46px; }
+.ctl { display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: -apple-system, system-ui, sans-serif; font-size: 0.8rem; color: #C4B8AE; }
+.ctl b { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; }
+.ctl .pause { background: rgb(58 50 44 / 0.8); border: 1px solid rgba(255, 244, 224, 0.5); color: #C4923F; }
+.ctl .stop { background: #FF4B4B; }
+.ctl .stop i { width: 18px; height: 18px; border-radius: 4px; background: #FAF7F2; }
+.ctl svg { width: 22px; height: 22px; }
+
+/* ── grouped list: the app's inset sections ─────────────────────────── */
+.section { padding-top: 48px; }
+.section-title { font-family: var(--head); font-weight: 600; font-size: 1.5rem; margin: 0 4px 12px; }
+.group { background: var(--bg-2); border-radius: var(--r); overflow: hidden; border: 1px solid var(--line); }
+.row { position: relative; display: flex; align-items: center; gap: 16px; padding: 14px 16px; color: inherit; }
+/* inset separator: starts after the tile, like an iOS list */
+.row + .row::before { content: ""; position: absolute; top: 0; right: 0; left: 76px; height: 1px; background: var(--line-strong); }
+.row.link::before, .row.plain + .row::before { left: 16px; }
+.row .text { flex: 1; min-width: 0; }
+.row .t { display: block; font-family: var(--body); font-size: 1.12rem; color: var(--text); line-height: 1.3; }
+.row .s { display: block; font-size: 0.95rem; color: var(--text-3); margin-top: 2px; line-height: 1.45; }
+.row .s.long { color: var(--text-2); }
+.row .chev { color: var(--text-3); flex: none; width: 10px; }
+.row.link .t { color: var(--accent-text); }
+a.row:hover { background: rgb(196 146 63 / 0.06); }
+.group-footer { font-size: 0.88rem; color: var(--text-3); margin: 10px 16px 0; }
+
+/* 44pt tile, radius 23 %, AccentSoft — StoryEmojiView */
+.tile { flex: none; width: 44px; height: 44px; border-radius: 10px; background: var(--accent-soft); display: grid; place-items: center; color: var(--accent); }
+.tile svg { width: 22px; height: 22px; }
+/* emoji flattened to a silhouette, tinted amber — the app's pictograms */
+.tile .emoji { font-size: 24px; line-height: 1; color: transparent; text-shadow: 0 0 0 var(--accent); }
+.row.align-top { align-items: flex-start; }
+
+/* ── forest: always night, always its own palette ───────────────────── */
+.forest { position: relative; border-radius: var(--r); overflow: hidden; background: linear-gradient(180deg, #070B1A 0%, #17243D 100%); min-height: 380px; color: #FAF7F2; }
+.forest svg.scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+.forest .copy { position: relative; padding: 28px 28px 0; max-width: 30em; }
+.forest h3 { font-family: var(--head); font-weight: 600; font-size: 1.5rem; color: #FAF7F2; }
+.forest p { color: #C4B8AE; margin: 8px 0 0; }
+.ff { animation: pulse 4.2s ease-in-out infinite; }
+.ff:nth-of-type(2n) { animation-duration: 5.4s; animation-delay: -2s; }
+.ff:nth-of-type(3n) { animation-duration: 3.7s; animation-delay: -1s; }
+@keyframes pulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .ff { animation: none; } }
+
+/* ── about: plain, like the Info screen ─────────────────────────────── */
+.about { text-align: center; padding: 72px 0 8px; }
+.about .fly { margin-bottom: 30px; }
+.about h2 { font-family: var(--head); font-weight: 600; font-size: 1.5rem; }
+.about p { max-width: 30em; margin: 10px auto 0; }
+
+.footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--text-3); display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.footer a { color: var(--text-2); }
+.footer .langs { margin-left: auto; display: flex; gap: 12px; font-family: var(--label); font-weight: 600; font-size: 0.78rem; }
+.footer .langs a[aria-current] { color: var(--accent-text); }
+
+/* ── tab bar: the floating glass pill ───────────────────────────────── */
+.tabbar {
+  position: fixed; z-index: 10; left: 50%; bottom: 18px; transform: translateX(-50%);
+  width: min(460px, calc(100% - 32px)); display: grid; grid-template-columns: repeat(4, 1fr);
+  padding: 6px; border-radius: 999px;
+  background: var(--glass); border: 1px solid var(--glass-edge);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.25);
+}
+.tab { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 7px 4px 6px; border-radius: 999px; color: var(--text); font-family: -apple-system, system-ui, sans-serif; font-size: 0.7rem; font-weight: 500; }
+.tab svg { width: 24px; height: 24px; }
+.tab[aria-current] { background: var(--tab-selected); color: var(--accent); }
+.tab .fly-sm { margin: 9px 0 10px; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; padding-top: 36px; }
+  .hero .phone { display: none; }
+}
+@media (max-width: 520px) {
+  .row .t { font-size: 1.05rem; }
+  .forest .copy { padding: 22px 20px 0; }
+}
