@@ -851,11 +851,8 @@ def build(config, strings, out_dir):
             ctx["recording_phone"] = recording_phone_html(i18n)
 
             # privacy page assembly
-            ctx["privacy_page_who_body"] = (
-                esc(i18n["privacy_page.who_published"]) + " " + publisher_html
-                + ', <span class="nowrap">' + esc(i18n["privacy_page.who_contact"]) + " "
-                + email_html + '</span>.')
-
+            # privacy and support: the publisher and the one contact address
+            ctx["publisher"] = publisher_html
             # support page contact card
             ctx["contact_email"] = email_html
 

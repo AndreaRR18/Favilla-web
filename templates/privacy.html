@@ -1,74 +1,125 @@
-<section class="page-head">
-  <div class="container">
-    <p class="label">{{privacy_page_updated}}</p>
-    <h1>{{privacy_page_title}}</h1>
-    <p class="page-lead">{{privacy_page_intro}}</p>
-  </div>
-</section>
+<div class="page">
+  <section class="page-title">
+    <h1 class="large-title">{{privacy_page_title}}</h1>
+    <p class="caption">{{privacy_page_updated}}</p>
+    <p class="lead">{{privacy_page_intro}}</p>
+  </section>
 
-<article class="page-body">
-  <div class="container container-narrow">
-    <section class="prose">
-      <h2>{{privacy_page_who_t}}</h2>
-      <p>{{privacy_page_who_body}}</p>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_in_short_t}}</h2>
-      <ul class="prose-list">
-        <li>{{privacy_page_in_short_1}}</li>
-        <li>{{privacy_page_in_short_2}}</li>
-        <li>{{privacy_page_in_short_3}}</li>
-      </ul>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_data_t}}</h2>
-      <div class="prose-table">
-        <table>
-          <thead>
-            <tr><th>{{privacy_page_data_h1}}</th><th>{{privacy_page_data_h2}}</th><th>{{privacy_page_data_h3}}</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>{{privacy_page_data_r1a}}</td><td>{{privacy_page_data_r1b}}</td><td>{{privacy_page_data_r1c}}</td></tr>
-            <tr><td>{{privacy_page_data_r2a}}</td><td>{{privacy_page_data_r2b}}</td><td>{{privacy_page_data_r2c}}</td></tr>
-            <tr><td>{{privacy_page_data_r3a}}</td><td>{{privacy_page_data_r3b}}</td><td>{{privacy_page_data_r3c}}</td></tr>
-            
-          </tbody>
-        </table>
+  <section class="section">
+    <h2 class="section-title">{{privacy_title}}</h2>
+    <div class="group">
+      <div class="row">
+        <span class="tile" aria-hidden="true">{{icon_person_slash}}</span>
+        <span class="text"><span class="t">{{privacy_sum_account_t}}</span><span class="s">{{privacy_sum_account_b}}</span></span>
       </div>
+      <div class="row">
+        <span class="tile" aria-hidden="true">{{icon_eye_slash}}</span>
+        <span class="text"><span class="t">{{privacy_sum_tracking_t}}</span><span class="s">{{privacy_sum_tracking_b}}</span></span>
+      </div>
+      <div class="row">
+        <span class="tile" aria-hidden="true">{{icon_cloud}}</span>
+        <span class="text"><span class="t">{{privacy_sum_yours_t}}</span><span class="s">{{privacy_sum_yours_b}}</span></span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="section" aria-labelledby="toc-title">
+    <h2 class="section-title" id="toc-title">{{privacy_page_toc_t}}</h2>
+    <div class="group toc">
+      <a class="row bare" href="#who"><span class="text"><span class="t">{{privacy_page_who_t}}</span></span>{{icon_chev}}</a>
+      <a class="row bare" href="#data"><span class="text"><span class="t">{{privacy_page_data_t}}</span></span>{{icon_chev}}</a>
+      <a class="row bare" href="#microphone"><span class="text"><span class="t">{{privacy_page_mic_t}}</span></span>{{icon_chev}}</a>
+      <a class="row bare" href="#sharing"><span class="text"><span class="t">{{privacy_page_sharing_t}}</span></span>{{icon_chev}}</a>
+      <a class="row bare" href="#children"><span class="text"><span class="t">{{privacy_page_children_t}}</span></span>{{icon_chev}}</a>
+      <a class="row bare" href="#deletion"><span class="text"><span class="t">{{privacy_page_retain_t}}</span></span>{{icon_chev}}</a>
+      <a class="row bare" href="#rights"><span class="text"><span class="t">{{privacy_page_rights_t}}</span></span>{{icon_chev}}</a>
+      <a class="row bare" href="#site"><span class="text"><span class="t">{{privacy_page_site_t}}</span></span>{{icon_chev}}</a>
+    </div>
+  </nav>
+
+  <section class="section" id="who">
+    <h2 class="section-title">{{privacy_page_who_t}}</h2>
+    <div class="group kv">
+      <div class="row"><span class="k">{{privacy_page_who_name}}</span><span class="v">{{publisher}}</span></div>
+      <div class="row"><span class="k">{{privacy_page_who_email}}</span><span class="v">{{contact_email}}</span></div>
+    </div>
+    <p class="group-footer">{{privacy_page_who_note}}</p>
+  </section>
+
+  <section class="section" id="data">
+    <h2 class="section-title">{{privacy_page_data_t}}</h2>
+    <div class="group data">
+      <div class="row"><span class="t">{{privacy_page_data_r1a}}</span>
+        <dl><dt>{{privacy_page_data_why}}</dt><dd>{{privacy_page_data_r1b}}</dd><dt>{{privacy_page_data_where}}</dt><dd>{{privacy_page_data_r1c}}</dd></dl></div>
+      <div class="row"><span class="t">{{privacy_page_data_r2a}}</span>
+        <dl><dt>{{privacy_page_data_why}}</dt><dd>{{privacy_page_data_r2b}}</dd><dt>{{privacy_page_data_where}}</dt><dd>{{privacy_page_data_r2c}}</dd></dl></div>
+      <div class="row"><span class="t">{{privacy_page_data_r3a}}</span>
+        <dl><dt>{{privacy_page_data_why}}</dt><dd>{{privacy_page_data_r3b}}</dd><dt>{{privacy_page_data_where}}</dt><dd>{{privacy_page_data_r3c}}</dd></dl></div>
+    </div>
+    <div class="prose group-footer">
       <p>{{privacy_page_data_note}}</p>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_mic_t}}</h2>
+      <p>{{privacy_page_backup_p}}</p>
+    </div>
+  </section>
+
+  <section class="section" id="microphone">
+    <h2 class="section-title">{{privacy_page_mic_t}}</h2>
+    <div class="prose">
       <p>{{privacy_page_mic_p}}</p>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_dont_t}}</h2>
+    </div>
+  </section>
+  <section class="section" id="sharing">
+    <h2 class="section-title">{{privacy_page_sharing_t}}</h2>
+    <div class="prose">
+      <p>{{privacy_page_sharing_p}}</p>
+    </div>
+  </section>
+  <section class="section">
+    <h2 class="section-title">{{privacy_page_dont_t}}</h2>
+    <div class="prose">
       <p>{{privacy_page_dont_p}}</p>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_children_t}}</h2>
+    </div>
+  </section>
+  <section class="section" id="children">
+    <h2 class="section-title">{{privacy_page_children_t}}</h2>
+    <div class="prose">
       <p>{{privacy_page_children_p}}</p>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_retain_t}}</h2>
+    </div>
+  </section>
+  <section class="section" id="deletion">
+    <h2 class="section-title">{{privacy_page_retain_t}}</h2>
+    <div class="prose">
       <p>{{privacy_page_retain_p}}</p>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_diag_t}}</h2>
+    </div>
+  </section>
+  <section class="section">
+    <h2 class="section-title">{{privacy_page_diag_t}}</h2>
+    <div class="prose">
       <p>{{privacy_page_diag_p}}</p>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_rights_t}}</h2>
+    </div>
+  </section>
+  <section class="section" id="rights">
+    <h2 class="section-title">{{privacy_page_rights_t}}</h2>
+    <div class="prose">
       <p>{{privacy_page_rights_p}}</p>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_purch_t}}</h2>
+    </div>
+  </section>
+  <section class="section">
+    <h2 class="section-title">{{privacy_page_purch_t}}</h2>
+    <div class="prose">
       <p>{{privacy_page_purch_p}}</p>
-    </section>
-    <section class="prose">
-      <h2>{{privacy_page_changes_t}}</h2>
+    </div>
+  </section>
+  <section class="section" id="site">
+    <h2 class="section-title">{{privacy_page_site_t}}</h2>
+    <div class="prose">
+      <p>{{privacy_page_site_p}}</p>
+    </div>
+  </section>
+  <section class="section">
+    <h2 class="section-title">{{privacy_page_changes_t}}</h2>
+    <div class="prose">
       <p>{{privacy_page_changes_p}}</p>
-    </section>
-    <p class="page-back"><a class="privacy-cta" href="{{nav_home}}"><span class="privacy-cta-glyph" aria-hidden="true">{{arrow_glyph}}</span>{{privacy_page_back}}</a></p>
-  </div>
-</article>
+    </div>
+  </section>
+</div>

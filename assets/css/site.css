@@ -298,6 +298,8 @@ a.row:hover { background: var(--hover); text-decoration: none; }
 .prose p + p { margin-top: 0.9em; }
 .prose b { color: var(--text-primary); font-weight: 600; }
 .path { font-family: var(--font-system); font-size: 0.92em; color: var(--text-primary); }
+.prose.group-footer { margin: 10px 16px 0; }
+.toc .row { padding-top: 12px; padding-bottom: 12px; }
 
 /* data rows: what / why / where */
 .data .row { display: block; }

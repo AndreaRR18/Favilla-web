@@ -38,6 +38,11 @@ FORBIDDEN = {
     "sparkle": ["✨", "⭐", "🌟", "💫"],
 }
 
+# The privacy page must not describe features 1.0 doesn't ship.
+PRIVACY_FORBIDDEN = ["every sound", "ogni suono", "chaque son", "jeder klang", "cada sonido"]
+PRIVACY_FORBIDDEN_RE = [r"\bimport(ed|s)?\b", r"\bimporti\b", r"\bimportez\b", r"\bimportierst\b", r"\bimportas\b"]
+PRIVACY_SECTIONS = ("who", "data", "microphone", "sharing", "children", "deletion", "rights", "site")
+
 # Regexes (case-insensitive) that must never match, per language.
 FORBIDDEN_RE = {
     "fr": {"tu instead of vous": [r"\btu\b", r"\bton\b", r"\btes\b", r"\bta\b"]},
@@ -58,10 +63,21 @@ def check_strings(strings):
                 for needle in needles:
                     if needle.lower() in low:
                         errors.append(f"{lang}: {key}: {rule} ({needle!r})")
+            if key.startswith("privacy_page."):
+                for needle in PRIVACY_FORBIDDEN:
+                    if needle in low:
+                        errors.append(f"{lang}: {key}: feature not in 1.0 ({needle!r})")
+                for pattern in PRIVACY_FORBIDDEN_RE:
+                    if re.search(pattern, value, re.I):
+                        errors.append(f"{lang}: {key}: imported sounds are not in 1.0 ({pattern})")
             for rule, patterns in FORBIDDEN_RE.get(lang, {}).items():
                 for pattern in patterns:
                     if re.search(pattern, value, re.I):
                         errors.append(f"{lang}: {key}: {rule} ({pattern})")
+        if not re.search(r"\b\d{1,2}\.?\s+(de\s+)?[^\W\d]", strings[lang].get("privacy_page.updated", "")):
+            errors.append(f"{lang}: privacy_page.updated: needs the day of the last change")
+        if "privacy_page.backup_p" not in strings[lang]:
+            errors.append(f"{lang}: privacy_page.backup_p: the iCloud backup sentence is missing")
     return errors
 
 
@@ -237,6 +253,25 @@ def check_home(rel, root, errors):
         errors.append(f"{rel}: the old mascot or hero wave is back")
 
 
+def check_privacy(rel, root, errors):
+    """The privacy page: an index of its sections, and only name and email."""
+    for ident in PRIVACY_SECTIONS:
+        if not root.by_id(ident):
+            errors.append(f"{rel}: privacy section #{ident} is missing")
+    toc = root.all(cls="toc")
+    if not toc or len(toc[0].all("a", cls="row")) != len(PRIVACY_SECTIONS):
+        errors.append(f"{rel}: the in-page index needs {len(PRIVACY_SECTIONS)} rows")
+    who = root.by_id("who")
+    if who and len(who.all(cls="row")) != 2:
+        errors.append(f"{rel}: #who shows {len(who.all(cls='row'))} rows, expected name and email only")
+
+
+def check_no_phone(rel, root, errors):
+    for node in root.all("a"):
+        if (node.attrs.get("href") or "").startswith("tel:"):
+            errors.append(f"{rel}: a phone number is on the site (owner: email only)")
+
+
 def check_pages(out, config):
     """Structure rules on the built HTML."""
     errors = []
@@ -244,8 +279,11 @@ def check_pages(out, config):
     for rel, path in sorted(built_pages(out).items()):
         root = parse(path)
         check_shell(rel, root, errors)
+        check_no_phone(rel, root, errors)
         if os.path.basename(rel) == "index.html":
             check_home(rel, root, errors)
+        if os.path.basename(rel) == "privacy.html":
+            check_privacy(rel, root, errors)
     return errors
 
 
