@@ -8,5 +8,6 @@ PORT="${1:-8000}"
 
 python3 scripts/build.py --out _site
 python3 scripts/check_site.py _site
+python3 scripts/check_copy.py _site
 echo "Serving http://localhost:${PORT} — press Ctrl+C to stop."
 python3 -m http.server -d _site "$PORT"

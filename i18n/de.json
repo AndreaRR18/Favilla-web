@@ -36,7 +36,7 @@
     "lead": "Nimm eine Gutenachtgeschichte einmal mit deiner eigenen Stimme auf. An den Abenden, an denen du spät arbeitest oder unterwegs bist, schläft dein Kind trotzdem mit dir ein: keine KI, keine synthetische Stimme.",
     "badge_label": "iPhone · Benötigt iOS 26.5",
     "badge_cta": "Bald im App Store",
-    "badge_note": "Kostenlos · keine Werbung · kein Tracking — und das bleibt so",
+    "badge_note": "Kostenlos · keine Werbung · kein Tracking",
     "cta_anchor": "So funktioniert es"
   },
   "idea": {
@@ -166,12 +166,9 @@
     "data_r2a": "Texte, die du schreibst oder einfügst",
     "data_r2b": "Beim Aufnehmen zu lesen",
     "data_r2c": "Wie oben",
-    "data_r3a": "Klänge aus deinen eigenen Dateien",
-    "data_r3b": "Als Schlafklänge abspielen",
-    "data_r3c": "Wie oben",
-    "data_r4a": "Einstellungen (Sprache, Intro gesehen)",
-    "data_r4b": "Deine Auswahl merken",
-    "data_r4c": "Nur auf dem Gerät",
+    "data_r3a": "Einstellungen (Sprache, Intro gesehen)",
+    "data_r3b": "Deine Auswahl merken",
+    "data_r3c": "Nur auf dem Gerät",
     "data_note": "Daten in iCloud leben in deinem Apple-Konto und werden von Apple nach seinen Bedingungen verwaltet; der Entwickler hat keinen Zugriff. Ohne iCloud bleibt alles auf dem Gerät und synchronisiert später.",
     "mic_t": "Mikrofon",
     "mic_p": "Das Mikrofon arbeitet nur beim Aufnehmen. Verlässt du die App mitten in der Aufnahme, läuft sie im Hintergrund weiter und iOS zeigt einen kleinen Indikator mit Pause und Fertig. Die Erlaubnis kannst du in den Einstellungen entziehen. Das Audio geht nie an uns oder an jemand anderen.",
@@ -186,7 +183,7 @@
     "rights_t": "Deine Rechte (DSGVO)",
     "rights_p": "Wir erhalten und speichern deine persönlichen Daten nicht: Zugriff, Export, Berichtigung und Löschung machst du direkt in der App und in den iCloud-Einstellungen. Sonst schreib an den Kontakt oben; wir antworten innerhalb von 30 Tagen. Deine nationale Datenschutzbehörde hilft ebenfalls.",
     "purch_t": "Käufe",
-    "purch_p": "Favilla ist kostenlos: jede Geschichte, jeder Klang, jeder Winkel. Version 1.0 hat keine Käufe. Falls sich das ändert, läuft die Bezahlung über Apple im App Store, und wir erhalten keinerlei Zahlungsdaten.",
+    "purch_p": "Version 1.0 enthält keine Käufe. Sollte sich das ändern, läuft die Bezahlung nur über Apple, keine Zahlungsdaten erreichen uns, und diese Seite ändert sich vorher.",
     "changes_t": "Änderungen",
     "changes_p": "Wird die Art, wie die App mit Daten umgeht, geändert, bekommt diese Seite ein neues Datum, und die App sagt dir, was wichtig ist.",
     "back": "Zurück zur Startseite"

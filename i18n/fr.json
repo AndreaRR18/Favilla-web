@@ -36,7 +36,7 @@
     "lead": "Enregistrez une histoire du soir avec votre propre voix, une seule fois. Les soirs où vous rentrez tard ou où vous voyagez, votre enfant s'endort quand même avec vous : pas d'IA, pas de voix de synthèse.",
     "badge_label": "iPhone · Nécessite iOS 26.5",
     "badge_cta": "Bientôt sur l'App Store",
-    "badge_note": "Gratuit · sans pub · sans pistage — et ça ne changera pas",
+    "badge_note": "Gratuit · sans pub · sans pistage",
     "cta_anchor": "Comment ça marche"
   },
   "idea": {
@@ -166,12 +166,9 @@
     "data_r2a": "Textes que vous écrivez ou collez",
     "data_r2b": "Les lire pendant l'enregistrement",
     "data_r2c": "Comme ci-dessus",
-    "data_r3a": "Sons importés depuis vos fichiers",
-    "data_r3b": "Les jouer comme sons du sommeil",
-    "data_r3c": "Comme ci-dessus",
-    "data_r4a": "Préférences (langue, introduction déjà vue)",
-    "data_r4b": "Se souvenir de vos choix",
-    "data_r4c": "Sur votre appareil seulement",
+    "data_r3a": "Préférences (langue, introduction déjà vue)",
+    "data_r3b": "Se souvenir de vos choix",
+    "data_r3c": "Sur votre appareil seulement",
     "data_note": "Les données dans iCloud vivent dans votre compte Apple, gérées par Apple selon ses conditions ; le développeur n'y a pas accès. Sans iCloud, tout reste sur l'appareil et se synchronise plus tard.",
     "mic_t": "Micro",
     "mic_p": "Le micro ne travaille que pendant l'enregistrement. Si vous quittez l'app au milieu, cela continue en arrière-plan et iOS montre un petit indicateur avec Pause et Terminer. Vous pouvez retirer la permission dans Réglages. L'audio n'est jamais envoyé à nous ni à personne.",
@@ -186,7 +183,7 @@
     "rights_t": "Vos droits (RGPD)",
     "rights_p": "Nous ne recevons ni ne gardons vos données personnelles : accès, export, rectification et suppression se font directement dans l'app et dans les réglages iCloud. Pour autre chose, écrivez au contact ci-dessus ; nous répondons sous 30 jours. Vous pouvez aussi vous adresser à l'autorité de votre pays.",
     "purch_t": "Achats",
-    "purch_p": "Favilla est gratuite : chaque histoire, chaque son, chaque coin. La version 1.0 n'a aucun achat intégré. Si un jour cela change, le paiement passe par Apple via l'App Store et aucune donnée de paiement ne nous arrive.",
+    "purch_p": "La version 1.0 ne contient aucun achat. Si cela change un jour, le paiement passera uniquement par Apple, aucune donnée de paiement ne nous parviendra, et cette page changera avant.",
     "changes_t": "Changements",
     "changes_p": "Si la façon dont l'app gère les données change, cette page porte une nouvelle date et l'app vous dira ce qui compte.",
     "back": "Retour à l'accueil"

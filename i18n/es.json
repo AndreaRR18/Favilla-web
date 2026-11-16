@@ -36,7 +36,7 @@
     "lead": "Graba un cuento para dormir con tu propia voz, una sola vez. En las noches de trabajo tarde o de viaje, tu pequeño se duerme igual contigo: sin IA, sin voz sintética.",
     "badge_label": "iPhone · Requiere iOS 26.5",
     "badge_cta": "Pronto en el App Store",
-    "badge_note": "Gratis · sin anuncios · sin rastreo — y seguirá así",
+    "badge_note": "Gratis · sin anuncios · sin rastreo",
     "cta_anchor": "Cómo funciona"
   },
   "idea": {
@@ -166,12 +166,9 @@
     "data_r2a": "Textos que escribes o pegas",
     "data_r2b": "Leerlos mientras grabas",
     "data_r2c": "Como arriba",
-    "data_r3a": "Sonidos que importas de tus archivos",
-    "data_r3b": "Reproducirlos como sonidos para dormir",
-    "data_r3c": "Como arriba",
-    "data_r4a": "Preferencias (idioma, introducción ya vista)",
-    "data_r4b": "Recordar tus elecciones",
-    "data_r4c": "Solo en el dispositivo",
+    "data_r3a": "Preferencias (idioma, introducción ya vista)",
+    "data_r3b": "Recordar tus elecciones",
+    "data_r3c": "Solo en el dispositivo",
     "data_note": "Los datos en iCloud viven en tu cuenta Apple y los gestiona Apple según sus términos; quien desarrolla no tiene acceso. Sin iCloud, todo se queda en el dispositivo y se sincroniza después.",
     "mic_t": "Micrófono",
     "mic_p": "El micrófono trabaja solo mientras grabas. Si sales de la app a mitad de grabación, sigue en segundo plano y iOS muestra un indicador pequeño con Pausa y Terminar. Puedes revocar el permiso en Ajustes. El audio nunca se envía a nosotros ni a nadie.",
@@ -186,7 +183,7 @@
     "rights_t": "Tus derechos (RGPD)",
     "rights_p": "No recibimos ni guardamos tus datos personales: el acceso, la exportación, la corrección y el borrado los haces en la app y en los ajustes de iCloud. Para otra cosa, escribe al contacto de arriba; respondemos en 30 días. También está la autoridad de tu país.",
     "purch_t": "Compras",
-    "purch_p": "Favilla es gratuita: cada cuento, cada sonido, cada rincón. La versión 1.0 no tiene compras. Si algún día cambia, el pago pasa por Apple en el App Store y a nosotros no llega ningún dato de pago.",
+    "purch_p": "La versión 1.0 no contiene compras. Si algún día cambia, el pago pasará solo por Apple, no nos llegará ningún dato de pago, y esta página cambiará antes.",
     "changes_t": "Cambios",
     "changes_p": "Si cambia la forma en que la app trata los datos, esta página cambia de fecha y la app te dirá lo importante.",
     "back": "Volver al inicio"

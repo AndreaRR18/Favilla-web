@@ -36,7 +36,7 @@
     "lead": "Record a bedtime story in your own voice, and keep it for the nights you can't be there. No AI and no synthetic voices: your child falls asleep to you, every night.",
     "badge_label": "iPhone · Requires iOS 26.5",
     "badge_cta": "Coming soon to the App Store",
-    "badge_note": "Free · no ads · no tracking — and it stays that way",
+    "badge_note": "Free · no ads · no tracking",
     "cta_anchor": "How it works"
   },
   "idea": {
@@ -166,12 +166,9 @@
     "data_r2a": "Story texts you write or paste",
     "data_r2b": "To read while you record",
     "data_r2c": "Same as above",
-    "data_r3a": "Sounds you import from your files",
-    "data_r3b": "To play them as sleep sounds",
-    "data_r3c": "Same as above",
-    "data_r4a": "Preferences (language, intro already seen)",
-    "data_r4b": "To remember your choices",
-    "data_r4c": "On your device only",
+    "data_r3a": "Preferences (language, intro already seen)",
+    "data_r3b": "To remember your choices",
+    "data_r3c": "On your device only",
     "data_note": "Data in iCloud lives in your Apple account and is managed by Apple under its terms; the developer has no access to it. If iCloud is off or unreachable, everything stays on the device and syncs later.",
     "mic_t": "Microphone",
     "mic_p": "The microphone works only while you record. If you leave the app mid-recording, it keeps going in the background and iOS shows a small indicator with Pause and Finish. You can take the permission back in Settings. The audio is never sent to us or to anyone else.",
@@ -186,7 +183,7 @@
     "rights_t": "Your rights (GDPR)",
     "rights_p": "We neither receive nor hold your personal data, so you access, export, correct and delete it directly in the app and in iCloud settings. For anything else, write to the contact above; we answer within 30 days. Your local data protection authority is there too.",
     "purch_t": "Purchases",
-    "purch_p": "Favilla is free — every story, every sound, every corner of it. Version 1.0 has no purchases at all. If that ever changes, Apple handles the payment through the App Store and we receive no payment data.",
+    "purch_p": "Version 1.0 contains no purchases. If that ever changes, payment will go through Apple only, no payment data will reach us, and this page will change first.",
     "changes_t": "Changes",
     "changes_p": "If the app's handling of data ever changes, this page gets a new date and the app will tell you what matters.",
     "back": "Back to the homepage"

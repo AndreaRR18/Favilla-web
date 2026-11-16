@@ -36,7 +36,7 @@
     "lead": "Registra una storia della buonanotte con la tua voce, una volta sola. Le sere in cui torni tardi o sei in viaggio, tuo figlio si addormenta comunque con te: niente IA, nessuna voce sintetica.",
     "badge_label": "iPhone · Richiede iOS 26.5",
     "badge_cta": "In arrivo sull'App Store",
-    "badge_note": "Gratis · niente pubblicità · nessun tracciamento — e resterà così",
+    "badge_note": "Gratis · niente pubblicità · nessun tracciamento",
     "cta_anchor": "Come funziona"
   },
   "idea": {
@@ -166,12 +166,9 @@
     "data_r2a": "Testi delle storie che scrivi o incolli",
     "data_r2b": "Leggerli mentre registri",
     "data_r2c": "Come sopra",
-    "data_r3a": "Suoni che importi dai tuoi file",
-    "data_r3b": "Riprodurli come suoni per dormire",
-    "data_r3c": "Come sopra",
-    "data_r4a": "Preferenze (lingua, introduzione già vista)",
-    "data_r4b": "Ricordare le tue scelte",
-    "data_r4c": "Solo sul dispositivo",
+    "data_r3a": "Preferenze (lingua, introduzione già vista)",
+    "data_r3b": "Ricordare le tue scelte",
+    "data_r3c": "Solo sul dispositivo",
     "data_note": "I dati in iCloud vivono nel tuo account Apple, gestiti da Apple secondo i suoi termini; lo sviluppatore non vi ha accesso. Senza iCloud, tutto resta sul dispositivo e si sincronizza dopo.",
     "mic_t": "Microfono",
     "mic_p": "Il microfono lavora solo mentre registri. Se lasci l'app a registrazione in corso, continua in background e iOS mostra un piccolo indicatore con Pausa e Fine. Puoi revocare il permesso in Impostazioni. L'audio non viene mai inviato a noi né ad altri.",
@@ -186,7 +183,7 @@
     "rights_t": "I tuoi diritti (GDPR)",
     "rights_p": "Non riceviamo né conserviamo i tuoi dati personali, quindi accesso, esportazione, rettifica e cancellazione li fai direttamente nell'app e nelle impostazioni iCloud. Per altro, scrivi al contatto qui sopra: rispondiamo entro 30 giorni. C'è anche l'autorità del tuo Paese.",
     "purch_t": "Acquisti",
-    "purch_p": "Favilla è gratuita: ogni storia, ogni suono, ogni angolo. La versione 1.0 non ha acquisti. Se un giorno cambiasse, il pagamento passa da Apple tramite App Store e a noi non arriva nessun dato di pagamento.",
+    "purch_p": "La versione 1.0 non contiene acquisti. Se un giorno arrivassero, il pagamento passerà solo da Apple, a noi non arriverà nessun dato di pagamento, e questa pagina cambierà prima.",
     "changes_t": "Modifiche",
     "changes_p": "Se cambiasse il modo in cui l'app tratta i dati, questa pagina cambierà data e l'app ti dirà cosa conta.",
     "back": "Torna alla home"
