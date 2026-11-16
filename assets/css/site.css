@@ -38,19 +38,19 @@
   --text-tertiary: #6A5F55;
   /* accent — warm amber */
   --accent: #C4923F;
-  --accent-hot: #E8B869;
   --accent-dim: #8A6428;
   --accent-tint: #3A2E1C;
   --parchment: #F5E9D0;
-  /* secondary — slate (sleep sounds) */
+  /* secondary — slate (sleep sounds) and tertiary — coral (recording): the
+     app's other two semantic accents. Declared so the palette is complete;
+     the site has no sleep or recording surface to use them on yet. */
   --slate: #708090;
   --slate-tint: #1A1E22;
-  /* tertiary — coral (recording) */
   --coral: #FF4B4B;
   --coral-dim: #B83333;
-  /* lines */
-  --line: rgba(250, 247, 242, 0.08);
-  --line-strong: rgba(250, 247, 242, 0.14);
+  /* lines — the app's warm cream, not the text colour */
+  --line: rgba(255, 244, 224, 0.08);
+  --line-strong: rgba(255, 244, 224, 0.14);
   /* fonts */
   --font-head: "Epilogue", -apple-system, "SF Pro Display", system-ui, sans-serif;
   --font-body: "New York", ui-serif, -apple-system-serif, Georgia, "Times New Roman", serif;
@@ -65,7 +65,7 @@
   --sky:
     radial-gradient(820px 420px at 16% -8%, rgb(196 146 63 / 0.10), transparent 62%),
     radial-gradient(640px 340px at 88% 10%, rgb(112 128 144 / 0.08), transparent 65%),
-    linear-gradient(180deg, #17100A 0%, var(--bg-primary) 38%, var(--bg-sunken) 100%);
+    linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 38%, var(--bg-sunken) 100%);
   --nav-bg: rgb(10 7 5 / 0.78);
   --hover-bg: rgb(250 247 242 / 0.06);
   --panel-bg: rgb(28 20 16 / 0.55);
@@ -75,13 +75,13 @@
   --badge-bg-2: rgb(10 7 5 / 0.92);
   --link: #C4923F;
   --kicker: #C4923F;
-  --cta-text: #F5E9D0;
+  --cta-text: var(--parchment);
   --title-2: #C4923F;
   /* the mark's rings (dot + 3 concentric flat rings, as in the app) */
   --ring-strong: rgb(196 146 63 / 0.24);
   --ring-mid: rgb(196 146 63 / 0.14);
   --ring-soft: rgb(196 146 63 / 0.08);
-  --mark-core: #E8B869;
+  --mark-core: #C4923F;
 }
 
 /* Light mode — the app's light palette from DesignSystem/Color.swift */
@@ -103,24 +103,22 @@
   --sky:
     radial-gradient(820px 420px at 16% -8%, rgb(196 146 63 / 0.14), transparent 62%),
     radial-gradient(640px 340px at 88% 10%, rgb(112 128 144 / 0.09), transparent 65%),
-    linear-gradient(180deg, #FFFEF9 0%, var(--bg-primary) 42%, var(--bg-secondary) 100%);
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   --nav-bg: rgb(250 247 242 / 0.85);
   --hover-bg: rgb(28 20 16 / 0.05);
-  --panel-bg: rgb(255 254 251 / 0.72);
-  --section-alt-bg: #F0EBE3;
-  --footer-bg: #F0EBE3;
-  --badge-bg-1: #FFFEF9;
-  --badge-bg-2: #F5F0E8;
+  /* the app's three surfaces, in its own order: page (primary), band
+     (sunken), card (secondary). Opaque, so a card lifts on both. */
+  --panel-bg: #F0EBE3;
+  --section-alt-bg: #E8E2D9;
+  --footer-bg: #E8E2D9;
+  --badge-bg-1: #FAF7F2;
+  --badge-bg-2: #F0EBE3;
   --link: #8A6428;
   --kicker: #8A6428;
   --cta-text: #4A3F35;
-  --title-2: #B07D3A;
+  --title-2: #8A6428;
   --shadow: 0 14px 34px rgb(64 48 28 / 0.12);
   --glow: 0 0 36px rgb(196 146 63 / 0.12);
-  --ring-strong: rgb(138 100 40 / 0.28);
-  --ring-mid: rgb(138 100 40 / 0.16);
-  --ring-soft: rgb(138 100 40 / 0.09);
-  --mark-core: #8A6428;
 }
 
 /* The phone mock always shows the app's dark bedtime UI, whatever the site theme. */
@@ -132,8 +130,8 @@
   --accent-dim: #8A6428;
   --accent-tint: #3A2E1C;
   --bg-sunken: #0A0705;
-  --line: rgba(250, 247, 242, 0.08);
-  --line-strong: rgba(250, 247, 242, 0.14);
+  --line: rgba(255, 244, 224, 0.08);
+  --line-strong: rgba(255, 244, 224, 0.14);
 }
 
 * { box-sizing: border-box; }
@@ -263,7 +261,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
     0 0 0 calc(6px + var(--fly-glow, 0) * 4px) var(--ring-strong),
     0 0 0 calc(12px + var(--fly-glow, 0) * 8px) var(--ring-mid),
     0 0 0 calc(20px + var(--fly-glow, 0) * 12px) var(--ring-soft),
-    0 0 calc(12px + var(--fly-glow, 0) * 16px) rgb(232 184 105 / 0.4);
+    0 0 calc(12px + var(--fly-glow, 0) * 16px) rgb(196 146 63 / 0.4);
   animation: ff-blink 3.8s ease-in-out infinite;
 }
 /* fireflies only come out at night: no companion in light mode (site.js
@@ -279,7 +277,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--accent-hot);
+  background: var(--accent);
   box-shadow: 0 0 6px 2px rgb(196 146 63 / 0.5);
   pointer-events: none;
   z-index: 89;
@@ -669,7 +667,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   width: 300px;
   border-radius: 44px;
   padding: 12px;
-  background: linear-gradient(170deg, #241A12, #0C0806);
+  background: linear-gradient(170deg, #1C1410, #0A0705);
   border: 1px solid var(--line-strong);
   box-shadow: var(--shadow);
 }
@@ -681,13 +679,13 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   width: 78px;
   height: 22px;
   border-radius: 12px;
-  background: #060402;
+  background: #0A0705;
   z-index: 2;
 }
 .mock-screen {
   position: relative;
   border-radius: 34px;
-  background: radial-gradient(140% 90% at 50% 0%, #1E150D 0%, #120C08 55%, #0B0705 100%);
+  background: radial-gradient(140% 90% at 50% 0%, #1C1410 0%, #100B08 55%, #0A0705 100%);
   padding: 58px 18px 22px;
   min-height: 400px;
   display: flex;

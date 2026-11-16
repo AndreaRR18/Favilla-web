@@ -65,12 +65,25 @@ iOS repo, `docs/superpowers/specs`). In short:
   sparkle icons (✨ and friends read as "AI") and never realistic flames
   or candles.
 - Palette: amber `#C4923F` on warm black `#100B08` (light mode: warm
-  parchment `#FAF7F2`). No pure white, no saturated orange.
+  parchment `#FAF7F2`). No pure white, no saturated orange. Every colour in
+  `site.css` is an app token or an alpha of one — no invented hexes. The two
+  deliberate exceptions are documented in the skill: light-mode lines are
+  dark (the app's cream line is invisible on parchment) and light-mode amber
+  text uses `#8A6428` (the app's light `#B07D3A` fails AA).
 - Typography: Epilogue (headings), New York / system serif (body), Manrope
   (labels) — the app's own stack. Epilogue and Manrope are self-hosted in
   `assets/fonts/` (variable woff2, latin subset, SIL OFL licenses alongside).
-- Tone: short, quiet sentences. Second person singular. No exclamation
-  marks, no hype words, no "transform your nights".
+- Tone: short, quiet sentences. No exclamation marks, no hype words, no
+  "transform your nights". The register follows the app per language: *tu*
+  in Italian, *du* in German, *tú* in Spanish, and **vous** in French — the
+  app addresses the parent as *vous* throughout, so the site does too.
+- Scope: describe only what the shipped build has. Check
+  `FAVILLA_FEATURE_*` in the iOS scheme before claiming a feature; both
+  `paywall` and `sleepSounds` are off today.
+
+The full rules — token map, phrasebook, anti-goals, verification — live in
+`.vibe/skills/favilla-site-brand/SKILL.md`. Load it before changing design or
+copy.
 
 ## config.json
 

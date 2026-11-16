@@ -34,7 +34,7 @@
     "h1a": "La storia di stasera, con la tua voce.",
     "h1b": "Anche quando tu non puoi esserci.",
     "lead": "Registra una storia della buonanotte con la tua voce, una volta sola. Le sere in cui torni tardi o sei in viaggio, tuo figlio si addormenta comunque con te: niente IA, nessuna voce sintetica.",
-    "badge_label": "iPhone · Richiede iOS 26",
+    "badge_label": "iPhone · Richiede iOS 26.5",
     "badge_cta": "In arrivo sull'App Store",
     "badge_note": "Gratis · niente pubblicità · nessun tracciamento — e resterà così",
     "cta_anchor": "Come funziona"
@@ -71,7 +71,7 @@
     "lib_b3": "Registra di nuovo o condividi ogni storia",
     "cat_tag": "Fiabe da leggere",
     "cat_name": "Catalogo",
-    "cat_body": "Le storie classiche, pronte per essere lette con la tua voce: Perrault, i Grimm, Andersen, Esopo e altri ancora, da dodici tradizioni narrative.",
+    "cat_body": "Le storie classiche, pronte per essere lette con la tua voce: Perrault, i Grimm, Andersen, Esopo e altri ancora, da tredici tradizioni narrative.",
     "cat_b1": "46 fiabe, e altre a ogni aggiornamento",
     "cat_b2": "Cerca per titolo, filtra per paese",
     "cat_b3": "Segna le fiabe come lette o già registrate",
@@ -130,8 +130,8 @@
     "cta_hint": "In una riga: non possiamo vedere le tue registrazioni, perché non le riceviamo mai."
   },
   "indie": {
-    "kicker": "Fatta da una persona",
-    "title": "Creata da un genitore, non da un'azienda",
+    "kicker": "Dietro l'app",
+    "title": "Fatta da una sola persona.",
     "body": "Favilla è fatta da un solo sviluppatore, per lo stesso motivo per cui la useresti tu. Nessun team, nessun finanziamento. Se regala a tuo figlio una buonanotte in più con dentro la tua voce, ha fatto il suo lavoro."
   },
   "footer": {

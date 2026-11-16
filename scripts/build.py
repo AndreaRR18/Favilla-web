@@ -268,7 +268,7 @@ def wave_svg(uid, amps, width, height):
     grad = (
         f'<linearGradient id="w-{uid}" x1="0" y1="0" x2="0" y2="1">'
         '<stop offset="0" stop-color="#C4923F" stop-opacity="0.9"/>'
-        '<stop offset="0.5" stop-color="#E8B869"/>'
+        '<stop offset="0.5" stop-color="#C4923F"/>'
         '<stop offset="1" stop-color="#C4923F" stop-opacity="0.9"/></linearGradient>'
     )
     return (

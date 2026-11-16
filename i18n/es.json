@@ -34,7 +34,7 @@
     "h1a": "El cuento de esta noche, con tu voz.",
     "h1b": "Aunque no puedas estar.",
     "lead": "Graba un cuento para dormir con tu propia voz, una sola vez. En las noches de trabajo tarde o de viaje, tu pequeño se duerme igual contigo: sin IA, sin voz sintética.",
-    "badge_label": "iPhone · Requiere iOS 26",
+    "badge_label": "iPhone · Requiere iOS 26.5",
     "badge_cta": "Pronto en el App Store",
     "badge_note": "Gratis · sin anuncios · sin rastreo — y seguirá así",
     "cta_anchor": "Cómo funciona"
@@ -71,7 +71,7 @@
     "lib_b3": "Vuelve a grabar o comparte cada cuento",
     "cat_tag": "Cuentos para leer",
     "cat_name": "Catálogo",
-    "cat_body": "Los cuentos clásicos, listos para ser leídos con tu voz: Perrault, los Grimm, Andersen, Esopo y más, de doce tradiciones de narración.",
+    "cat_body": "Los cuentos clásicos, listos para ser leídos con tu voz: Perrault, los Grimm, Andersen, Esopo y más, de trece tradiciones de narración.",
     "cat_b1": "46 cuentos, y más con cada actualización",
     "cat_b2": "Busca por título, filtra por país",
     "cat_b3": "Marca los cuentos como leídos o ya grabados",
@@ -130,8 +130,8 @@
     "cta_hint": "En una línea: no podemos ver tus grabaciones, porque nunca las recibimos."
   },
   "indie": {
-    "kicker": "Hecha por una sola persona",
-    "title": "Creada por un progenitor, no por una empresa",
+    "kicker": "Detrás de la app",
+    "title": "Hecha por una sola persona.",
     "body": "Favilla la hace un solo desarrollador, por la misma razón por la que tú la usarías. Sin equipo, sin financiación. Si le regala a tu pequeño una buena noche más con tu voz dentro, ya ha hecho su trabajo."
   },
   "footer": {

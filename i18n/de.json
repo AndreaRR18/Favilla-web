@@ -34,7 +34,7 @@
     "h1a": "Die Geschichte von heute Abend, in deiner Stimme.",
     "h1b": "Auch wenn du nicht dabei sein kannst.",
     "lead": "Nimm eine Gutenachtgeschichte einmal mit deiner eigenen Stimme auf. An den Abenden, an denen du spät arbeitest oder unterwegs bist, schläft dein Kind trotzdem mit dir ein: keine KI, keine synthetische Stimme.",
-    "badge_label": "iPhone · Benötigt iOS 26",
+    "badge_label": "iPhone · Benötigt iOS 26.5",
     "badge_cta": "Bald im App Store",
     "badge_note": "Kostenlos · keine Werbung · kein Tracking — und das bleibt so",
     "cta_anchor": "So funktioniert es"
@@ -71,7 +71,7 @@
     "lib_b3": "Jede Geschichte neu aufnehmen oder teilen",
     "cat_tag": "Geschichten zum Lesen",
     "cat_name": "Katalog",
-    "cat_body": "Klassische Geschichten, bereit, mit deiner Stimme gelesen zu werden: Perrault, die Grimms, Andersen, Äsop und weitere, aus zwölf Erzähltraditionen.",
+    "cat_body": "Klassische Geschichten, bereit, mit deiner Stimme gelesen zu werden: Perrault, die Grimms, Andersen, Äsop und weitere, aus dreizehn Erzähltraditionen.",
     "cat_b1": "46 Geschichten, und mehr mit jedem Update",
     "cat_b2": "Nach Titel suchen, nach Land filtern",
     "cat_b3": "Geschichten als gelesen oder aufgenommen markieren",
@@ -130,8 +130,8 @@
     "cta_hint": "In einer Zeile: Wir können deine Aufnahmen nicht sehen, weil wir sie nie erhalten."
   },
   "indie": {
-    "kicker": "Von einer Person gemacht",
-    "title": "Von einem Elternteil gebaut, nicht von einer Firma",
+    "kicker": "Hinter der App",
+    "title": "Von einer einzigen Person gemacht.",
     "body": "Favilla macht ein einzelner Entwickler, aus demselben Grund, aus dem du sie nutzen würdest. Kein Team, kein Geld von außen. Wenn sie deinem Kind eine gute Nacht mehr mit deiner Stimme darin schenkt, hat sie ihren Job getan."
   },
   "footer": {
