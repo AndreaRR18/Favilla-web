@@ -266,6 +266,32 @@ def check_privacy(rel, root, errors):
         errors.append(f"{rel}: #who shows {len(who.all(cls='row'))} rows, expected name and email only")
 
 
+FAQ = ("coming", "account", "where", "mic", "sum", "locked", "sync", "share", "long", "ai",
+       "languages", "fireflies", "forest", "delete")
+
+
+def check_support(rel, root, errors, config):
+    """Support: the parents' real questions, one contact address, the policy."""
+    faq = root.all("div", cls="faq")
+    items = faq[0].all("details") if faq else []
+    if len(items) != len(FAQ):
+        errors.append(f"{rel}: {len(items)} FAQ entries, expected {len(FAQ)}")
+    for item in items:
+        summary = item.all("summary")
+        if not summary or not summary[0].get_text().strip():
+            errors.append(f"{rel}: a FAQ entry has no question")
+    kv = root.all(cls="kv")
+    mails = [a for a in (kv[0].all("a") if kv else []) if (a.attrs.get("href") or "").startswith("mailto:")]
+    todos = kv[0].all("mark", cls="todo") if kv else []
+    if config.get("contact_email") and len(mails) != 1:
+        errors.append(f"{rel}: the contact card needs one mailto: link")
+    if not config.get("contact_email") and not todos:
+        errors.append(f"{rel}: the contact card must show the missing email placeholder")
+    links = [a for a in root.all("a", cls="row link") if a.attrs.get("href") == "privacy.html"]
+    if len(links) != 1:
+        errors.append(f"{rel}: support needs one a.row.link to privacy.html")
+
+
 def check_no_phone(rel, root, errors):
     for node in root.all("a"):
         if (node.attrs.get("href") or "").startswith("tel:"):
@@ -284,6 +310,8 @@ def check_pages(out, config):
             check_home(rel, root, errors)
         if os.path.basename(rel) == "privacy.html":
             check_privacy(rel, root, errors)
+        if os.path.basename(rel) == "support.html":
+            check_support(rel, root, errors, config)
     return errors
 
 
