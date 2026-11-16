@@ -96,11 +96,12 @@ copy.
 | `app_store_url` | **Empty while the app is not on the App Store** — the download badge renders as "coming soon". Paste the App Store URL here at launch and it becomes a live download button everywhere. |
 | `contact_email` | Used in the footer, support page and privacy policy. Until set, a red placeholder is rendered so the gap is impossible to miss. |
 | `publisher_name` | "Published by" in the footer and privacy policy. Same placeholder behavior. |
+| `github_url` | Footer source link. |
 
 Only the publisher's name and email ever appear on the site. The address and
-phone number App Store Connect asks for (EU trader status) live in
-`RELEASE.md`, never in `config.json` or a template.
-| `github_url` | Footer source link. |
+phone number App Store Connect asks for (EU trader status) go only into App
+Store Connect: this repo is public, so never write them in `RELEASE.md`,
+`config.json` or a template.
 
 If the GitHub repo is renamed (owner action, e.g. to `Favilla-web`), update
 both `base_url` and `github_url` in one commit.

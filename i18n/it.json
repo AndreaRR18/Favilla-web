@@ -41,7 +41,7 @@
     "s1_t": "Registra",
     "s1_b": "Scegli una fiaba dal catalogo, o raccontane una tua. Un tocco e stai già leggendo piano, mentre il telefono ascolta: nessuna impostazione, niente tra te e la storia.",
     "s2_t": "Resta tua",
-    "s2_b": "La storia si salva sul tuo dispositivo e, se lo usi, nel tuo iCloud privato. Arriva sugli altri dispositivi della famiglia, e da nessun'altra parte.",
+    "s2_b": "La storia si salva sul tuo dispositivo e, se lo usi, nel tuo iCloud privato. Arriva sugli altri tuoi dispositivi con lo stesso account Apple, e da nessun'altra parte.",
     "s3_t": "Buonanotte",
     "s3_b": "Nella camera buia la storia va avanti da sola. Lo schermo resta fioco, non chiede di essere toccato, e un timer può far spegnere tutto con calma."
   },
@@ -137,7 +137,7 @@
     "faq_coming_q": "Quando possiamo iniziare a usarla?",
     "faq_coming_a": "Favilla sta arrivando sull'App Store. Il link comparirà qui il giorno in cui arriva.",
     "faq_account_q": "Serve un account?",
-    "faq_account_a": "No. L'app gira interamente sul tuo dispositivo, e le registrazioni seguono la famiglia tramite il tuo iCloud. Non c'è nessun account da creare, e non ci sarà mai.",
+    "faq_account_a": "No. L'app gira interamente sul tuo dispositivo, e le registrazioni arrivano sugli altri tuoi dispositivi tramite il tuo iCloud. Non c'è nessun account da creare.",
     "faq_where_q": "Dove finiscono le registrazioni?",
     "faq_where_a": "Sul tuo dispositivo, e nel tuo iCloud privato quando sei connesso. Non arrivano mai a un server Favilla, perché server Favilla non esistono.",
     "faq_mic_q": "Il microfono è negato, o l'app non registra",
@@ -161,7 +161,7 @@
     "faq_forest_q": "La Foresta non mostra niente",
     "faq_forest_a": "La foresta richiede l'aspetto scuro e l'interruttore Lucciole attivo in Info.",
     "faq_delete_q": "Come elimino qualcosa?",
-    "faq_delete_a": "Elimina una storia nell'app (scorrila via nella Libreria) e sparisce ovunque: dal dispositivo e, tramite iCloud, dagli altri dispositivi della famiglia. Disinstallare cancella la parte locale; iCloud si gestisce da Impostazioni › il tuo nome › iCloud › Gestisci spazio.",
+    "faq_delete_a": "Elimina una storia nell'app (scorrila via nella Libreria) e sparisce dal dispositivo e, tramite iCloud, dagli altri tuoi dispositivi. Un backup iCloud del dispositivo fatto prima può contenerla ancora finché non viene sostituito. Disinstallare cancella la parte locale; iCloud si gestisce da Impostazioni › il tuo nome › iCloud › Gestisci spazio.",
     "contact_t": "Scrivici",
     "contact_email": "Email",
     "contact_hint": "Rispondiamo entro pochi giorni, di solito dopo la nanna."

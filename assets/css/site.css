@@ -43,6 +43,7 @@
   /* glass: a lift of TextPrimary under the GlassTint, blurred */
   --glass: linear-gradient(rgb(28 20 16 / 0.25), rgb(28 20 16 / 0.25)), rgb(250 247 242 / 0.09);
   --glass-edge: rgba(255, 244, 224, 0.10);
+  --tab-selected-solid: #100B08;
   --tab-selected: rgb(16 11 8 / 0.78);
   --hover: rgb(196 146 63 / 0.06);
   --shadow: 0 10px 30px rgb(10 7 5 / 0.45);
@@ -71,13 +72,45 @@
   --coral-dim: #C42828;
   --line: rgba(28, 20, 16, 0.09);
   --line-strong: rgba(28, 20, 16, 0.16);
-  --glass: rgb(240 235 227 / 0.86);
-  --glass-edge: rgba(28, 20, 16, 0.08);
-  --tab-selected: rgb(232 226 217 / 0.95);
+  --glass: rgb(250 247 242 / 0.88);
+  --glass-edge: rgba(28, 20, 16, 0.12);
+  /* the selected tab is parchment, so #8A6428 on it stays at 5:1 */
+  --tab-selected-solid: #FAF7F2;
+  --tab-selected: rgb(250 247 242 / 0.96);
   --hover: rgb(196 146 63 / 0.08);
   --shadow: 0 10px 30px rgb(28 20 16 / 0.12);
   color-scheme: light;
 }
+
+/* Without JavaScript nothing sets data-theme: follow the OS. Keep these
+   tokens identical to the block above. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg-primary: #FAF7F2;
+    --bg-secondary: #F0EBE3;
+    --bg-sunken: #E8E2D9;
+    --text-primary: #1C1410;
+    --text-secondary: #4A3F35;
+    --text-tertiary: #8A7D72;
+    --accent-text: #8A6428;
+    --coral: #E03030;
+    --coral-dim: #C42828;
+    --line: rgba(28, 20, 16, 0.09);
+    --line-strong: rgba(28, 20, 16, 0.16);
+    --glass: rgb(250 247 242 / 0.88);
+    --glass-edge: rgba(28, 20, 16, 0.12);
+    /* the selected tab is parchment, so #8A6428 on it stays at 5:1 */
+    --tab-selected-solid: #FAF7F2;
+    --tab-selected: rgb(250 247 242 / 0.96);
+    --hover: rgb(196 146 63 / 0.08);
+    --shadow: 0 10px 30px rgb(28 20 16 / 0.12);
+    color-scheme: light;
+  }
+  :root:not([data-theme]) .sky,
+  :root:not([data-theme]) .cursor-fly { display: none; }
+}
+/* the theme button needs JavaScript; without it the OS decides */
+:root:not([data-theme]) .theme-toggle { display: none; }
 
 /* The phone and the forest always show the app's night UI. */
 .phone, .forest {
@@ -89,7 +122,8 @@
 
 /* ── base ──────────────────────────────────────────────────────────────── */
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+/* scroll-padding keeps a focused element clear of the floating tab bar */
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-bottom: 110px; }
 body {
   margin: 0;
   background: var(--bg-primary);
@@ -106,7 +140,7 @@ p { margin: 0; }
 a { color: var(--accent-text); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 ::selection { background: var(--accent); color: var(--bg-primary); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; border-radius: 8px; }
 [id] { scroll-margin-top: 24px; }
 .nowrap { white-space: nowrap; }
 
@@ -211,7 +245,7 @@ header, main, footer { position: relative; z-index: 1; }
 }
 .round {
   width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
-  color: var(--accent); cursor: pointer; padding: 0;
+  color: var(--accent-text); cursor: pointer; padding: 0;
   font-family: var(--font-label); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em;
 }
 .round .icon { width: 20px; height: 20px; }
@@ -415,7 +449,7 @@ a.row:hover { background: var(--hover); text-decoration: none; }
 .tab span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tab .icon { width: 24px; height: 24px; }
 .tab .fly-sm { margin: 9px 0 10px; }
-.tab[aria-current="page"] { background: var(--tab-selected); color: var(--accent); }
+.tab[aria-current="page"] { background: var(--tab-selected); color: var(--accent-text); }
 
 /* ── small screens ─────────────────────────────────────────────────────── */
 @media (max-width: 860px) {

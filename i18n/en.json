@@ -41,7 +41,7 @@
     "s1_t": "Record",
     "s1_b": "Choose a tale from the catalog, or tell one of your own. One tap and you're reading softly while the phone listens — no setup, nothing between you and the story.",
     "s2_t": "It stays yours",
-    "s2_b": "The story is saved on your device, and in your private iCloud if you use it. It appears on the other family devices, and nowhere else.",
+    "s2_b": "The story is saved on your device, and in your private iCloud if you use it. It reaches your other devices on the same Apple Account, and nowhere else.",
     "s3_t": "Goodnight",
     "s3_b": "In the dark room, the story plays by itself. The screen stays dim and nothing asks to be touched, and a sleep timer can let it all fade away."
   },
@@ -137,7 +137,7 @@
     "faq_coming_q": "When can we start using Favilla?",
     "faq_coming_a": "Favilla is on its way to the App Store. The link will appear on this page the day it arrives.",
     "faq_account_q": "Does it need an account?",
-    "faq_account_a": "No. The app runs entirely on your device, and your recordings follow your family through your own iCloud. There is no account to create — there never will be.",
+    "faq_account_a": "No. The app runs entirely on your device, and your recordings reach your other devices through your own iCloud. There is no account to create.",
     "faq_where_q": "Where do the recordings live?",
     "faq_where_a": "On your device first, and in your private iCloud when you're signed in. They never reach a Favilla server, because there are none.",
     "faq_mic_q": "The microphone is denied, or the app doesn't record",
@@ -161,7 +161,7 @@
     "faq_forest_q": "The Forest shows nothing",
     "faq_forest_a": "The forest needs the dark appearance, and the Fireflies switch in About turned on.",
     "faq_delete_q": "How do I delete something?",
-    "faq_delete_a": "Delete a story in the app (swipe it away in the Library) and it disappears everywhere — from the device and, through iCloud, from the family's other devices. Uninstalling clears the local side; iCloud lives in Settings › your name › iCloud › Manage Storage.",
+    "faq_delete_a": "Delete a story in the app (swipe it away in the Library) and it disappears from the device and, through iCloud, from your other devices. An older iCloud Backup of the device may still hold it until that backup is replaced. Uninstalling clears the local side; iCloud lives in Settings › your name › iCloud › Manage Storage.",
     "contact_t": "Write to us",
     "contact_email": "Email",
     "contact_hint": "We answer within a few days, usually after bedtime."

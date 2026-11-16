@@ -41,7 +41,7 @@
     "s1_t": "Enregistrez",
     "s1_b": "Choisissez un conte du catalogue, ou racontez le vôtre. Un geste, et vous lisez doucement pendant que le téléphone écoute : aucun réglage, rien entre vous et l'histoire.",
     "s2_t": "Cela reste à vous",
-    "s2_b": "L'histoire se garde sur votre appareil et, si vous l'utilisez, dans votre iCloud personnel. Elle arrive sur les autres appareils de la famille, et nulle part ailleurs.",
+    "s2_b": "L'histoire se garde sur votre appareil et, si vous l'utilisez, dans votre iCloud personnel. Elle arrive sur vos autres appareils avec le même compte Apple, et nulle part ailleurs.",
     "s3_t": "Bonne nuit",
     "s3_b": "Dans la chambre sombre, l'histoire continue toute seule. L'écran reste discret, ne demande rien, et une minuterie peut tout éteindre en douceur."
   },
@@ -137,7 +137,7 @@
     "faq_coming_q": "Quand pourra-t-on commencer ?",
     "faq_coming_a": "Favilla arrive sur l'App Store. Le lien apparaîtra ici le jour venu.",
     "faq_account_q": "Faut-il un compte ?",
-    "faq_account_a": "Non. L'app tourne entièrement sur votre appareil, et les enregistrements suivent la famille via votre iCloud. Il n'y a aucun compte à créer — et il n'y en aura jamais.",
+    "faq_account_a": "Non. L'app tourne entièrement sur votre appareil, et les enregistrements arrivent sur vos autres appareils via votre iCloud. Il n'y a aucun compte à créer.",
     "faq_where_q": "Où vont les enregistrements ?",
     "faq_where_a": "Sur votre appareil d'abord, et dans votre iCloud personnel quand vous êtes connecté. Ils n'arrivent jamais sur un serveur Favilla, parce qu'il n'y en a pas.",
     "faq_mic_q": "Le micro est refusé, ou l'app n'enregistre pas",
@@ -161,7 +161,7 @@
     "faq_forest_q": "La Forêt n'affiche rien",
     "faq_forest_a": "La forêt demande l'apparence sombre et l'interrupteur Lucioles activé dans À propos.",
     "faq_delete_q": "Comment supprimer quelque chose ?",
-    "faq_delete_a": "Supprimez une histoire dans l'app (faites-la glisser dans la Bibliothèque) et elle disparaît partout : de l'appareil et, via iCloud, des autres appareils de la famille. Désinstaller efface la partie locale ; iCloud se gère dans Réglages › votre nom › iCloud › Gérer le stockage.",
+    "faq_delete_a": "Supprimez une histoire dans l'app (faites-la glisser dans la Bibliothèque) et elle disparaît de l'appareil et, via iCloud, de vos autres appareils. Une sauvegarde iCloud plus ancienne de l'appareil peut encore la contenir jusqu'à ce qu'elle soit remplacée. Désinstaller efface la partie locale ; iCloud se gère dans Réglages › votre nom › iCloud › Gérer le stockage.",
     "contact_t": "Écrivez-nous",
     "contact_email": "E-mail",
     "contact_hint": "Nous répondons sous quelques jours, en général après le dodo."

@@ -41,7 +41,7 @@
     "s1_t": "Graba",
     "s1_b": "Elige un cuento del catálogo o cuenta uno tuyo. Un toque, y ya estás leyendo suave mientras el teléfono escucha: sin ajustes, nada entre tú y el cuento.",
     "s2_t": "Se queda tuyo",
-    "s2_b": "El cuento se guarda en tu dispositivo y, si lo usas, en tu iCloud privado. Aparece en los otros dispositivos de la familia, y en ningún sitio más.",
+    "s2_b": "El cuento se guarda en tu dispositivo y, si lo usas, en tu iCloud privado. Aparece en tus otros dispositivos con la misma cuenta de Apple, y en ningún sitio más.",
     "s3_t": "Buenas noches",
     "s3_b": "En la habitación oscura el cuento sigue solo. La pantalla queda tenue, no pide toques, y un temporizador puede apagar todo con calma."
   },
@@ -137,7 +137,7 @@
     "faq_coming_q": "¿Cuándo podemos empezar a usarla?",
     "faq_coming_a": "Favilla está llegando al App Store. El enlace aparecerá aquí el día que llegue.",
     "faq_account_q": "¿Hace falta una cuenta?",
-    "faq_account_a": "No. La app funciona por completo en tu dispositivo, y las grabaciones siguen a la familia a través de tu iCloud. No hay cuenta que crear — y nunca la habrá.",
+    "faq_account_a": "No. La app funciona por completo en tu dispositivo, y las grabaciones llegan a tus otros dispositivos a través de tu iCloud. No hay cuenta que crear.",
     "faq_where_q": "¿Dónde quedan las grabaciones?",
     "faq_where_a": "En tu dispositivo primero, y en tu iCloud privado cuando tienes sesión iniciada. Nunca llegan a un servidor de Favilla, porque no existen.",
     "faq_mic_q": "El micrófono está denegado, o la app no graba",
@@ -161,7 +161,7 @@
     "faq_forest_q": "El Bosque no muestra nada",
     "faq_forest_a": "El bosque necesita el aspecto oscuro y el interruptor Luciérnagas activado en Información.",
     "faq_delete_q": "¿Cómo borro algo?",
-    "faq_delete_a": "Borra un cuento en la app (deslízalo en la Biblioteca) y desaparece de todas partes: del dispositivo y, vía iCloud, de los demás. Desinstalar limpia lo local; iCloud se gestiona en Ajustes › tu nombre › iCloud › Gestionar almacenamiento.",
+    "faq_delete_a": "Borra un cuento en la app (deslízalo en la Biblioteca) y desaparece del dispositivo y, vía iCloud, de tus otros dispositivos. Una copia de seguridad de iCloud anterior del dispositivo puede contenerlo todavía hasta que se sustituya. Desinstalar limpia lo local; iCloud se gestiona en Ajustes › tu nombre › iCloud › Gestionar almacenamiento.",
     "contact_t": "Escríbenos",
     "contact_email": "Correo",
     "contact_hint": "Respondemos en unos días, normalmente después de dormir."

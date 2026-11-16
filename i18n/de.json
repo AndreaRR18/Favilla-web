@@ -41,7 +41,7 @@
     "s1_t": "Aufnehmen",
     "s1_b": "Wähl eine Geschichte aus dem Katalog, oder erzähl eine eigene. Ein Tipp, und du liest leise, während das Telefon zuhört: keine Einstellungen, nichts zwischen dir und der Geschichte.",
     "s2_t": "Sie bleibt dein",
-    "s2_b": "Die Geschichte wird auf deinem Gerät gespeichert und, wenn du es nutzt, in deinem privaten iCloud. Sie erscheint auf den anderen Geräten der Familie — und nirgends sonst.",
+    "s2_b": "Die Geschichte wird auf deinem Gerät gespeichert und, wenn du es nutzt, in deinem privaten iCloud. Sie erscheint auf deinen anderen Geräten mit demselben Apple-Konto, und nirgends sonst.",
     "s3_t": "Gute Nacht",
     "s3_b": "Im dunklen Zimmer läuft die Geschichte von allein. Der Bildschirm bleibt dunkel, verlangt nichts, und ein Timer lässt alles sanft ausklingen."
   },
@@ -137,7 +137,7 @@
     "faq_coming_q": "Wann können wir loslegen?",
     "faq_coming_a": "Favilla ist auf dem Weg in den App Store. Der Link erscheint hier, sobald es so weit ist.",
     "faq_account_q": "Braucht es ein Konto?",
-    "faq_account_a": "Nein. Die App läuft ganz auf deinem Gerät, und die Aufnahmen folgen der Familie über dein iCloud. Ein Konto gibt es nicht — und wird es nie geben.",
+    "faq_account_a": "Nein. Die App läuft ganz auf deinem Gerät, und die Aufnahmen kommen über dein iCloud auf deine anderen Geräte. Ein Konto gibt es nicht.",
     "faq_where_q": "Wo landen die Aufnahmen?",
     "faq_where_a": "Zuerst auf deinem Gerät, und in deinem privaten iCloud, wenn du angemeldet bist. Zu einem Favilla-Server kommen sie nie, weil es keinen gibt.",
     "faq_mic_q": "Das Mikrofon ist verweigert, oder die App nimmt nicht auf",
@@ -161,7 +161,7 @@
     "faq_forest_q": "Der Wald zeigt nichts",
     "faq_forest_a": "Der Wald braucht das dunkle Erscheinungsbild und den Schalter Glühwürmchen unter Info.",
     "faq_delete_q": "Wie lösche ich etwas?",
-    "faq_delete_a": "Lösch eine Geschichte in der App (in der Bibliothek zur Seite wischen), und sie verschwindet überall: vom Gerät und über iCloud von den anderen Geräten der Familie. Deinstallieren räumt das Lokale weg; iCloud verwaltest du unter Einstellungen › dein Name › iCloud › Speicher verwalten.",
+    "faq_delete_a": "Lösch eine Geschichte in der App (in der Bibliothek zur Seite wischen), und sie verschwindet vom Gerät und über iCloud von deinen anderen Geräten. Ein älteres iCloud-Backup des Geräts kann sie noch enthalten, bis es ersetzt wird. Deinstallieren räumt das Lokale weg; iCloud verwaltest du unter Einstellungen › dein Name › iCloud › Speicher verwalten.",
     "contact_t": "Schreib uns",
     "contact_email": "E-Mail",
     "contact_hint": "Wir antworten innerhalb weniger Tage, meist nach dem Einschlafen."

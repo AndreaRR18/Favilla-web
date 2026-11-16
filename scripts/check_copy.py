@@ -38,6 +38,15 @@ FORBIDDEN = {
     "sparkle": ["✨", "⭐", "🌟", "💫"],
 }
 
+# iCloud's private database syncs one Apple Account, not "the family".
+SYNC_OVERCLAIM = ["family devices", "follow your family", "family's other devices",
+                  "dispositivi della famiglia", "seguono la famiglia",
+                  "appareils de la famille", "suivent la famille",
+                  "geräte der familie", "folgen der familie",
+                  "dispositivos de la familia", "siguen a la familia"]
+# deleting can't reach an old iCloud Backup, so never "everywhere"
+DELETE_OVERCLAIM = ["everywhere", "ovunque", "partout", "überall", "todas partes"]
+
 # The privacy page must not describe features 1.0 doesn't ship.
 PRIVACY_FORBIDDEN = ["every sound", "ogni suono", "chaque son", "jeder klang", "cada sonido"]
 PRIVACY_FORBIDDEN_RE = [r"\bimport(ed|s)?\b", r"\bimporti\b", r"\bimportez\b", r"\bimportierst\b", r"\bimportas\b"]
@@ -63,6 +72,13 @@ def check_strings(strings):
                 for needle in needles:
                     if needle.lower() in low:
                         errors.append(f"{lang}: {key}: {rule} ({needle!r})")
+            for needle in SYNC_OVERCLAIM:
+                if needle in low:
+                    errors.append(f"{lang}: {key}: sync reaches one Apple Account, not the family ({needle!r})")
+            if key == "support_page.faq_delete_a":
+                for needle in DELETE_OVERCLAIM:
+                    if needle in low:
+                        errors.append(f"{lang}: {key}: deletion is not 'everywhere' (iCloud Backup) ({needle!r})")
             if key.startswith("privacy_page."):
                 for needle in PRIVACY_FORBIDDEN:
                     if needle in low:
@@ -206,6 +222,8 @@ def check_shell(rel, root, errors):
 def check_globals(strings, errors):
     """Rules that are not about one page."""
     from build import THEME_SCRIPT
+    if 'catch(e){d.dataset.theme="dark"' in THEME_SCRIPT:
+        errors.append("THEME_SCRIPT: blocked storage forces dark instead of following the OS")
     if 'classList.add("js")' in THEME_SCRIPT or "fv-ready" in THEME_SCRIPT:
         errors.append("THEME_SCRIPT still hides content until site.js runs (js / fv-ready)")
     for lang in LANGS:
@@ -214,6 +232,7 @@ def check_globals(strings, errors):
                 errors.append(f"{lang}: {key}: tab label longer than {TAB_LABEL_MAX} characters")
     with open(os.path.join(ROOT, "assets", "css", "site.css"), encoding="utf-8") as fh:
         css = fh.read()
+    check_css(css, errors)
     calm = re.findall(r"@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{(.*?)\n\}", css, re.S)
     calm_text = "\n".join(calm)
     for selector in CALM_SELECTORS:
@@ -312,6 +331,56 @@ def check_no_phone(rel, root, errors):
             errors.append(f"{rel}: a phone number is on the site (owner: email only)")
 
 
+def _hex(value):
+    value = value.strip().lstrip("#")
+    return tuple(int(value[i:i + 2], 16) / 255 for i in (0, 2, 4))
+
+
+def _luminance(rgb):
+    lin = [c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4 for c in rgb]
+    return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2]
+
+
+def contrast(fg, bg):
+    a, b = sorted((_luminance(_hex(fg)), _luminance(_hex(bg))), reverse=True)
+    return (a + 0.05) / (b + 0.05)
+
+
+def _block(css, selector):
+    match = re.search(re.escape(selector) + r"\s*\{(.*?)\n\}", css, re.S)
+    return match.group(1) if match else ""
+
+
+def _token(block, name):
+    match = re.search(re.escape(name) + r":\s*(#[0-9A-Fa-f]{6})", block)
+    return match.group(1) if match else None
+
+
+def check_css(css, errors):
+    """Theme and accessibility rules that live in site.css."""
+    # without JavaScript nothing sets data-theme: the OS must still choose
+    fallback = re.search(r"@media\s*\(prefers-color-scheme:\s*light\)\s*\{\s*:root:not\(\[data-theme\]\)", css)
+    if not fallback:
+        errors.append("site.css: no prefers-color-scheme fallback for :root:not([data-theme]) (JS off ignores the OS)")
+    # amber labels on the light glass must stay readable
+    light = _block(css, ':root[data-theme="light"]')
+    amber, selected, base = _token(light, "--accent-text"), _token(light, "--tab-selected-solid"), _token(light, "--bg-primary")
+    if not (amber and selected and base):
+        errors.append("site.css: light theme needs --accent-text, --tab-selected-solid and --bg-primary as hex")
+    else:
+        for name, bg in (("active tab", selected), ("page", base)):
+            if contrast(amber, bg) < 4.5:
+                errors.append(f"site.css: light amber text on {name} is {contrast(amber, bg):.2f}:1, under 4.5:1")
+    for selector in ('.tab[aria-current="page"]', ".round", ":focus-visible"):
+        rule = re.search(r"^" + re.escape(selector) + r"\s*\{([^}]*)\}", css, re.M)
+        color = re.search(r"(?:^|[;\s])(?:color|outline)\s*:[^;]*", rule.group(1)) if rule else None
+        if not color or "var(--accent-text)" not in color.group(0):
+            errors.append(f"site.css: {selector} must draw in var(--accent-text) (AA in light mode)")
+    # the fixed tab bar must not hide the focused element
+    if not re.search(r"scroll-padding-bottom\s*:", css):
+        errors.append("site.css: no scroll-padding-bottom, so keyboard focus can hide under the tab bar")
+
+
 def check_pages(out, config):
     """Structure rules on the built HTML."""
     errors = []
@@ -341,6 +410,11 @@ def check_release(out, base_url):
         text = fh.read()
     if "{{" in text:
         errors.append("RELEASE.md: unresolved {{placeholder}}")
+    # the repo is public: address and phone go only into App Store Connect
+    if re.search(r"^\|\s*(Indirizzo|Telefono|Address|Phone)\b", text, re.M | re.I):
+        errors.append("RELEASE.md: has a table row for address or phone (public repo)")
+    if "## Da verificare nella build dell'app" not in text:
+        errors.append("RELEASE.md: no section listing the app changes the site describes as shipped")
     urls = set(re.findall(re.escape(base_url) + r"[^\s)>`|]*", text))
     for url in sorted(urls):
         rel = url[len(base_url):]

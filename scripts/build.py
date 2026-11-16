@@ -53,7 +53,7 @@ THEME_SCRIPT = (
     '(function(){var d=document.documentElement;'
     'try{var c=localStorage.getItem("fv-theme");'
     'var l=c==="light"||(!c&&matchMedia("(prefers-color-scheme: light)").matches);'
-    'd.dataset.theme=l?"light":"dark";}catch(e){d.dataset.theme="dark";}})();'
+    'd.dataset.theme=l?"light":"dark";}catch(e){d.dataset.theme=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}})();'
 )
 THEME_SCRIPT_HASH = base64.b64encode(hashlib.sha256(THEME_SCRIPT.encode("utf-8")).digest()).decode("ascii")
 

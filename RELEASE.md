@@ -22,14 +22,13 @@ L'inglese è alla radice, le altre lingue in una sottocartella.
 
 ## Titolare e stato di "trader" UE
 
-Apple li chiede per lo stato di trader (Digital Services Act) e li mostra nella pagina dell'app. Sul sito compaiono solo il nome del titolare e l'email: indirizzo e telefono restano qui.
+Apple li chiede per lo stato di trader (Digital Services Act) e li mostra nella pagina dell'app. Sul sito compaiono solo il nome del titolare e l'email.
 
-| Campo | Valore |
-|---|---|
-| Titolare (nome o ragione sociale) | `[TITOLARE]` — da mettere anche in `config.json` → `publisher_name` |
-| Indirizzo | `[INDIRIZZO]` |
-| Email | strofa.tarsali.3p@icloud.com (già in `config.json`) |
-| Telefono | `[TELEFONO]` |
+**Questo repo è pubblico:** indirizzo e telefono si scrivono solo in App Store Connect, mai in questo file né in `config.json`.
+
+- Titolare (nome o ragione sociale): da mettere in `config.json` → `publisher_name` e in App Store Connect.
+- Email: strofa.tarsali.3p@icloud.com (già in `config.json`).
+- Indirizzo e telefono: solo in App Store Connect.
 
 ## App Privacy (etichetta)
 
@@ -67,10 +66,20 @@ to sync the user's private database between their own devices. The
 developer receives no tokens and no data.
 ```
 
+## Da verificare nella build dell'app
+
+Il sito descrive come già presenti queste modifiche dell'app, che il 16 novembre 2026 erano ancora **non committate** sul branch `release-readiness` del repo iOS. Vanno committate e incluse nella build che si invia; se una manca, la risposta di supporto o la nota per il reviewer che la cita va cambiata prima di pubblicare.
+
+| Comportamento | File nell'app | Dove lo cita il sito |
+|---|---|---|
+| Controllo parentale prima di "Apri Impostazioni" quando il microfono è negato | `App/Sources/App/Recording/RecordingScreen.swift`, `AppTabViewStore*.swift` | supporto `faq_mic_a`, `faq_sum_a`; note per il reviewer |
+| Limiti di 100 caratteri (titolo) e 20.000 (testo) | `Library/Sources/StoryCatalog/CreateStoryStore.swift` | supporto `faq_long_a` |
+| Pulizia dei file audio orfani dopo una cancellazione su un altro dispositivo | `Favilla/FavillaApp.swift` | privacy `retain_p`, supporto `faq_delete_a` |
+
 ## Prima di inviare
 
 1. Compilare `config.json` → `publisher_name`. La build mostra un segnaposto rosso finché è vuoto, e rifiuta un `app_store_url` senza titolare ed email.
-2. Compilare i campi `[...]` di questo file in App Store Connect (titolare, indirizzo, telefono, copyright).
+2. In App Store Connect: titolare, copyright, e indirizzo e telefono per lo stato di trader (solo lì, non in questo repo).
 3. Far rileggere a un madrelingua i testi FR, DE ed ES di privacy e supporto.
 4. Rileggere la privacy contro la build che si invia: se cambia un comportamento (acquisti, suoni per dormire, analisi), cambiano insieme la pagina, la data in testa e l'etichetta App Privacy.
 5. Per un'app Kids conviene una rilettura finale di un legale: queste pagine non sono un parere legale.
