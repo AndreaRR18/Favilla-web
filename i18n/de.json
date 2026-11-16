@@ -1,7 +1,6 @@
 {
   "meta": {
     "html_lang": "de",
-    "og_locale": "de_DE",
     "site_name": "Favilla",
     "title_index": "Favilla — Gutenachtgeschichten mit deiner Stimme",
     "desc_index": "Nimm die Geschichte von heute Abend mit deiner eigenen Stimme auf. Favilla hebt sie für die Abende auf, an denen du nicht da sein kannst: keine KI, keine synthetischen Stimmen, und nichts verlässt deine Familie.",
@@ -12,9 +11,7 @@
     "title_404": "Seite nicht gefunden — Favilla"
   },
   "brand": {
-    "name": "Favilla",
-    "tagline": "Sie bleibt an, auch wenn du nicht da bist.",
-    "tagline_short": "Geschichten in deiner Stimme"
+    "name": "Favilla"
   },
   "a11y": {
     "skip": "Zum Inhalt springen",
@@ -84,13 +81,8 @@
     "body": "Favilla macht ein einzelner Entwickler, aus demselben Grund, aus dem du sie nutzen würdest. Kein Team, kein Geld von außen. Wenn sie deinem Kind eine gute Nacht mehr mit deiner Stimme darin schenkt, hat sie ihren Job getan."
   },
   "footer": {
-    "pages": "Seiten",
-    "languages": "Sprachen",
-    "contact": "Kontakt",
     "paper": "Favilla ist ein unabhängiges Produkt und steht in keiner Verbindung zu Apple Inc.",
     "trademark": "iCloud ist eine Marke von Apple Inc.",
-    "published": "Herausgegeben von",
-    "updated_prefix": "Website aktualisiert",
     "privacy_link": "Datenschutzerklärung",
     "support_link": "Hilfe"
   },

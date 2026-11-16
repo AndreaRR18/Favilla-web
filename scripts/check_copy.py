@@ -332,8 +332,27 @@ def check_pages(out, config):
 
 
 def check_release(out, base_url):
-    """RELEASE.md must only point at pages the build produces (Task 7)."""
-    return []
+    """RELEASE.md: a privacy and a support URL per language, all of them real."""
+    errors = []
+    path = os.path.join(ROOT, "RELEASE.md")
+    if not os.path.isfile(path):
+        return ["RELEASE.md is missing (App Store Connect values)"]
+    with open(path, encoding="utf-8") as fh:
+        text = fh.read()
+    if "{{" in text:
+        errors.append("RELEASE.md: unresolved {{placeholder}}")
+    urls = set(re.findall(re.escape(base_url) + r"[^\s)>`|]*", text))
+    for url in sorted(urls):
+        rel = url[len(base_url):]
+        target = os.path.join(out, rel, "index.html") if rel == "" or rel.endswith("/") else os.path.join(out, rel)
+        if not os.path.isfile(target):
+            errors.append(f"RELEASE.md: {url} has no page behind it")
+    for lang in LANGS:
+        prefix = "" if lang == "en" else f"{lang}/"
+        for page in ("privacy.html", "support.html"):
+            if base_url + prefix + page not in urls:
+                errors.append(f"RELEASE.md: missing {base_url + prefix + page}")
+    return errors
 
 
 def main():

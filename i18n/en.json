@@ -1,7 +1,6 @@
 {
   "meta": {
     "html_lang": "en",
-    "og_locale": "en_US",
     "site_name": "Favilla",
     "title_index": "Favilla — bedtime stories in your voice",
     "desc_index": "Record tonight's story in your own voice. Favilla keeps it for the nights you can't be there: no AI, no synthetic voices, and nothing that leaves your family.",
@@ -12,9 +11,7 @@
     "title_404": "Page not found — Favilla"
   },
   "brand": {
-    "name": "Favilla",
-    "tagline": "Stays lit, even when you can't be there.",
-    "tagline_short": "Stories in your voice"
+    "name": "Favilla"
   },
   "a11y": {
     "skip": "Skip to content",
@@ -84,13 +81,8 @@
     "body": "Favilla is made by a single developer, for the same reason you would use it. No team, no funding, no committee. If it gives your child one more goodnight with your voice in it, it has done its job."
   },
   "footer": {
-    "pages": "Pages",
-    "languages": "Languages",
-    "contact": "Contact",
     "paper": "Favilla is an independent product and is not affiliated with Apple Inc.",
     "trademark": "iCloud is a trademark of Apple Inc.",
-    "published": "Published by",
-    "updated_prefix": "Site last updated",
     "privacy_link": "Privacy policy",
     "support_link": "Support"
   },

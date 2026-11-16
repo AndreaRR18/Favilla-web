@@ -1,7 +1,6 @@
 {
   "meta": {
     "html_lang": "fr",
-    "og_locale": "fr_FR",
     "site_name": "Favilla",
     "title_index": "Favilla — des histoires du soir avec votre voix",
     "desc_index": "Enregistrez l'histoire de ce soir avec votre voix. Favilla la garde pour les soirs où vous ne pouvez pas être là : pas d'IA, pas de voix de synthèse, et rien qui quitte votre famille.",
@@ -12,9 +11,7 @@
     "title_404": "Page introuvable — Favilla"
   },
   "brand": {
-    "name": "Favilla",
-    "tagline": "Elle reste allumée, même quand vous n'êtes pas là.",
-    "tagline_short": "Des histoires avec votre voix"
+    "name": "Favilla"
   },
   "a11y": {
     "skip": "Aller au contenu",
@@ -84,13 +81,8 @@
     "body": "Favilla est faite par un seul développeur, pour la même raison pour laquelle vous l'utiliseriez. Pas d'équipe, pas de financement. Si elle offre à votre enfant un soir de plus avec votre voix dedans, son travail est fait."
   },
   "footer": {
-    "pages": "Pages",
-    "languages": "Langues",
-    "contact": "Contact",
     "paper": "Favilla est un produit indépendant, sans lien avec Apple Inc.",
     "trademark": "iCloud est une marque d'Apple Inc.",
-    "published": "Publié par",
-    "updated_prefix": "Site mis à jour",
     "privacy_link": "Politique de confidentialité",
     "support_link": "Assistance"
   },

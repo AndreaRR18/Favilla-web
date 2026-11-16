@@ -1,7 +1,6 @@
 {
   "meta": {
     "html_lang": "it",
-    "og_locale": "it_IT",
     "site_name": "Favilla",
     "title_index": "Favilla — storie della buonanotte con la tua voce",
     "desc_index": "Registra la storia di stasera con la tua voce. Favilla la conserva per le sere in cui non puoi esserci: niente IA, niente voci sintetiche, e nulla che esca dalla tua famiglia.",
@@ -12,9 +11,7 @@
     "title_404": "Pagina non trovata — Favilla"
   },
   "brand": {
-    "name": "Favilla",
-    "tagline": "Resta accesa anche quando non ci sei.",
-    "tagline_short": "Storie con la tua voce"
+    "name": "Favilla"
   },
   "a11y": {
     "skip": "Vai al contenuto",
@@ -84,13 +81,8 @@
     "body": "Favilla è fatta da un solo sviluppatore, per lo stesso motivo per cui la useresti tu. Nessun team, nessun finanziamento. Se regala a tuo figlio una buonanotte in più con dentro la tua voce, ha fatto il suo lavoro."
   },
   "footer": {
-    "pages": "Pagine",
-    "languages": "Lingue",
-    "contact": "Contatti",
     "paper": "Favilla è un prodotto indipendente e non è affiliato ad Apple Inc.",
     "trademark": "iCloud è un marchio di Apple Inc.",
-    "published": "Pubblicato da",
-    "updated_prefix": "Sito aggiornato",
     "privacy_link": "Informativa sulla privacy",
     "support_link": "Supporto"
   },

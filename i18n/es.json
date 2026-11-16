@@ -1,7 +1,6 @@
 {
   "meta": {
     "html_lang": "es",
-    "og_locale": "es_ES",
     "site_name": "Favilla",
     "title_index": "Favilla — cuentos para dormir con tu voz",
     "desc_index": "Graba el cuento de esta noche con tu propia voz. Favilla lo guarda para las noches en que no puedes estar: sin IA, sin voces sintéticas, y sin nada que salga de tu familia.",
@@ -12,9 +11,7 @@
     "title_404": "Página no encontrada — Favilla"
   },
   "brand": {
-    "name": "Favilla",
-    "tagline": "Sigue encendida, aunque no estés.",
-    "tagline_short": "Cuentos con tu voz"
+    "name": "Favilla"
   },
   "a11y": {
     "skip": "Ir al contenido",
@@ -84,13 +81,8 @@
     "body": "Favilla la hace un solo desarrollador, por la misma razón por la que tú la usarías. Sin equipo, sin financiación. Si le regala a tu pequeño una buena noche más con tu voz dentro, ya ha hecho su trabajo."
   },
   "footer": {
-    "pages": "Páginas",
-    "languages": "Idiomas",
-    "contact": "Contacto",
     "paper": "Favilla es un producto independiente y no está afiliado a Apple Inc.",
     "trademark": "iCloud es una marca de Apple Inc.",
-    "published": "Publicado por",
-    "updated_prefix": "Sitio actualizado",
     "privacy_link": "Política de privacidad",
     "support_link": "Ayuda"
   },

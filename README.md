@@ -22,6 +22,8 @@ i18n/{en,it,fr,de,es}.json   every string on the site, per language
 assets/               css/js/img, copied verbatim
 scripts/build.py      renderer: templates x 5 languages -> _site
 scripts/check_site.py post-build gate: links, assets, #fragments, CSP rules
+scripts/check_copy.py post-build gate: brand and store copy rules, page structure, RELEASE.md
+RELEASE.md            App Store Connect values (not published)
 .github/workflows/deploy.yml   build + check + deploy to GitHub Pages
 config.json           site-level facts (see below)
 ```
@@ -42,6 +44,7 @@ config.json           site-level facts (see below)
    ```bash
    python3 scripts/build.py --out _site
    python3 scripts/check_site.py _site
+   python3 scripts/check_copy.py _site
    python3 -m http.server -d _site 8000
    ```
 
@@ -93,6 +96,10 @@ copy.
 | `app_store_url` | **Empty while the app is not on the App Store** — the download badge renders as "coming soon". Paste the App Store URL here at launch and it becomes a live download button everywhere. |
 | `contact_email` | Used in the footer, support page and privacy policy. Until set, a red placeholder is rendered so the gap is impossible to miss. |
 | `publisher_name` | "Published by" in the footer and privacy policy. Same placeholder behavior. |
+
+Only the publisher's name and email ever appear on the site. The address and
+phone number App Store Connect asks for (EU trader status) live in
+`RELEASE.md`, never in `config.json` or a template.
 | `github_url` | Footer source link. |
 
 If the GitHub repo is renamed (owner action, e.g. to `Favilla-web`), update
@@ -100,28 +107,39 @@ both `base_url` and `github_url` in one commit.
 
 ## Design
 
-A port of the app's `DesignSystem` package (see the Favilla iOS repo):
+Every page is drawn with the app's own components (`DesignSystem` in the
+Favilla iOS repo), so the site reads as the app at desk size, not as a
+landing page. The approved design is
+`docs/superpowers/specs/2026-11-16-app-faithful-restyle-design.md`.
 
-- Dark-first night theme and the warm parchment light theme, with a
-  sun/moon toggle in the top-right nav. The choice is remembered per browser
-  (`localStorage`), defaults to the OS preference, and ships with an inline
-  `<head>` script so there is no flash of wrong theme. The phone mockups
-  always stay dark — they show the app's bedtime UI.
-- Fireflies: a few ambient ones drift in the night sky (dark theme only),
-  one follows the cursor like a curious companion (mouse/trackpad only, not
-  on touch screens). Under Reduce Motion it behaves like the app's fireflies:
-  it stays, but holds still beside the pointer — no wandering, sparks or
-  blinking — and the ambient sky ones are not drawn. Like the app's forest,
-  fireflies only come out at night: in light mode there is no companion.
-- If `site.js` is blocked or fails, the inline head script un-hides the
-  scroll-reveal content after 3 s; with JavaScript off it's never hidden.
-- A visible language strip (`EN IT FR DE ES`) sits in the top-right corner of
-  every page, with the current language highlighted.
-- The phone mocks mirror real screens: the Library (amber mic, large title,
-  search pill, play tiles) and the Forest tab at night, drawn from the app's
-  `Color+Forest.swift` palette. Only describe features the shipped build has:
-  Sleep Sounds is behind a feature flag that is off, so the site doesn't
-  advertise it; folders and tags have no UI yet.
+- **Screens, not sections.** Each page opens with a large left-aligned title.
+  Content sits in inset grouped lists: a 44 pt amber tile (`StoryEmojiView`),
+  a serif title, a secondary line, a chevron only on rows that link. Long
+  text reads like a group footer. No uppercase kickers, no card grids, no
+  scroll-reveal.
+- **Glass.** Round 44 px buttons (language, theme), a back capsule on pushed
+  pages, the App Store capsule, and the floating glass tab bar at the bottom
+  (Favilla, Catalog, Privacy, Support) at every width.
+- **The home** shows the app's recording screen in a phone, the catalog as
+  the app lists it (each tale's emoji flattened to an amber silhouette), the
+  Forest as a night card in its own palette (`Color+Forest.swift`), the four
+  tabs, and "Privacy in 30 seconds". The phone and the forest stay dark in
+  both themes.
+- **The firefly** (a core and three flat rings, as `FireflyField` draws it)
+  is the dot on the wordmark's i, the Favilla tab, a few lights in the night
+  sky and the companion that follows the cursor (mouse/trackpad, dark theme
+  only; under Reduce Motion it holds still and nothing else moves).
+- **Themes.** Dark-first, with the warm parchment light theme. The choice is
+  remembered per browser and set by the inline head script before first
+  paint. Nothing waits for JavaScript: with scripts blocked the site follows
+  the OS theme and every page is complete; the FAQ is plain `<details>`.
+- **Contrast.** `TextTertiary` fails AA as small text, so subtitles, notes and
+  captions use `TextSecondary`; tertiary is kept for chevrons and other
+  non-text. Light mode also uses dark lines and `#8A6428` amber text (see the
+  brand skill).
+- Only describe what the shipped build has: Sleep Sounds and purchases are
+  off, folders and tags have no UI, and the site makes no promise about the
+  price. `check_copy.py` enforces the wording.
 - Favicons, the touch icon and the social share image are generated at build
   time in `scripts/build.py` (stdlib PNG writer, no image dependencies); the
   SVG favicon in `assets/img/favicon.svg` mirrors the same drawing.
@@ -130,7 +148,8 @@ A port of the app's `DesignSystem` package (see the Favilla iOS repo):
 
 `.github/workflows/deploy.yml` runs on every push and pull request to `main`:
 
-checkout → `scripts/build.py` → `scripts/check_site.py` → upload artifact →
+checkout → `scripts/build.py` → `scripts/check_site.py` → `scripts/check_copy.py` →
+upload artifact →
 deploy-pages. Pull requests only build and check; only `main` deploys.
 GitHub Pages is configured with source `workflow` (Settings → Pages), HTTPS
 enforced.
@@ -163,29 +182,26 @@ from the inside:
 
 ## Going live
 
-The site is already published. Before the App Store submission:
+The site is already published. Everything App Store Connect needs — URLs per
+language, App Privacy answers, Kids notes, reviewer notes, the "before you
+submit" and "launch day" lists — is in `RELEASE.md`. In short:
 
-1. **Fill `config.json`**: `contact_email` and `publisher_name`. Until then
-   every page shows a red placeholder, and the build *refuses* to publish an
-   App Store link without them (review requires reachable contact details).
-2. **App Store Connect** → App Information / version page:
-   - Privacy Policy URL: `https://andrearr18.github.io/Favilla-web/privacy.html`
-   - Support URL: `https://andrearr18.github.io/Favilla-web/support.html`
-   - Marketing URL (optional): `https://andrearr18.github.io/Favilla-web/`
+1. **Fill `config.json` → `publisher_name`** (`contact_email` is set). Until
+   then the pages show a red placeholder, and the build *refuses* an App Store
+   link without both.
+2. **`app_store_url` stays empty until the app is approved.** The badge reads
+   "coming soon" meanwhile.
 3. **In the app**: set `LegalLinks.privacyPolicy` (iOS repo,
-   `Library/Sources/About/LegalLinks.swift`) to the same privacy URL.
-4. **Re-read the privacy policy** against the build you submit (it still lists
-   imported sleep sounds, a feature that is hidden in 1.0).
-5. **On launch day**: paste the App Store URL into `app_store_url`, push. The
-   badge becomes a live download link in all five languages; the support
-   FAQ's "coming soon" answer should be updated in the same commit.
-6. Optional: a custom domain (add a `CNAME` to the build output and update
+   `Library/Sources/About/LegalLinks.swift`) to the privacy URL.
+4. **On launch day**: paste the App Store URL into `app_store_url`, replace the
+   "when can we use it" support answer in five languages, push.
+5. Optional: a custom domain (add a `CNAME` to the build output and update
    `base_url`). Keep the github.io URLs working until App Store Connect points
    at the new ones.
 
 ## Catalog showcase data
 
-The landing page's catalog showcase (six tales with localized titles, authors
+The home's catalog list (six tales with emoji, localized titles, authors
 and countries) is embedded in `scripts/build.py` as `TALES`; the six stories
 match the iOS app's `catalog-seed.json`.
 

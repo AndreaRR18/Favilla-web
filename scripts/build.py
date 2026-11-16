@@ -8,6 +8,8 @@ Design tokens mirror the iOS DesignSystem package (dark-first, warm amber,
 #C4923F on #100B08). The mark is the Favilla symbol exactly as the app draws
 it in FireflyField: a bright dot with three flat concentric rings. Never
 sparkle icons (they read as "AI") and never flames or insect drawings.
+Pages are drawn with the app's components (grouped lists, glass tab bar,
+the recording phone, the night forest); see README "Design".
 Run:  python3 scripts/build.py [--out _site] [--dry-run]
 """
 
@@ -156,14 +158,6 @@ def load_i18n():
 # SVG fragments
 
 
-def svg(inner, size=24, cls=""):
-    klass = f' class="{cls}"' if cls else ""
-    return (
-        f'<svg{klass} viewBox="0 0 24 24" width="{size}" height="{size}" '
-        f'fill="currentColor" aria-hidden="true">{inner}</svg>'
-    )
-
-
 # The Favilla mark, exactly as the app draws a firefly in FireflyField.swift:
 # a bright core with three flat concentric rings — radii 6x, 4x, 2.5x the core
 # at 0.08, 0.14, 0.24 of its alpha, stacked over each other.
@@ -178,38 +172,6 @@ def _mark_svg(cx, cy, core_r, cls="", color=""):
         f'<circle cx="{cx}" cy="{cy}" r="{core_r * scale:.1f}" fill="currentColor" fill-opacity="{weight}"/>'
         for scale, weight in MARK_RINGS)
     return f'<g{klass}>{rings}<circle cx="{cx}" cy="{cy}" r="{core_r:.1f}" fill="currentColor"/></g>'
-
-
-def _firefly_glyph():
-    """The Favilla mark, small: a bright dot with three flat concentric rings."""
-    return svg(_mark_svg(12, 12, 1.9), size=26)
-
-
-def mascot_svg():
-    """The hero mark: the dot-and-rings symbol, large, with two smaller ones
-    drifting nearby — the same drawing the app uses for its fireflies."""
-    return (
-        '<svg class="mascot" viewBox="0 0 160 160" width="150" height="150" aria-hidden="true">'
-        + _mark_svg(80, 80, 13)
-        + _mark_svg(34, 122, 4, cls="mascot-spark")
-        + _mark_svg(128, 40, 3.2, cls="mascot-spark")
-        + _mark_svg(122, 130, 2.6, cls="mascot-spark")
-        + '</svg>'
-    )
-
-
-GLYPHS = {
-    "moon": lambda: svg('<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/>'),
-    "heart": lambda: svg('<path d="M12 21s-7.5-4.6-9.3-9A5.4 5.4 0 0 1 12 6.2 5.4 5.4 0 0 1 21.3 12c-1.8 4.4-9.3 9-9.3 9Z"/>'),
-    "play": lambda: svg('<path d="M8 5v14l11-7L8 5Z"/>', size=14),
-    "arrow": lambda: svg('<path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'),
-    "firefly": _firefly_glyph,
-    "brand": _firefly_glyph,
-    "sun": lambda: svg('<circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.6v2.4M12 19v2.4M2.6 12h2.4M19 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>', size=16),
-    "search": lambda: svg('<path d="M10.5 3a7.5 7.5 0 1 0 4.55 13.45l4.75 4.75 1.4-1.4-4.75-4.75A7.5 7.5 0 0 0 10.5 3Zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z"/>', size=15),
-    "mic": lambda: svg('<path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17v3.5M9 20.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>', size=16),
-}
-
 
 
 # Icons for rows, tiles and the tab bar, drawn after the SF Symbols the app
@@ -287,41 +249,6 @@ FOREST = {
 }
 FOREST_STARS = [(22, 40), (58, 92), (96, 30), (128, 76), (150, 18), (176, 120), (214, 52), (246, 98),
                 (38, 150), (88, 174), (122, 138), (232, 162), (70, 60), (190, 82), (260, 30), (12, 110)]
-# (x, y, core radius, palette index)
-FOREST_FLIES = [(40, 110, 2.6, 2), (92, 196, 3.2, 1), (150, 150, 2.4, 4), (212, 222, 3.0, 3),
-                (60, 300, 3.4, 0), (122, 262, 2.8, 2), (236, 318, 2.6, 1), (176, 348, 3.4, 4),
-                (28, 396, 2.8, 3), (104, 404, 3.0, 0), (250, 410, 2.4, 2), (64, 214, 2.2, 0)]
-
-
-def _pines(base_y, height, width, count, offset, color):
-    step = 276 / (count - 1)
-    trees = []
-    for i in range(count):
-        cx = offset + i * step
-        h = height * (0.78 + 0.22 * ((i * 37) % 10) / 10)
-        trees.append(f'M{cx - width / 2:.1f} {base_y}L{cx:.1f} {base_y - h:.1f}L{cx + width / 2:.1f} {base_y}Z')
-    return f'<path fill="{color}" d="{"".join(trees)}"/>'
-
-
-def forest_svg():
-    f = FOREST
-    stars = "".join(f'<circle cx="{x}" cy="{y}" r="0.9"/>' for x, y in FOREST_STARS)
-    flies = "".join(_mark_svg(x, y, r, cls="forest-fly", color=f["palette"][hue])
-                    for x, y, r, hue in FOREST_FLIES)
-    return (
-        '<svg class="forest" viewBox="0 0 276 470" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
-        f'<defs><linearGradient id="forest-sky" x1="0" y1="0" x2="0" y2="1">'
-        f'<stop offset="0" stop-color="{f["sky_top"]}"/><stop offset="0.62" stop-color="{f["sky_bottom"]}"/></linearGradient></defs>'
-        '<rect width="276" height="470" fill="url(#forest-sky)"/>'
-        f'<g fill="{f["moon"]}" opacity="0.7">{stars}</g>'
-        f'<g fill="{f["moon"]}"><circle cx="212" cy="150" r="38" fill-opacity="0.05"/>'
-        '<circle cx="212" cy="150" r="26" fill-opacity="0.08"/><circle cx="212" cy="150" r="14" fill-opacity="0.9"/></g>'
-        + _pines(340, 120, 46, 9, -10, f["far"])
-        + _pines(392, 150, 58, 7, 6, f["mid"])
-        + _pines(470, 190, 74, 6, -18, f["near"])
-        + f'<rect y="440" width="276" height="30" fill="{f["near"]}"/>'
-        + flies + '</svg>')
-
 
 
 def _ridge(base, peaks, height, color, width=720, depth=380):
@@ -387,38 +314,6 @@ def recording_phone_html(i18n):
         f'<span class="ctl"><b class="pause">{icon("pause")}</b>{esc(i18n["hero.rec_pause"])}</span>'
         f'<span class="ctl"><b class="stop"><i></i></b>{esc(i18n["hero.rec_finish"])}</span>'
         '</span></div></div>')
-
-def wave_svg(uid, amps, width, height):
-    """A centered, mirrored waveform of rounded bars with one vertical gradient."""
-    count = len(amps)
-    slot = width / count
-    bar_w = slot * 0.52
-    bars = []
-    for index, amp in enumerate(amps):
-        bar_h = max(height * amp, 5)
-        x = index * slot + (slot - bar_w) / 2
-        y = (height - bar_h) / 2
-        r = min(bar_w / 2, 4)
-        bars.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{bar_h:.1f}" rx="{r:.1f}"/>')
-    grad = (
-        f'<linearGradient id="w-{uid}" x1="0" y1="0" x2="0" y2="1">'
-        '<stop offset="0" stop-color="#C4923F" stop-opacity="0.9"/>'
-        '<stop offset="0.5" stop-color="#C4923F"/>'
-        '<stop offset="1" stop-color="#C4923F" stop-opacity="0.9"/></linearGradient>'
-    )
-    return (
-        f'<svg class="wave" viewBox="0 0 {width} {height}" preserveAspectRatio="xMidYMid meet" '
-        f'aria-hidden="true">{grad}'
-        f'<g fill="url(#w-{uid})">{"".join(bars)}</g></svg>'
-    )
-
-
-HERO_AMPS = [0.28, 0.42, 0.6, 0.38, 0.72, 0.5, 0.86, 0.64, 0.46, 0.9, 0.58, 0.34,
-             0.7, 0.92, 0.52, 0.4, 0.66, 0.3, 0.78, 0.48, 0.36, 0.62, 0.44, 0.8, 0.32, 0.5]
-
-
-# ---------------------------------------------------------------------------
-# PNG writer (stdlib only)
 
 
 def png_bytes(width, height, pixel):
@@ -708,11 +603,8 @@ def build(config, strings, out_dir):
     assets_dest = os.path.join(out_dir, "assets")
     if os.path.isdir(assets_src):
         shutil.copytree(assets_src, assets_dest, dirs_exist_ok=True)
-    drawings = {f"{name}_glyph": glyph() for name, glyph in GLYPHS.items()}
-    drawings.update(hero_wave=wave_svg("hero", HERO_AMPS, 800, 120),
-                    mascot_svg=mascot_svg(), forest_svg=forest_svg(),
-                    forest_card=forest_card_svg())
-    drawings.update({f"icon_{name}": icon(name) for name in ICONS})
+    drawings = {f"icon_{name}": icon(name) for name in ICONS}
+    drawings["forest_card"] = forest_card_svg()
     drawings["icon_chev"] = icon("chevron", "chev")
     versions = {
         "v_css": file_version(os.path.join(assets_src, "css", "site.css")),
@@ -809,15 +701,12 @@ def build(config, strings, out_dir):
                 f'<a lang="{other}" hreflang="{other}" href="{page_set_url(base_url, page if page != "404" else "index", other)}" '
                 f'title="{esc(LANG_NAMES[other])}"' + (' aria-current="true"' if other == lang else "") + f'>{LANG_CODES[other]}</a>'
                 for other in LANGS)
-            ctx["footer_home"] = "index.html"
             ctx["footer_privacy"] = "privacy.html"
             ctx["footer_support"] = "support.html"
             ctx["footer_email"] = email_html
             ctx["footer_github"] = config["github_url"]
             ctx["footer_gh_label"] = "GitHub"
-            ctx["footer_published_note"] = ctx["footer.published"]
             ctx["footer_publisher"] = publisher_html
-            ctx["privacy_cta_hint"] = ctx["privacy.cta_hint"]
 
             # legacy: 404 is served for any missing path under any prefix,
             # so root-relative absolute URLs are the only safe links there.
@@ -831,11 +720,10 @@ def build(config, strings, out_dir):
                 ctx["back_link"] = back_link_html(i18n, path_prefix)
                 ctx["tab_bar"] = tab_bar_html(i18n, "", path_prefix, path_prefix + "privacy.html",
                                               path_prefix + "support.html")
-                ctx["footer_home"] = path_prefix
                 ctx["footer_privacy"] = path_prefix + "privacy.html"
                 ctx["footer_support"] = path_prefix + "support.html"
 
-            # glyphs, the hero wave, the mascot and the forest (built once)
+            # icons and the forest card (built once)
             ctx.update(drawings)
 
             # store badge
@@ -856,7 +744,6 @@ def build(config, strings, out_dir):
             # support page contact card
             ctx["contact_email"] = email_html
 
-            ctx["privacy_href"] = "privacy.html"
 
             page_html = render(templates[page], ctx, page, lang)
             target = os.path.join(out_dir, prefix, filename)
