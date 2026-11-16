@@ -30,29 +30,17 @@
     "support": "Supporto"
   },
   "hero": {
-    "kicker": "Per l'ultima luce del giorno",
     "h1a": "La storia di stasera, con la tua voce.",
     "h1b": "Anche quando tu non puoi esserci.",
     "lead": "Registra una storia della buonanotte con la tua voce, una volta sola. Le sere in cui torni tardi o sei in viaggio, tuo figlio si addormenta comunque con te: niente IA, nessuna voce sintetica.",
     "badge_label": "iPhone · Richiede iOS 26.5",
     "badge_cta": "In arrivo sull'App Store",
     "badge_note": "Gratis · niente pubblicità · nessun tracciamento",
-    "cta_anchor": "Come funziona"
-  },
-  "idea": {
-    "kicker": "Perché Favilla",
-    "title": "La piccola luce che resta accesa.",
-    "body": "In italiano, una favilla è una piccola scintilla — la brace che continua a brillare quando il fuoco si è calmato. Una storia registrata è proprio questo: la tua voce, familiare e comunque tua, in una serata in cui non puoi stare nella stanza.",
-    "p1_t": "La tua voce, esattamente",
-    "p1_b": "Favilla non ha IA né sintesi vocale. Ciò che suona nel buio è ciò che hai registrato, e nient'altro.",
-    "p2_t": "Resta in famiglia",
-    "p2_b": "Le registrazioni vivono sui tuoi dispositivi e nel tuo iCloud privato. Favilla non ha server, e non vede nulla.",
-    "p3_t": "Un'app onesta",
-    "p3_b": "Una registrazione non sostituisce la buonanotte con te. Porta la tua voce nelle sere in cui sei lontano — e aspetta le sere in cui ci sei."
+    "rec_pause": "Pausa",
+    "rec_finish": "Fine"
   },
   "how": {
-    "kicker": "Come funziona",
-    "title": "Dalla tua voce alla loro buonanotte",
+    "title": "Come funziona",
     "s1_t": "Registra",
     "s1_b": "Scegli una fiaba dal catalogo, o raccontane una tua. Un tocco e stai già leggendo piano, mentre il telefono ascolta: nessuna impostazione, niente tra te e la storia.",
     "s2_t": "Resta tua",
@@ -60,77 +48,38 @@
     "s3_t": "Buonanotte",
     "s3_b": "Nella camera buia la storia va avanti da sola. Lo schermo resta fioco, non chiede di essere toccato, e un timer può far spegnere tutto con calma."
   },
-  "tabs": {
-    "kicker": "Dentro l'app",
-    "title": "Tutto ciò che serve alla nanna — e niente di più",
-    "lib_tag": "Le tue storie",
-    "lib_name": "Libreria",
-    "lib_body": "Ogni storia che hai raccontato, tenuta come uno scaffale tutto tuo. La ritrovi dal titolo, e le preferite restano a portata di mano.",
-    "lib_b1": "Ricerca per titolo, preferiti in vista",
-    "lib_b2": "Un lettore fatto per il buio, non per la scrivania",
-    "lib_b3": "Registra di nuovo o condividi ogni storia",
-    "cat_tag": "Fiabe da leggere",
-    "cat_name": "Catalogo",
-    "cat_body": "Le storie classiche, pronte per essere lette con la tua voce: Perrault, i Grimm, Andersen, Esopo e altri ancora, da tredici tradizioni narrative.",
-    "cat_b1": "46 fiabe, e altre a ogni aggiornamento",
-    "cat_b2": "Cerca per titolo, filtra per paese",
-    "cat_b3": "Segna le fiabe come lette o già registrate",
-    "frs_tag": "Per un minuto di quiete",
-    "frs_name": "Foresta",
-    "frs_body": "Una piccola foresta notturna piena di lucciole. Ne tocchi una e si accende con un suono di campanella. Scuoti il telefono e si raccolgono tutte al centro, poi tornano a vagare.",
-    "frs_b1": "Lucciole di cinque colori, solo di notte",
-    "frs_b2": "Toccane una: si illumina e suona una campanella",
-    "frs_b3": "Un solo interruttore in Info le spegne tutte",
-    "abt_tag": "Il perché",
-    "abt_name": "Info",
-    "abt_body": "Perché esiste Favilla, raccontato in modo semplice: cosa dice la ricerca sulla voce di un genitore, e cosa promette l'app.",
-    "abt_b1": "La scienza, in parole semplici",
-    "abt_b2": "L'introduzione di nuovo, quando vuoi",
-    "abt_b3": "Lingua e privacy, spiegate bene"
-  },
-  "mock": {
-    "search": "Cerca per titolo",
-    "forest_title": "Foresta di lucciole"
-  },
-  "showcase": {
-    "kicker": "Il catalogo",
-    "title": "I classici, pronti per la tua voce",
-    "caption": "{author} · {country}, {year}",
+  "catalog": {
+    "title": "Catalogo",
+    "caption": "{country} · {author}, {year}",
     "footnote": "…e altre 40, in cinque lingue. Una di queste potrebbe essere la storia di stasera."
   },
-  "personas": {
-    "kicker": "Per due persone",
-    "title": "Per chi racconta, e per chi si addormenta",
-    "parent_t": "Tu, che registri",
-    "parent_b": "Stanco, magari ancora in cucina con una mano libera. L'app non si mette in mezzo: scegli, leggi, fatto. Non chiede più tempo di quello che hai.",
-    "child_t": "Il bambino, che ascolta",
-    "child_b": "Sotto le coperte, in una camera buia, una voce che conosce bene. Lo schermo resta fioco, e la storia non chiede nemmeno un tocco."
+  "forest": {
+    "title": "Foresta",
+    "body": "Una piccola foresta notturna piena di lucciole. Ne tocchi una e si accende con un suono di campanella. Scuoti il telefono e si raccolgono tutte al centro, poi tornano a vagare."
   },
-  "science": {
-    "kicker": "Perché conta",
-    "title": "La voce di un genitore funziona davvero",
-    "i1_t": "Una voce che conoscono",
-    "i1_b": "I bambini riconoscono la voce di un genitore da meno di un secondo di audio, e quella voce da sola li calma: quasi come essere presi in braccio.",
-    "i2_t": "La stessa voce, ogni sera",
-    "i2_b": "Una routine della buonanotte costante aiuta i bambini ad addormentarsi prima e a svegliarsi meno spesso. Spesso già nelle prime notti.",
-    "footnote": "Sintesi in parole semplici di ricerche pubblicate sulla voce dei genitori e sulle routine della nanna. I riferimenti completi sono nell'app, nella sezione Info."
+  "app": {
+    "title": "Dentro l'app",
+    "stories_t": "Storie",
+    "stories_b": "Ogni storia che hai raccontato, tenuta come uno scaffale tutto tuo, con un lettore fatto per il buio, non per la scrivania.",
+    "catalog_t": "Catalogo",
+    "catalog_b": "46 fiabe classiche pronte per la tua voce. Cerca per titolo, filtra per paese, segna quelle lette o già registrate.",
+    "forest_t": "Foresta",
+    "forest_b": "Lucciole di cinque colori, solo di notte. Un solo interruttore in Info le spegne tutte.",
+    "about_t": "Info",
+    "about_b": "Perché esiste Favilla, raccontato in modo semplice: cosa dice la ricerca sulla voce di un genitore, e cosa promette l'app."
   },
   "privacy": {
-    "kicker": "Privacy",
-    "title": "Resta in famiglia",
-    "s1_t": "Niente IA, niente voci sintetiche",
-    "s1_b": "La voce che tuo figlio sente è quella che hai registrato tu, e nient'altro.",
-    "s2_t": "Solo i tuoi dispositivi",
-    "s2_b": "Le storie vivono sul tuo dispositivo e nel tuo iCloud privato. Favilla non ha alcun server.",
-    "s3_t": "Nessun tracciamento, nessuna pubblicità",
-    "s3_b": "Nessuna analisi, nessun identificativo, nessuno che guardi una buonanotte.",
-    "s4_t": "Funziona senza rete",
-    "s4_b": "Connessione assente? L'app non se ne accorge: tutto accade sul dispositivo.",
+    "title": "Privacy in 30 secondi",
+    "sum_account_t": "Nessun account",
+    "sum_account_b": "Niente da creare, niente da cancellare.",
+    "sum_tracking_t": "Nessun tracciamento",
+    "sum_tracking_b": "Niente pubblicità, analisi o codice di terzi.",
+    "sum_yours_t": "Le registrazioni restano tue",
+    "sum_yours_b": "Sul tuo dispositivo e nel tuo iCloud privato, dove noi non arriviamo.",
     "cta": "Leggi l'informativa completa",
     "cta_hint": "In una riga: non possiamo vedere le tue registrazioni, perché non le riceviamo mai."
   },
   "indie": {
-    "kicker": "Dietro l'app",
     "title": "Fatta da una sola persona.",
     "body": "Favilla è fatta da un solo sviluppatore, per lo stesso motivo per cui la useresti tu. Nessun team, nessun finanziamento. Se regala a tuo figlio una buonanotte in più con dentro la tua voce, ha fatto il suo lavoro."
   },

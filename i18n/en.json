@@ -30,29 +30,17 @@
     "support": "Support"
   },
   "hero": {
-    "kicker": "For the last light of the day",
     "h1a": "Tonight's story, in your voice.",
     "h1b": "Even when you can't be there.",
     "lead": "Record a bedtime story in your own voice, and keep it for the nights you can't be there. No AI and no synthetic voices: your child falls asleep to you, every night.",
     "badge_label": "iPhone · Requires iOS 26.5",
     "badge_cta": "Coming soon to the App Store",
     "badge_note": "Free · no ads · no tracking",
-    "cta_anchor": "How it works"
-  },
-  "idea": {
-    "kicker": "Why Favilla",
-    "title": "The little light that stays on.",
-    "body": "In Italian, a favilla is a small spark — the ember that keeps glowing after the fire has settled. A recorded story is just that: your voice, still familiar and still yours, on a night when you can't be in the room.",
-    "p1_t": "Your voice, exactly",
-    "p1_b": "Favilla has no AI and no text-to-speech. What plays in the dark is what you recorded, nothing else.",
-    "p2_t": "It stays in the family",
-    "p2_b": "Your recordings live on your devices and in your private iCloud. Favilla has no servers, and it sees nothing.",
-    "p3_t": "An honest app",
-    "p3_b": "A recording doesn't replace bedtime with you. It carries your voice on the nights you're away — and waits for the nights you're there."
+    "rec_pause": "Pause",
+    "rec_finish": "Finish"
   },
   "how": {
-    "kicker": "How it works",
-    "title": "From your voice to their goodnight",
+    "title": "How it works",
     "s1_t": "Record",
     "s1_b": "Choose a tale from the catalog, or tell one of your own. One tap and you're reading softly while the phone listens — no setup, nothing between you and the story.",
     "s2_t": "It stays yours",
@@ -60,77 +48,38 @@
     "s3_t": "Goodnight",
     "s3_b": "In the dark room, the story plays by itself. The screen stays dim and nothing asks to be touched, and a sleep timer can let it all fade away."
   },
-  "tabs": {
-    "kicker": "Inside the app",
-    "title": "Everything a goodnight needs — nothing it doesn't",
-    "lib_tag": "Your stories",
-    "lib_name": "Library",
-    "lib_body": "Every story you have told, kept like a small bookshelf. Find one by its title, and keep the favourites close.",
-    "lib_b1": "Search by title, favourites at a glance",
-    "lib_b2": "A player made for the dark, not for the desk",
-    "lib_b3": "Re-record or share any story",
-    "cat_tag": "Tales to read",
-    "cat_name": "Catalog",
-    "cat_body": "Classic tales ready to be read in your voice — Perrault, the Grimms, Andersen, Aesop and friends, from thirteen storytelling traditions.",
-    "cat_b1": "46 tales, and more with every update",
-    "cat_b2": "Search by title, filter by country",
-    "cat_b3": "Mark tales as read or as recorded",
-    "frs_tag": "For a quiet minute",
-    "frs_name": "Forest",
-    "frs_body": "A small night forest full of fireflies. Touch one and it lights up with a soft bell. Shake the phone and they all gather in the middle, then drift off again.",
-    "frs_b1": "Fireflies in five colours, out only at night",
-    "frs_b2": "Touch one: it glows and rings a bell",
-    "frs_b3": "One switch in About turns them all off",
-    "abt_tag": "The why",
-    "abt_name": "About",
-    "abt_body": "Why Favilla exists, told plainly: what the research says about a parent's voice, and what the app promises.",
-    "abt_b1": "The science, in plain words",
-    "abt_b2": "The intro again, whenever you like",
-    "abt_b3": "Language and privacy, explained"
-  },
-  "mock": {
-    "search": "Search by title",
-    "forest_title": "Firefly forest"
-  },
-  "showcase": {
-    "kicker": "The catalog",
-    "title": "The classics, ready for your voice",
-    "caption": "{author} · {country}, {year}",
+  "catalog": {
+    "title": "Catalog",
+    "caption": "{country} · {author}, {year}",
     "footnote": "…and 40 more, in five languages. One of them could be tonight's story."
   },
-  "personas": {
-    "kicker": "Who it's for",
-    "title": "For the one telling, and the one falling asleep",
-    "parent_t": "You, recording",
-    "parent_b": "Tired, maybe still in the kitchen with one hand free. The app stays out of the way: choose, read, done. It never asks for more time than you have.",
-    "child_t": "Your child, listening",
-    "child_b": "Under the blanket, in a dark room, a voice that knows them. The screen keeps itself dim and the story needs no taps at all."
+  "forest": {
+    "title": "Forest",
+    "body": "A small night forest full of fireflies. Touch one and it lights up with a soft bell. Shake the phone and they all gather in the middle, then drift off again."
   },
-  "science": {
-    "kicker": "Why it matters",
-    "title": "A parent's voice does a quiet thing",
-    "i1_t": "A voice they know",
-    "i1_b": "Children recognize their parent's voice from less than a second of audio, and that voice alone can calm them — almost like being held.",
-    "i2_t": "The same voice, every night",
-    "i2_b": "A steady bedtime ritual helps children fall asleep sooner and wake less often, often within the first few nights.",
-    "footnote": "Plain-language summaries of published research on hearing a parent's voice and on bedtime rituals. The full citations live in the app, under About."
+  "app": {
+    "title": "Inside the app",
+    "stories_t": "Stories",
+    "stories_b": "Every story you have told, kept like a shelf of your own, with a player made for the dark, not the desk.",
+    "catalog_t": "Catalog",
+    "catalog_b": "46 classic tales ready for your voice. Search by title, filter by country, mark the ones you have read or recorded.",
+    "forest_t": "Forest",
+    "forest_b": "Fireflies in five colours, out only at night. One switch in About turns them all off.",
+    "about_t": "About",
+    "about_b": "Why Favilla exists, told plainly: what the research says about a parent's voice, and what the app promises."
   },
   "privacy": {
-    "kicker": "Privacy",
-    "title": "It stays in the family",
-    "s1_t": "No AI, no synthetic voices",
-    "s1_b": "The voice your child hears is the one you recorded, and nothing else.",
-    "s2_t": "Only your devices",
-    "s2_b": "Stories live on your device and in your private iCloud. Favilla has no servers at all.",
-    "s3_t": "No tracking, no ads",
-    "s3_b": "No analytics, no identifiers, nothing watching a goodnight.",
-    "s4_t": "Works offline",
-    "s4_b": "No connection? The app doesn't mind. Everything happens on the device.",
+    "title": "Privacy in 30 seconds",
+    "sum_account_t": "No account",
+    "sum_account_b": "Nothing to create, nothing to delete.",
+    "sum_tracking_t": "No tracking",
+    "sum_tracking_b": "No ads, no analytics, no third-party code.",
+    "sum_yours_t": "Your recordings stay yours",
+    "sum_yours_b": "On your device and in your private iCloud, out of our reach.",
     "cta": "Read the privacy policy",
     "cta_hint": "In one line: we can't see your recordings, because we never receive them."
   },
   "indie": {
-    "kicker": "Behind the app",
     "title": "Made by one person.",
     "body": "Favilla is made by a single developer, for the same reason you would use it. No team, no funding, no committee. If it gives your child one more goodnight with your voice in it, it has done its job."
   },

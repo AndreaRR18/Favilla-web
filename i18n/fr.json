@@ -30,29 +30,17 @@
     "support": "Aide"
   },
   "hero": {
-    "kicker": "Pour la dernière lumière du jour",
     "h1a": "L'histoire de ce soir, avec votre voix.",
     "h1b": "Même quand vous ne pouvez pas être là.",
     "lead": "Enregistrez une histoire du soir avec votre propre voix, une seule fois. Les soirs où vous rentrez tard ou où vous voyagez, votre enfant s'endort quand même avec vous : pas d'IA, pas de voix de synthèse.",
     "badge_label": "iPhone · Nécessite iOS 26.5",
     "badge_cta": "Bientôt sur l'App Store",
     "badge_note": "Gratuit · sans pub · sans pistage",
-    "cta_anchor": "Comment ça marche"
-  },
-  "idea": {
-    "kicker": "Pourquoi Favilla",
-    "title": "La petite lumière qui reste allumée.",
-    "body": "En italien, une favilla est une petite étincelle — la braise qui continue de briller quand le feu s'est apaisé. Une histoire enregistrée, c'est exactement cela : votre voix, toujours familière et toujours la vôtre, pour un soir où vous n'êtes pas dans la chambre.",
-    "p1_t": "Votre voix, exactement",
-    "p1_b": "Favilla n'a ni IA ni synthèse vocale. Ce qui sonne dans le noir, c'est ce que vous avez enregistré, et rien d'autre.",
-    "p2_t": "Cela reste en famille",
-    "p2_b": "Les enregistrements vivent sur vos appareils et dans votre iCloud personnel. Favilla n'a aucun serveur, et elle ne voit rien.",
-    "p3_t": "Une app honnête",
-    "p3_b": "Un enregistrement ne remplace pas le soir passé avec vous. Il porte votre voix les soirs où vous êtes loin — et attend les soirs où vous êtes là."
+    "rec_pause": "Pause",
+    "rec_finish": "Terminer"
   },
   "how": {
-    "kicker": "Comment ça marche",
-    "title": "De votre voix à leur bonne nuit",
+    "title": "Comment ça marche",
     "s1_t": "Enregistrez",
     "s1_b": "Choisissez un conte du catalogue, ou racontez le vôtre. Un geste, et vous lisez doucement pendant que le téléphone écoute : aucun réglage, rien entre vous et l'histoire.",
     "s2_t": "Cela reste à vous",
@@ -60,77 +48,38 @@
     "s3_t": "Bonne nuit",
     "s3_b": "Dans la chambre sombre, l'histoire continue toute seule. L'écran reste discret, ne demande rien, et une minuterie peut tout éteindre en douceur."
   },
-  "tabs": {
-    "kicker": "Dans l'app",
-    "title": "Tout ce qu'il faut pour le coucher — et rien de plus",
-    "lib_tag": "Vos histoires",
-    "lib_name": "Bibliothèque",
-    "lib_body": "Chaque histoire que vous avez racontée, rangée comme une petite étagère. Vous la retrouvez par son titre, et vos favorites restent à portée de main.",
-    "lib_b1": "Recherche par titre, favoris en vue",
-    "lib_b2": "Un lecteur fait pour la nuit, pas pour le bureau",
-    "lib_b3": "Réenregistrez ou partagez chaque histoire",
-    "cat_tag": "Des contes à lire",
-    "cat_name": "Catalogue",
-    "cat_body": "Les contes classiques, prêts à être lus avec votre voix : Perrault, les Grimm, Andersen, Ésope et d'autres, de treize traditions narratives.",
-    "cat_b1": "46 contes, et d'autres à chaque mise à jour",
-    "cat_b2": "Cherchez par titre, filtrez par pays",
-    "cat_b3": "Marquez les contes comme lus ou déjà enregistrés",
-    "frs_tag": "Pour une minute de calme",
-    "frs_name": "Forêt",
-    "frs_body": "Une petite forêt de nuit pleine de lucioles. Touchez-en une et elle s'allume avec un son de clochette. Secouez le téléphone et elles se rassemblent toutes au centre, puis repartent se promener.",
-    "frs_b1": "Des lucioles de cinq couleurs, seulement la nuit",
-    "frs_b2": "Touchez-en une : elle brille et fait sonner une clochette",
-    "frs_b3": "Un seul interrupteur dans À propos les éteint toutes",
-    "abt_tag": "Le pourquoi",
-    "abt_name": "À propos",
-    "abt_body": "Pourquoi Favilla existe, raconté simplement : ce que dit la recherche sur la voix d'un parent, et ce que promet l'app.",
-    "abt_b1": "La science, en mots simples",
-    "abt_b2": "L'introduction encore, quand vous voulez",
-    "abt_b3": "Langue et confidentialité, expliquées"
-  },
-  "mock": {
-    "search": "Rechercher par titre",
-    "forest_title": "Forêt de lucioles"
-  },
-  "showcase": {
-    "kicker": "Le catalogue",
-    "title": "Les classiques, prêts pour votre voix",
-    "caption": "{author} · {country}, {year}",
+  "catalog": {
+    "title": "Catalogue",
+    "caption": "{country} · {author}, {year}",
     "footnote": "…et 40 autres, en cinq langues. L'une d'elles sera peut-être l'histoire de ce soir."
   },
-  "personas": {
-    "kicker": "Pour deux personnes",
-    "title": "Pour celui qui raconte, et celui qui s'endort",
-    "parent_t": "Vous, qui enregistrez",
-    "parent_b": "Fatigué, peut-être encore dans la cuisine avec une main libre. L'app ne se met pas en travers : choisir, lire, c'est tout. Elle ne demande jamais plus de temps que vous en avez.",
-    "child_t": "L'enfant, qui écoute",
-    "child_b": "Sous la couverture, dans une chambre sombre, une voix qu'il connaît bien. L'écran reste discret, et l'histoire ne demande même pas un geste."
+  "forest": {
+    "title": "Forêt",
+    "body": "Une petite forêt de nuit pleine de lucioles. Touchez-en une et elle s'allume avec un son de clochette. Secouez le téléphone et elles se rassemblent toutes au centre, puis repartent se promener."
   },
-  "science": {
-    "kicker": "Pourquoi ça compte",
-    "title": "La voix d'un parent agit vraiment",
-    "i1_t": "Une voix qu'ils connaissent",
-    "i1_b": "Les enfants reconnaissent la voix de leur parent en moins d'une seconde d'audio, et cette voix seule les apaise : presque comme un câlin.",
-    "i2_t": "La même voix, chaque soir",
-    "i2_b": "Un rituel du soir régulier aide les enfants à s'endormir plus vite et à se réveiller moins souvent. Souvent dès les premières nuits.",
-    "footnote": "Résumés en mots simples de recherches publiées sur la voix d'un parent et les rituels du coucher. Les références complètes sont dans l'app, dans À propos."
+  "app": {
+    "title": "Dans l'app",
+    "stories_t": "Histoires",
+    "stories_b": "Chaque histoire que vous avez racontée, rangée comme sur votre propre étagère, avec un lecteur fait pour le noir, pas pour le bureau.",
+    "catalog_t": "Catalogue",
+    "catalog_b": "46 contes classiques prêts pour votre voix. Cherchez par titre, filtrez par pays, marquez ceux déjà lus ou enregistrés.",
+    "forest_t": "Forêt",
+    "forest_b": "Des lucioles de cinq couleurs, seulement la nuit. Un seul interrupteur dans À propos les éteint toutes.",
+    "about_t": "À propos",
+    "about_b": "Pourquoi Favilla existe, raconté simplement : ce que dit la recherche sur la voix d'un parent, et ce que promet l'app."
   },
   "privacy": {
-    "kicker": "Confidentialité",
-    "title": "Cela reste en famille",
-    "s1_t": "Pas d'IA, pas de voix de synthèse",
-    "s1_b": "La voix que votre enfant entend est celle que vous avez enregistrée, et rien d'autre.",
-    "s2_t": "Seulement vos appareils",
-    "s2_b": "Les histoires vivent sur votre appareil et dans votre iCloud personnel. Favilla n'a aucun serveur.",
-    "s3_t": "Ni pistage, ni pub",
-    "s3_b": "Pas d'analyse, pas d'identifiants, personne qui observe une bonne nuit.",
-    "s4_t": "Marche sans réseau",
-    "s4_b": "Pas de connexion ? L'app ne s'en aperçoit pas : tout se passe sur l'appareil.",
+    "title": "La vie privée en 30 secondes",
+    "sum_account_t": "Aucun compte",
+    "sum_account_b": "Rien à créer, rien à supprimer.",
+    "sum_tracking_t": "Aucun suivi",
+    "sum_tracking_b": "Ni publicité, ni analyse, ni code tiers.",
+    "sum_yours_t": "Vos enregistrements restent à vous",
+    "sum_yours_b": "Sur votre appareil et dans votre iCloud privé, hors de notre portée.",
     "cta": "Lire la politique de confidentialité",
     "cta_hint": "En une ligne : nous ne pouvons pas voir vos enregistrements, parce que nous ne les recevons jamais."
   },
   "indie": {
-    "kicker": "Derrière l'app",
     "title": "Créée par une seule personne.",
     "body": "Favilla est faite par un seul développeur, pour la même raison pour laquelle vous l'utiliseriez. Pas d'équipe, pas de financement. Si elle offre à votre enfant un soir de plus avec votre voix dedans, son travail est fait."
   },

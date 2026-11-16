@@ -74,36 +74,42 @@ CSP = "; ".join([
 # Six catalog tales shown on the landing page (titles and credits localized).
 TALES = [
     {
+        "emoji": "🧺",
         "titles": {"it": "Cappuccetto Rosso", "en": "Little Red Riding Hood", "fr": "Le Petit Chaperon rouge", "de": "Rotkäppchen", "es": "Caperucita Roja"},
         "author": {"it": "Charles Perrault", "en": "Charles Perrault", "fr": "Charles Perrault", "de": "Charles Perrault", "es": "Charles Perrault"},
         "country": {"it": "Francia", "en": "France", "fr": "France", "de": "Frankreich", "es": "Francia"},
         "year": {"it": "1697", "en": "1697", "fr": "1697", "de": "1697", "es": "1697"},
     },
     {
+        "emoji": "🦢",
         "titles": {"it": "Il Brutto Anatroccolo", "en": "The Ugly Duckling", "fr": "Le Vilain Petit Canard", "de": "Das hässliche Entlein", "es": "El patito feo"},
         "author": {"it": "Hans Christian Andersen", "en": "Hans Christian Andersen", "fr": "Hans Christian Andersen", "de": "Hans Christian Andersen", "es": "Hans Christian Andersen"},
         "country": {"it": "Danimarca", "en": "Denmark", "fr": "Danemark", "de": "Dänemark", "es": "Dinamarca"},
         "year": {"it": "1843", "en": "1843", "fr": "1843", "de": "1843", "es": "1843"},
     },
     {
+        "emoji": "🏠",
         "titles": {"it": "Hansel e Gretel", "en": "Hansel and Gretel", "fr": "Hansel et Gretel", "de": "Hänsel und Gretel", "es": "Hansel y Gretel"},
         "author": {"it": "Fratelli Grimm", "en": "The Brothers Grimm", "fr": "Frères Grimm", "de": "Brüder Grimm", "es": "Hermanos Grimm"},
         "country": {"it": "Germania", "en": "Germany", "fr": "Allemagne", "de": "Deutschland", "es": "Alemania"},
         "year": {"it": "1812", "en": "1812", "fr": "1812", "de": "1812", "es": "1812"},
     },
     {
+        "emoji": "🐢",
         "titles": {"it": "La Lepre e la Tartaruga", "en": "The Tortoise and the Hare", "fr": "Le Lièvre et la Tortue", "de": "Der Hase und die Schildkröte", "es": "La liebre y la tortuga"},
         "author": {"it": "Esopo", "en": "Aesop", "fr": "Ésope", "de": "Äsop", "es": "Esopo"},
         "country": {"it": "Grecia antica", "en": "Ancient Greece", "fr": "Grèce antique", "de": "Antikes Griechenland", "es": "Antigua Grecia"},
         "year": {"it": "VI sec. a.C.", "en": "6th century BC", "fr": "VIᵉ s. av. J.-C.", "de": "6. Jh. v. Chr.", "es": "s. VI a. C."},
     },
     {
+        "emoji": "🍑",
         "titles": {"it": "Momotaro, il Bambino Pesca", "en": "Momotaro, the Peach Boy", "fr": "Momotaro, l'enfant pêche", "de": "Momotaro, der Pfirsichjunge", "es": "Momotaro, el niño melocotón"},
         "author": {"it": "Fiaba popolare giapponese", "en": "Japanese folk tale", "fr": "Conte populaire japonais", "de": "Japanisches Volksmärchen", "es": "Cuento popular japonés"},
         "country": {"it": "Giappone", "en": "Japan", "fr": "Japon", "de": "Japan", "es": "Japón"},
         "year": {"it": "Periodo Edo", "en": "Edo period", "fr": "période Edo", "de": "Edo-Zeit", "es": "período Edo"},
     },
     {
+        "emoji": "🐒",
         "titles": {"it": "La Scimmia e l'Uccellino", "en": "The Monkey and the Little Bird", "fr": "Le Singe et le Petit Oiseau", "de": "Der Affe und das Vöglein", "es": "El mono y el pajarito"},
         "author": {"it": "Leonardo da Vinci", "en": "Leonardo da Vinci", "fr": "Léonard de Vinci", "de": "Leonardo da Vinci", "es": "Leonardo da Vinci"},
         "country": {"it": "Italia", "en": "Italy", "fr": "Italie", "de": "Italien", "es": "Italia"},
@@ -316,6 +322,71 @@ def forest_svg():
         + f'<rect y="440" width="276" height="30" fill="{f["near"]}"/>'
         + flies + '</svg>')
 
+
+
+def _ridge(base, peaks, height, color, width=720, depth=380):
+    """One row of pines across the card: a jagged ridge of triangles."""
+    step = width / peaks
+    pts = [f"0 {depth}", f"0 {base}"]
+    for n in range(peaks):
+        x = n * step
+        h = height * (0.7 + 0.3 * ((n * 37) % 10) / 10)
+        pts += [f"{x + step / 2:.0f} {base - h:.0f}", f"{x + step:.0f} {base}"]
+    pts.append(f"{width} {depth}")
+    return f'<path fill="{color}" d="M{"L".join(pts)}Z"/>'
+
+
+# (x, y, core radius, palette index) on the 720x380 card
+FOREST_CARD_FLIES = [(140, 200, 3, 0), (330, 225, 3, 1), (455, 180, 3, 2), (560, 250, 3, 3),
+                     (250, 290, 3, 4), (660, 300, 2.4, 0), (60, 255, 2.4, 2), (400, 300, 2.4, 3)]
+
+
+def forest_card_svg():
+    """The Forest tab at night as a wide card: moon, stars, three ridges of
+    pines and fireflies in the five colours (Color+Forest.swift)."""
+    f = FOREST
+    stars = "".join(f'<circle cx="{x * 2.6:.0f}" cy="{y * 0.9:.0f}" r="1"/>' for x, y in FOREST_STARS[:10])
+    flies = "".join(_mark_svg(x, y, r, cls="forest-fly", color=f["palette"][hue])
+                    for x, y, r, hue in FOREST_CARD_FLIES)
+    return (
+        '<svg class="scene" viewBox="0 0 720 380" preserveAspectRatio="xMidYMax slice" aria-hidden="true">'
+        f'<g fill="{f["moon"]}" opacity="0.55">{stars}</g>'
+        f'<g fill="{f["moon"]}"><circle cx="620" cy="70" r="48" fill-opacity="0.06"/>'
+        '<circle cx="620" cy="70" r="26"/></g>'
+        + _ridge(300, 9, 90, f["far"]) + _ridge(330, 8, 75, f["mid"]) + _ridge(362, 10, 60, f["near"])
+        + flies + '</svg>')
+
+
+def catalog_rows_html(lang, caption):
+    """The landing page's catalog: rows drawn like the app's catalog list."""
+    return "".join(
+        '<div class="row">'
+        f'<span class="tile" aria-hidden="true"><span class="emoji">{t["emoji"]}</span></span>'
+        f'<span class="text"><span class="t">{esc(t["titles"][lang])}</span>'
+        f'<span class="s">{fmt(caption, {"country": t["country"][lang], "author": t["author"][lang], "year": t["year"][lang]})}</span></span>'
+        '</div>'
+        for t in TALES)
+
+
+# the recording screen's waveform: dots, a few taller where the voice is
+WELL = "......uUuUu.........u.............."
+
+
+def recording_phone_html(i18n):
+    """The app's recording screen, as on the App Store screenshot: timer,
+    waveform well, REC, Pause and Finish, fireflies around."""
+    bars = "".join({"." : "<i></i>", "u": '<i class="u"></i>', "U": '<i class="uu"></i>'}[c] for c in WELL)
+    flies = "".join(f'<span class="fly{" fly-sm" if n % 2 == 0 else ""} ph-{n}"></span>' for n in range(1, 6))
+    return (
+        '<div class="phone" aria-hidden="true"><div class="screen">'
+        '<span class="grab"></span>' + flies
+        + '<span class="timer">00:08</span>'
+        f'<span class="well">{bars}</span>'
+        '<span class="rec">REC</span>'
+        '<span class="controls">'
+        f'<span class="ctl"><b class="pause">{icon("pause")}</b>{esc(i18n["hero.rec_pause"])}</span>'
+        f'<span class="ctl"><b class="stop"><i></i></b>{esc(i18n["hero.rec_finish"])}</span>'
+        '</span></div></div>')
 
 def wave_svg(uid, amps, width, height):
     """A centered, mirrored waveform of rounded bars with one vertical gradient."""
@@ -639,7 +710,10 @@ def build(config, strings, out_dir):
         shutil.copytree(assets_src, assets_dest, dirs_exist_ok=True)
     drawings = {f"{name}_glyph": glyph() for name, glyph in GLYPHS.items()}
     drawings.update(hero_wave=wave_svg("hero", HERO_AMPS, 800, 120),
-                    mascot_svg=mascot_svg(), forest_svg=forest_svg())
+                    mascot_svg=mascot_svg(), forest_svg=forest_svg(),
+                    forest_card=forest_card_svg())
+    drawings.update({f"icon_{name}": icon(name) for name in ICONS})
+    drawings["icon_chev"] = icon("chevron", "chev")
     versions = {
         "v_css": file_version(os.path.join(assets_src, "css", "site.css")),
         "v_js": file_version(os.path.join(assets_src, "js", "site.js")),
@@ -772,16 +846,9 @@ def build(config, strings, out_dir):
             ctx["badge_label"] = ctx["hero.badge_label"]
             ctx["hero_badge_cta"] = ctx["hero.badge_cta"]
 
-            # tale data (mock rows and showcase)
-            ctx["tale1_title"] = esc(TALES[0]["titles"][lang])
-            ctx["tale2_title"] = esc(TALES[1]["titles"][lang])
-            ctx["tale3_title"] = esc(TALES[2]["titles"][lang])
-            ctx["tale_cards"] = "".join(
-                f'<article class="tale">'
-                f'<h3 class="tale-title">{esc(t["titles"][lang])}</h3>'
-                f'<p class="tale-caption">{fmt(i18n["showcase.caption"], {"author": t["author"][lang], "country": t["country"][lang], "year": t["year"][lang]})}</p>'
-                f'</article>'
-                for t in TALES)
+            # home: the catalog list and the recording phone
+            ctx["catalog_rows"] = catalog_rows_html(lang, i18n["catalog.caption"])
+            ctx["recording_phone"] = recording_phone_html(i18n)
 
             # privacy page assembly
             ctx["privacy_page_who_body"] = (

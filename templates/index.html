@@ -1,247 +1,101 @@
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-mascot" aria-hidden="true">{{mascot_svg}}</div>
-    <p class="label">{{hero_kicker}}</p>
-    <h1 class="hero-title">{{hero_h1a}}<br><span class="hero-title-accent">{{hero_h1b}}</span></h1>
-    <p class="hero-lead">{{hero_lead}}</p>
-    <div class="hero-cta">
-      <a class="store-badge" {{badge_attributes}}>
-        <span class="store-badge-glyph" aria-hidden="true">{{firefly_glyph}}</span>
-        <span class="store-badge-text">
-          <span class="store-badge-note">{{badge_label}}</span>
-          <span class="store-badge-title">{{hero_badge_cta}}</span>
-        </span>
-      </a>
-      <p class="hero-note">{{hero_badge_note}}</p>
-    </div>
-  </div>
-  <div class="hero-wave" aria-hidden="true">
-    {{hero_wave}}
-  </div>
-  <div class="hero-scroll">
-    <a class="scroll-hint" href="#idea"><span class="scroll-firefly" aria-hidden="true">{{firefly_glyph}}</span>{{hero_cta_anchor}}</a>
-  </div>
-</section>
-
-<section id="idea" class="section">
-  <div class="container">
-    <header class="section-head">
-      <p class="label">{{idea_kicker}}</p>
-      <h2>{{idea_title}}</h2>
-      <p class="section-lead">{{idea_body}}</p>
-    </header>
-    <div class="grid">
-      <article class="card">
-        <h3>{{idea_p1_t}}</h3>
-        <p>{{idea_p1_b}}</p>
-      </article>
-      <article class="card">
-        <h3>{{idea_p2_t}}</h3>
-        <p>{{idea_p2_b}}</p>
-      </article>
-      <article class="card">
-        <h3>{{idea_p3_t}}</h3>
-        <p>{{idea_p3_b}}</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="how" class="section section-alt">
-  <div class="container">
-    <header class="section-head">
-      <p class="label">{{how_kicker}}</p>
-      <h2>{{how_title}}</h2>
-    </header>
-    <ol class="steps">
-      <li class="step">
-        <span class="step-num">1</span>
-        <div>
-          <h3>{{how_s1_t}}</h3>
-          <p>{{how_s1_b}}</p>
-        </div>
-      </li>
-      <li class="step">
-        <span class="step-num">2</span>
-        <div>
-          <h3>{{how_s2_t}}</h3>
-          <p>{{how_s2_b}}</p>
-        </div>
-      </li>
-      <li class="step">
-        <span class="step-num">3</span>
-        <div>
-          <h3>{{how_s3_t}}</h3>
-          <p>{{how_s3_b}}</p>
-        </div>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<section id="app" class="section">
-  <div class="container">
-    <header class="section-head">
-      <p class="label">{{tabs_kicker}}</p>
-      <h2>{{tabs_title}}</h2>
-    </header>
-
-    <div class="feature-row">
-      <div class="feature-text">
-        <p class="feature-tag">{{tabs_lib_tag}}</p>
-        <h3>{{tabs_lib_name}}</h3>
-        <p class="feature-body">{{tabs_lib_body}}</p>
-        <ul class="checklist">
-          <li>{{tabs_lib_b1}}</li>
-          <li>{{tabs_lib_b2}}</li>
-          <li>{{tabs_lib_b3}}</li>
-        </ul>
-      </div>
-      <div class="mock-wrap" aria-hidden="true">
-        <div class="mock">
-          <div class="mock-notch"></div>
-          <div class="mock-screen">
-            <div class="mock-toolbar"><span class="mock-mic">{{mic_glyph}}</span></div>
-            <p class="mock-large-title">{{tabs_lib_name}}</p>
-            <div class="mock-search">{{search_glyph}}<span>{{mock_search}}</span></div>
-            <div class="mock-story"><span class="mock-tile">{{play_glyph}}</span><span class="mock-story-text"><b>{{tale1_title}}</b><span>5:12</span></span><span class="mock-fav">{{heart_glyph}}</span></div>
-            <div class="mock-story"><span class="mock-tile">{{play_glyph}}</span><span class="mock-story-text"><b>{{tale2_title}}</b><span>9:00</span></span></div>
-            <div class="mock-story"><span class="mock-tile">{{play_glyph}}</span><span class="mock-story-text"><b>{{tale3_title}}</b><span>3:00</span></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-2 app-cards">
-      <article class="card">
-        <p class="card-tag">{{tabs_cat_tag}}</p>
-        <h3>{{tabs_cat_name}}</h3>
-        <p>{{tabs_cat_body}}</p>
-        <ul class="checklist checklist-plain">
-          <li>{{tabs_cat_b1}}</li>
-          <li>{{tabs_cat_b2}}</li>
-          <li>{{tabs_cat_b3}}</li>
-        </ul>
-      </article>
-      <article class="card">
-        <p class="card-tag">{{tabs_abt_tag}}</p>
-        <h3>{{tabs_abt_name}}</h3>
-        <p>{{tabs_abt_body}}</p>
-        <ul class="checklist checklist-plain">
-          <li>{{tabs_abt_b1}}</li>
-          <li>{{tabs_abt_b2}}</li>
-          <li>{{tabs_abt_b3}}</li>
-        </ul>
-      </article>
-    </div>
-
-    <div class="feature-row feature-row-flip">
-      <div class="feature-text">
-        <p class="feature-tag">{{tabs_frs_tag}}</p>
-        <h3>{{tabs_frs_name}}</h3>
-        <p class="feature-body">{{tabs_frs_body}}</p>
-        <ul class="checklist">
-          <li>{{tabs_frs_b1}}</li>
-          <li>{{tabs_frs_b2}}</li>
-          <li>{{tabs_frs_b3}}</li>
-        </ul>
-      </div>
-      <div class="mock-wrap" aria-hidden="true">
-        <div class="mock mock-forest">
-          <div class="mock-notch"></div>
-          <div class="mock-screen">
-            {{forest_svg}}
-            <p class="mock-forest-title">{{mock_forest_title}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <header class="section-head">
-      <p class="label">{{showcase_kicker}}</p>
-      <h2>{{showcase_title}}</h2>
-    </header>
-    <div class="tale-grid" id="catalog">
-      {{tale_cards}}
-    </div>
-    <p class="section-footnote">{{showcase_footnote}}</p>
-  </div>
-</section>
-
-<section id="why" class="section section-alt">
-  <div class="container">
-    <header class="section-head">
-      <p class="label">{{personas_kicker}}</p>
-      <h2>{{personas_title}}</h2>
-    </header>
-    <div class="grid grid-2">
-      <article class="card">
-        <p class="card-tag">{{personas_parent_t}}</p>
-        <p>{{personas_parent_b}}</p>
-      </article>
-      <article class="card">
-        <p class="card-tag">{{personas_child_t}}</p>
-        <p>{{personas_child_b}}</p>
-      </article>
-    </div>
-
-    <header class="section-head">
-      <p class="label">{{science_kicker}}</p>
-      <h2>{{science_title}}</h2>
-    </header>
-    <div class="grid grid-2">
-      <article class="card">
-        <h3>{{science_i1_t}}</h3>
-        <p>{{science_i1_b}}</p>
-      </article>
-      <article class="card">
-        <h3>{{science_i2_t}}</h3>
-        <p>{{science_i2_b}}</p>
-      </article>
-    </div>
-    <p class="section-footnote">{{science_footnote}}</p>
-  </div>
-</section>
-
-<section id="privacy" class="section">
-  <div class="container">
-    <header class="section-head">
-      <p class="label">{{privacy_kicker}}</p>
-      <h2>{{privacy_title}}</h2>
-    </header>
-    <div class="grid">
-      <article class="card">
-        <h3>{{privacy_s1_t}}</h3>
-        <p>{{privacy_s1_b}}</p>
-      </article>
-      <article class="card">
-        <h3>{{privacy_s2_t}}</h3>
-        <p>{{privacy_s2_b}}</p>
-      </article>
-      <article class="card">
-        <h3>{{privacy_s3_t}}</h3>
-        <p>{{privacy_s3_b}}</p>
-      </article>
-      <article class="card">
-        <h3>{{privacy_s4_t}}</h3>
-        <p>{{privacy_s4_b}}</p>
-      </article>
-    </div>
-    <a class="privacy-cta" href="{{privacy_href}}">
-      <span class="privacy-cta-glyph" aria-hidden="true">{{arrow_glyph}}</span>
-      {{privacy_cta}}
+<section class="page-wide hero">
+  <div>
+    <h1 class="large-title">{{hero_h1a}}</h1>
+    <p class="hero-sub">{{hero_h1b}}</p>
+    <p class="lead">{{hero_lead}}</p>
+    <a class="capsule" {{badge_attributes}}>
+      <span class="tile" aria-hidden="true"><span class="fly fly-sm"></span></span>
+      <span>{{hero_badge_cta}}<small>{{badge_label}}</small></span>
     </a>
-    <p class="section-footnote">{{privacy_cta_hint}}</p>
+    <p class="caption">{{hero_badge_note}}</p>
   </div>
+  {{recording_phone}}
 </section>
 
-<section class="section section-indie">
-  <div class="container">
-    <div class="indie-panel">
-      <p class="label">{{indie_kicker}}</p>
-      <h2>{{indie_title}}</h2>
-      <p class="indie-body">{{indie_body}}</p>
-      <p class="indie-fly" aria-hidden="true">{{firefly_glyph}}</p>
+<div class="page">
+  <section class="section" id="how">
+    <h2 class="section-title">{{how_title}}</h2>
+    <div class="group">
+      <div class="row top">
+        <span class="tile" aria-hidden="true">{{icon_mic}}</span>
+        <span class="text"><span class="t">{{how_s1_t}}</span><span class="s">{{how_s1_b}}</span></span>
+      </div>
+      <div class="row top">
+        <span class="tile" aria-hidden="true">{{icon_cloud}}</span>
+        <span class="text"><span class="t">{{how_s2_t}}</span><span class="s">{{how_s2_b}}</span></span>
+      </div>
+      <div class="row top">
+        <span class="tile" aria-hidden="true">{{icon_moon}}</span>
+        <span class="text"><span class="t">{{how_s3_t}}</span><span class="s">{{how_s3_b}}</span></span>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">{{catalog_title}}</h2>
+    <div class="group" id="catalog">
+      {{catalog_rows}}
+    </div>
+    <p class="group-footer">{{catalog_footnote}}</p>
+  </section>
+
+  <section class="section">
+    <div class="forest">
+      {{forest_card}}
+      <div class="copy">
+        <h2>{{forest_title}}</h2>
+        <p>{{forest_body}}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="app">
+    <h2 class="section-title">{{app_title}}</h2>
+    <div class="group">
+      <div class="row top">
+        <span class="tile" aria-hidden="true">{{icon_book}}</span>
+        <span class="text"><span class="t">{{app_stories_t}}</span><span class="s">{{app_stories_b}}</span></span>
+      </div>
+      <div class="row top">
+        <span class="tile" aria-hidden="true">{{icon_books}}</span>
+        <span class="text"><span class="t">{{app_catalog_t}}</span><span class="s">{{app_catalog_b}}</span></span>
+      </div>
+      <div class="row top">
+        <span class="tile" aria-hidden="true">{{icon_tree}}</span>
+        <span class="text"><span class="t">{{app_forest_t}}</span><span class="s">{{app_forest_b}}</span></span>
+      </div>
+      <div class="row top">
+        <span class="tile" aria-hidden="true">{{icon_info}}</span>
+        <span class="text"><span class="t">{{app_about_t}}</span><span class="s">{{app_about_b}}</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="privacy">
+    <h2 class="section-title">{{privacy_title}}</h2>
+    <div class="group">
+      <div class="row">
+        <span class="tile" aria-hidden="true">{{icon_person_slash}}</span>
+        <span class="text"><span class="t">{{privacy_sum_account_t}}</span><span class="s">{{privacy_sum_account_b}}</span></span>
+      </div>
+      <div class="row">
+        <span class="tile" aria-hidden="true">{{icon_eye_slash}}</span>
+        <span class="text"><span class="t">{{privacy_sum_tracking_t}}</span><span class="s">{{privacy_sum_tracking_b}}</span></span>
+      </div>
+      <div class="row">
+        <span class="tile" aria-hidden="true">{{icon_cloud}}</span>
+        <span class="text"><span class="t">{{privacy_sum_yours_t}}</span><span class="s">{{privacy_sum_yours_b}}</span></span>
+      </div>
+      <a class="row link bare" href="privacy.html">
+        <span class="text"><span class="t">{{privacy_cta}}</span></span>{{icon_chev}}
+      </a>
+    </div>
+    <p class="group-footer">{{privacy_cta_hint}}</p>
+  </section>
+
+  <section class="about">
+    <span class="fly" aria-hidden="true"></span>
+    <h2>{{indie_title}}</h2>
+    <p>{{indie_body}}</p>
+  </section>
+</div>

@@ -30,29 +30,17 @@
     "support": "Ayuda"
   },
   "hero": {
-    "kicker": "Para la última luz del día",
     "h1a": "El cuento de esta noche, con tu voz.",
     "h1b": "Aunque no puedas estar.",
     "lead": "Graba un cuento para dormir con tu propia voz, una sola vez. En las noches de trabajo tarde o de viaje, tu pequeño se duerme igual contigo: sin IA, sin voz sintética.",
     "badge_label": "iPhone · Requiere iOS 26.5",
     "badge_cta": "Pronto en el App Store",
     "badge_note": "Gratis · sin anuncios · sin rastreo",
-    "cta_anchor": "Cómo funciona"
-  },
-  "idea": {
-    "kicker": "Por qué Favilla",
-    "title": "La lucecita que sigue encendida.",
-    "body": "En italiano, una favilla es una chispa pequeña — la brasa que sigue brillando cuando el fuego se ha calmado. Un cuento grabado es justo eso: tu voz, siempre familiar y siempre tuya, para una noche en que no estás en la habitación.",
-    "p1_t": "Tu voz, exactamente",
-    "p1_b": "Favilla no tiene IA ni voz sintética. Lo que suena en la oscuridad es lo que grabaste, y nada más.",
-    "p2_t": "Se queda en familia",
-    "p2_b": "Las grabaciones viven en tus dispositivos y en tu iCloud privado. Favilla no tiene servidores, y no ve nada.",
-    "p3_t": "Una app honesta",
-    "p3_b": "Una grabación no sustituye la noche contigo. Lleva tu voz las noches que estás lejos — y espera las noches que estás."
+    "rec_pause": "Pausa",
+    "rec_finish": "Finalizar"
   },
   "how": {
-    "kicker": "Cómo funciona",
-    "title": "De tu voz a su sueño",
+    "title": "Cómo funciona",
     "s1_t": "Graba",
     "s1_b": "Elige un cuento del catálogo o cuenta uno tuyo. Un toque, y ya estás leyendo suave mientras el teléfono escucha: sin ajustes, nada entre tú y el cuento.",
     "s2_t": "Se queda tuyo",
@@ -60,77 +48,38 @@
     "s3_t": "Buenas noches",
     "s3_b": "En la habitación oscura el cuento sigue solo. La pantalla queda tenue, no pide toques, y un temporizador puede apagar todo con calma."
   },
-  "tabs": {
-    "kicker": "Dentro de la app",
-    "title": "Todo lo que hace falta para dormir — y nada más",
-    "lib_tag": "Tus cuentos",
-    "lib_name": "Biblioteca",
-    "lib_body": "Cada cuento que has contado, guardado como una pequeña estantería. Lo encuentras por el título, y tus favoritos quedan a mano.",
-    "lib_b1": "Búsqueda por título, favoritos a la vista",
-    "lib_b2": "Un reproductor hecho para la oscuridad, no para el escritorio",
-    "lib_b3": "Vuelve a grabar o comparte cada cuento",
-    "cat_tag": "Cuentos para leer",
-    "cat_name": "Catálogo",
-    "cat_body": "Los cuentos clásicos, listos para ser leídos con tu voz: Perrault, los Grimm, Andersen, Esopo y más, de trece tradiciones de narración.",
-    "cat_b1": "46 cuentos, y más con cada actualización",
-    "cat_b2": "Busca por título, filtra por país",
-    "cat_b3": "Marca los cuentos como leídos o ya grabados",
-    "frs_tag": "Para un minuto de calma",
-    "frs_name": "Bosque",
-    "frs_body": "Un pequeño bosque de noche lleno de luciérnagas. Toca una y se enciende con un sonido de campanilla. Agita el teléfono y todas se reúnen en el centro, y luego vuelven a vagar.",
-    "frs_b1": "Luciérnagas de cinco colores, solo de noche",
-    "frs_b2": "Toca una: brilla y suena una campanilla",
-    "frs_b3": "Un solo interruptor en Información las apaga todas",
-    "abt_tag": "El porqué",
-    "abt_name": "Información",
-    "abt_body": "Por qué existe Favilla, contado sin vueltas: qué dice la investigación sobre la voz de un progenitor, y qué promete la app.",
-    "abt_b1": "La ciencia, en palabras sencillas",
-    "abt_b2": "La introducción otra vez, cuando quieras",
-    "abt_b3": "Idioma y privacidad, explicados"
-  },
-  "mock": {
-    "search": "Buscar por título",
-    "forest_title": "Bosque de luciérnagas"
-  },
-  "showcase": {
-    "kicker": "El catálogo",
-    "title": "Los clásicos, listos para tu voz",
-    "caption": "{author} · {country}, {year}",
+  "catalog": {
+    "title": "Catálogo",
+    "caption": "{country} · {author}, {year}",
     "footnote": "…y 40 más, en cinco idiomas. Uno de ellos puede ser el cuento de esta noche."
   },
-  "personas": {
-    "kicker": "Para dos personas",
-    "title": "Para quien cuenta, y para quien se duerme",
-    "parent_t": "Tú, que grabas",
-    "parent_b": "Cansado, quizá todavía en la cocina con una mano libre. La app no se mete en medio: elegir, leer, listo. Nunca pide más tiempo del que tienes.",
-    "child_t": "El pequeño, que escucha",
-    "child_b": "Bajo la manta, en un cuarto oscuro, una voz que conoce bien. La pantalla queda tenue, y el cuento no pide ni un toque."
+  "forest": {
+    "title": "Bosque",
+    "body": "Un pequeño bosque de noche lleno de luciérnagas. Toca una y se enciende con un sonido de campanilla. Agita el teléfono y todas se reúnen en el centro, y luego vuelven a vagar."
   },
-  "science": {
-    "kicker": "Por qué importa",
-    "title": "La voz de un progenitor funciona de verdad",
-    "i1_t": "Una voz que conocen",
-    "i1_b": "Los niños reconocen la voz de su mamá o su papá en menos de un segundo de audio, y esa voz sola los calma: casi como ser abrazados.",
-    "i2_t": "La misma voz, cada noche",
-    "i2_b": "Una rutina constante de noche ayuda a los niños a dormirse antes y a despertar menos. A menudo desde las primeras noches.",
-    "footnote": "Resúmenes en palabras sencillas de investigaciones publicadas sobre la voz de los progenitores y las rutinas para dormir. Las citas completas están en la app, en Acerca de."
+  "app": {
+    "title": "Dentro de la app",
+    "stories_t": "Historias",
+    "stories_b": "Cada cuento que has contado, guardado como en una estantería tuya, con un reproductor hecho para la oscuridad, no para el escritorio.",
+    "catalog_t": "Catálogo",
+    "catalog_b": "46 cuentos clásicos listos para tu voz. Busca por título, filtra por país, marca los leídos o ya grabados.",
+    "forest_t": "Bosque",
+    "forest_b": "Luciérnagas de cinco colores, solo de noche. Un solo interruptor en Información las apaga todas.",
+    "about_t": "Información",
+    "about_b": "Por qué existe Favilla, contado sin vueltas: qué dice la investigación sobre la voz de un progenitor, y qué promete la app."
   },
   "privacy": {
-    "kicker": "Privacidad",
-    "title": "Se queda en familia",
-    "s1_t": "Sin IA, sin voces sintéticas",
-    "s1_b": "La voz que tu peque oye es la que grabaste, y nada más.",
-    "s2_t": "Solo tus dispositivos",
-    "s2_b": "Los cuentos viven en tu dispositivo y en tu iCloud privado. Favilla no tiene ningún servidor.",
-    "s3_t": "Sin rastreo, sin anuncios",
-    "s3_b": "Sin análisis, sin identificadores, nadie mirando la noche.",
-    "s4_t": "Funciona sin red",
-    "s4_b": "¿Sin conexión? A la app no le importa: todo pasa en el dispositivo.",
+    "title": "Privacidad en 30 segundos",
+    "sum_account_t": "Sin cuenta",
+    "sum_account_b": "Nada que crear, nada que borrar.",
+    "sum_tracking_t": "Sin rastreo",
+    "sum_tracking_b": "Sin anuncios, sin análisis, sin código de terceros.",
+    "sum_yours_t": "Tus grabaciones son tuyas",
+    "sum_yours_b": "En tu dispositivo y en tu iCloud privado, fuera de nuestro alcance.",
     "cta": "Leer la política de privacidad",
     "cta_hint": "En una línea: no podemos ver tus grabaciones, porque nunca las recibimos."
   },
   "indie": {
-    "kicker": "Detrás de la app",
     "title": "Hecha por una sola persona.",
     "body": "Favilla la hace un solo desarrollador, por la misma razón por la que tú la usarías. Sin equipo, sin financiación. Si le regala a tu pequeño una buena noche más con tu voz dentro, ya ha hecho su trabajo."
   },

@@ -205,6 +205,38 @@ def check_globals(strings, errors):
             errors.append(f"site.css: {selector!r} keeps moving under prefers-reduced-motion")
 
 
+def count(root, ident, *args, **kwargs):
+    node = root.by_id(ident)
+    return len(node.all(*args, **kwargs)) if node else -1
+
+
+def check_home(rel, root, errors):
+    """The home is built from app screens: recording phone, catalog list, forest."""
+    if not root.all("h1", cls="large-title"):
+        errors.append(f"{rel}: no h1.large-title")
+    if len(root.all("div", cls="phone")) != 1:
+        errors.append(f"{rel}: expected one recording phone (div.phone)")
+    expected = {"how": 3, "catalog": 6, "app": 4, "privacy": 4}
+    for ident, want in expected.items():
+        got = count(root, ident, cls="row")
+        if got != want:
+            errors.append(f"{rel}: #{ident} has {got} rows, expected {want}")
+    catalog = root.by_id("catalog")
+    if catalog and len(catalog.all(cls="emoji")) != 6:
+        errors.append(f"{rel}: every catalog row needs its emoji silhouette")
+    privacy = root.by_id("privacy")
+    links = privacy.all("a", cls="row link") if privacy else []
+    if len(links) != 1 or links[0].attrs.get("href") != "privacy.html":
+        errors.append(f"{rel}: #privacy needs one a.row.link to privacy.html")
+    if len(root.all(cls="forest")) != 1:
+        errors.append(f"{rel}: expected one .forest")
+    for gone in ("idea", "why"):
+        if root.by_id(gone):
+            errors.append(f"{rel}: section #{gone} was retired")
+    if root.all(cls="mascot") or root.all(cls="hero-wave"):
+        errors.append(f"{rel}: the old mascot or hero wave is back")
+
+
 def check_pages(out, config):
     """Structure rules on the built HTML."""
     errors = []
@@ -212,6 +244,8 @@ def check_pages(out, config):
     for rel, path in sorted(built_pages(out).items()):
         root = parse(path)
         check_shell(rel, root, errors)
+        if os.path.basename(rel) == "index.html":
+            check_home(rel, root, errors)
     return errors
 
 

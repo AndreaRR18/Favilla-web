@@ -30,29 +30,17 @@
     "support": "Hilfe"
   },
   "hero": {
-    "kicker": "Für das letzte Licht des Tages",
     "h1a": "Die Geschichte von heute Abend, in deiner Stimme.",
     "h1b": "Auch wenn du nicht dabei sein kannst.",
     "lead": "Nimm eine Gutenachtgeschichte einmal mit deiner eigenen Stimme auf. An den Abenden, an denen du spät arbeitest oder unterwegs bist, schläft dein Kind trotzdem mit dir ein: keine KI, keine synthetische Stimme.",
     "badge_label": "iPhone · Benötigt iOS 26.5",
     "badge_cta": "Bald im App Store",
     "badge_note": "Kostenlos · keine Werbung · kein Tracking",
-    "cta_anchor": "So funktioniert es"
-  },
-  "idea": {
-    "kicker": "Warum Favilla",
-    "title": "Das kleine Licht, das weiterbrennt.",
-    "body": "Im Italienischen ist eine favilla ein kleiner Funke — die Glut, die weiterglüht, wenn das Feuer sich gelegt hat. Eine aufgenommene Geschichte ist genau das: deine Stimme, immer vertraut und immer deine, an einem Abend, an dem du nicht im Zimmer bist.",
-    "p1_t": "Deine Stimme, genau",
-    "p1_b": "Favilla hat keine KI und keine Sprachsynthese. Was im Dunkeln klingt, ist das, was du aufgenommen hast — und sonst nichts.",
-    "p2_t": "Es bleibt in der Familie",
-    "p2_b": "Die Aufnahmen leben auf deinen Geräten und in deinem privaten iCloud. Favilla hat keine Server und sieht nichts.",
-    "p3_t": "Eine ehrliche App",
-    "p3_b": "Eine Aufnahme ersetzt den Abend mit dir nicht. Sie trägt deine Stimme an den Abenden, an denen du weg bist — und wartet auf die, an denen du da bist."
+    "rec_pause": "Pause",
+    "rec_finish": "Fertig"
   },
   "how": {
-    "kicker": "So funktioniert es",
-    "title": "Von deiner Stimme zur guten Nacht",
+    "title": "So funktioniert es",
     "s1_t": "Aufnehmen",
     "s1_b": "Wähl eine Geschichte aus dem Katalog, oder erzähl eine eigene. Ein Tipp, und du liest leise, während das Telefon zuhört: keine Einstellungen, nichts zwischen dir und der Geschichte.",
     "s2_t": "Sie bleibt dein",
@@ -60,77 +48,38 @@
     "s3_t": "Gute Nacht",
     "s3_b": "Im dunklen Zimmer läuft die Geschichte von allein. Der Bildschirm bleibt dunkel, verlangt nichts, und ein Timer lässt alles sanft ausklingen."
   },
-  "tabs": {
-    "kicker": "In der App",
-    "title": "Alles, was eine gute Nacht braucht — und nichts darüber hinaus",
-    "lib_tag": "Deine Geschichten",
-    "lib_name": "Bibliothek",
-    "lib_body": "Jede Geschichte, die du erzählt hast, aufbewahrt wie ein eigenes kleines Regal. Du findest sie über den Titel, und deine Favoriten bleiben in Reichweite.",
-    "lib_b1": "Suche nach Titel, Favoriten auf einen Blick",
-    "lib_b2": "Ein Spieler für die Dunkelheit, nicht für den Schreibtisch",
-    "lib_b3": "Jede Geschichte neu aufnehmen oder teilen",
-    "cat_tag": "Geschichten zum Lesen",
-    "cat_name": "Katalog",
-    "cat_body": "Klassische Geschichten, bereit, mit deiner Stimme gelesen zu werden: Perrault, die Grimms, Andersen, Äsop und weitere, aus dreizehn Erzähltraditionen.",
-    "cat_b1": "46 Geschichten, und mehr mit jedem Update",
-    "cat_b2": "Nach Titel suchen, nach Land filtern",
-    "cat_b3": "Geschichten als gelesen oder aufgenommen markieren",
-    "frs_tag": "Für eine stille Minute",
-    "frs_name": "Wald",
-    "frs_body": "Ein kleiner Wald bei Nacht, voller Glühwürmchen. Berühre eines, und es leuchtet auf und klingt wie ein Glöckchen. Schüttle das Telefon, und alle sammeln sich in der Mitte, dann schwirren sie wieder davon.",
-    "frs_b1": "Glühwürmchen in fünf Farben, nur bei Nacht",
-    "frs_b2": "Berühre eines: Es leuchtet und läutet ein Glöckchen",
-    "frs_b3": "Ein Schalter unter Info schaltet alle aus",
-    "abt_tag": "Das Warum",
-    "abt_name": "Info",
-    "abt_body": "Warum es Favilla gibt, einfach erzählt: was die Forschung über die Stimme eines Elternteils sagt, und was die App verspricht.",
-    "abt_b1": "Die Wissenschaft, in einfachen Worten",
-    "abt_b2": "Die Einführung noch einmal, wann du magst",
-    "abt_b3": "Sprache und Datenschutz, erklärt"
-  },
-  "mock": {
-    "search": "Nach Titel suchen",
-    "forest_title": "Glühwürmchenwald"
-  },
-  "showcase": {
-    "kicker": "Der Katalog",
-    "title": "Die Klassiker, bereit für deine Stimme",
-    "caption": "{author} · {country}, {year}",
+  "catalog": {
+    "title": "Katalog",
+    "caption": "{country} · {author}, {year}",
     "footnote": "…und 40 weitere, in fünf Sprachen. Eine davon ist vielleicht die Geschichte von heute Abend."
   },
-  "personas": {
-    "kicker": "Für zwei Menschen",
-    "title": "Für die, die erzählt — und für die, die einschläft",
-    "parent_t": "Du, beim Aufnehmen",
-    "parent_b": "Müde, vielleicht noch in der Küche mit einer Hand frei. Die App stellt sich nicht in den Weg: suchen, lesen, fertig. Sie verlangt nie mehr Zeit, als du hast.",
-    "child_t": "Dein Kind, beim Zuhören",
-    "child_b": "Unter der Decke, im dunklen Zimmer, eine vertraute Stimme. Der Bildschirm bleibt leise, und die Geschichte braucht gar keine Berührung."
+  "forest": {
+    "title": "Wald",
+    "body": "Ein kleiner Wald bei Nacht, voller Glühwürmchen. Berühre eines, und es leuchtet auf und klingt wie ein Glöckchen. Schüttle das Telefon, und alle sammeln sich in der Mitte, dann schwirren sie wieder davon."
   },
-  "science": {
-    "kicker": "Warum es zählt",
-    "title": "Die Stimme eines Elternteils wirkt wirklich",
-    "i1_t": "Eine Stimme, die sie kennen",
-    "i1_b": "Kinder erkennen die Stimme ihrer Eltern in weniger als einer Sekunde Audio, und diese Stimme allein beruhigt sie: fast wie im Arm gehalten werden.",
-    "i2_t": "Dieselbe Stimme, jeden Abend",
-    "i2_b": "Ein regelmäßiges Gutenacht-Ritual hilft Kindern, schneller einzuschlafen und seltener aufzuwachen. Oft schon in den ersten Nächten.",
-    "footnote": "Einfache Zusammenfassungen veröffentlichter Forschung zur elterlichen Stimme und zu Einschlafritualen. Die vollständigen Quellen stehen in der App unter Über."
+  "app": {
+    "title": "In der App",
+    "stories_t": "Geschichten",
+    "stories_b": "Jede Geschichte, die du erzählt hast, wie in einem eigenen Regal, mit einem Player für das dunkle Zimmer, nicht für den Schreibtisch.",
+    "catalog_t": "Katalog",
+    "catalog_b": "46 klassische Märchen, bereit für deine Stimme. Suche nach Titel, filtere nach Land, markiere gelesene oder aufgenommene.",
+    "forest_t": "Wald",
+    "forest_b": "Glühwürmchen in fünf Farben, nur bei Nacht. Ein Schalter unter Info schaltet alle aus.",
+    "about_t": "Info",
+    "about_b": "Warum es Favilla gibt, einfach erzählt: was die Forschung über die Stimme eines Elternteils sagt, und was die App verspricht."
   },
   "privacy": {
-    "kicker": "Datenschutz",
-    "title": "Es bleibt in der Familie",
-    "s1_t": "Keine KI, keine synthetischen Stimmen",
-    "s1_b": "Die Stimme, die dein Kind hört, ist das, was du aufgenommen hast — und sonst nichts.",
-    "s2_t": "Nur deine Geräte",
-    "s2_b": "Geschichten leben auf deinem Gerät und in deinem privaten iCloud. Favilla hat überhaupt keine Server.",
-    "s3_t": "Kein Tracking, keine Werbung",
-    "s3_b": "Keine Analyse, keine Kennungen, niemand, der eine gute Nacht beobachtet.",
-    "s4_t": "Geht auch offline",
-    "s4_b": "Kein Netz? Die App merkt es kaum: alles passiert auf dem Gerät.",
+    "title": "Datenschutz in 30 Sekunden",
+    "sum_account_t": "Kein Konto",
+    "sum_account_b": "Nichts anzulegen, nichts zu löschen.",
+    "sum_tracking_t": "Kein Tracking",
+    "sum_tracking_b": "Keine Werbung, keine Analyse, kein Code von Dritten.",
+    "sum_yours_t": "Deine Aufnahmen gehören dir",
+    "sum_yours_b": "Auf deinem Gerät und in deiner privaten iCloud, wo wir nicht hinkommen.",
     "cta": "Datenschutzerklärung lesen",
     "cta_hint": "In einer Zeile: Wir können deine Aufnahmen nicht sehen, weil wir sie nie erhalten."
   },
   "indie": {
-    "kicker": "Hinter der App",
     "title": "Von einer einzigen Person gemacht.",
     "body": "Favilla macht ein einzelner Entwickler, aus demselben Grund, aus dem du sie nutzen würdest. Kein Team, kein Geld von außen. Wenn sie deinem Kind eine gute Nacht mehr mit deiner Stimme darin schenkt, hat sie ihren Job getan."
   },
